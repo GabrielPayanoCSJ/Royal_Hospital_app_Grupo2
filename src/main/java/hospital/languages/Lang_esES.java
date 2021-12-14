@@ -54,7 +54,13 @@ public class Lang_esES {
 	 * @return
 	 */
 	private ArrayList<String> loadFTPClientTxts() {
-		return new ArrayList<String>(Arrays.asList(""));
+		return new ArrayList<String>(Arrays.asList( // LIST FTP CLIENT TEXTS
+				"CREAR DIRECTORIO", // 0
+				"ELIMINAR", // 1
+				"SUBIR", // 2
+				"DESCARGAR", // 3
+				"SALIR" // 4
+		));
 	}
 
 	/**
@@ -72,20 +78,9 @@ public class Lang_esES {
 	private ArrayList<String> loadErrorTxts() {
 		return new ArrayList<String>(Arrays.asList( // LIST ERROR TEXTS
 				"Clase no encontrada", // 0
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				"",
-				""
-		));
+				"", "", "", "", "", "", "", "", "", "", ""));
 	}
-	
+
 	/**
 	 * 
 	 * @return

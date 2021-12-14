@@ -4,6 +4,13 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.CompoundBorder;
+import javax.swing.border.EmptyBorder;
+import javax.swing.border.EtchedBorder;
+import javax.swing.border.TitledBorder;
+
+import java.awt.BorderLayout;
+import java.awt.Font;
 
 /**
  * Log's panel with a txA_Log (JTextArea), where will write all the information
@@ -19,7 +26,7 @@ public class Pa_Log extends JPanel {
 	// Objects
 	private JTextArea txA_Log;
 	private JScrollPane scroll;
-
+	
 	// TextArea's measures
 	private final int HEIGHT;
 	private final int WIDTH;
@@ -28,20 +35,24 @@ public class Pa_Log extends JPanel {
 	 * Constructor
 	 */
 	public Pa_Log() {
+		this.setLayout(new BorderLayout(0, 0));
+		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), "LOG"), new EmptyBorder(5,5,5,5)));
+		
 		// Values of TextArea's measures
 		HEIGHT = 16;
 		WIDTH = 58;
 
 		// Creation of objects
 		txA_Log = new JTextArea(HEIGHT, WIDTH);
+		txA_Log.setLineWrap(true);
+		txA_Log.setWrapStyleWord(true);
 		scroll = new JScrollPane(txA_Log);
 
 		txA_Log.setEditable(false);
 
 		// vertical scroll always visible
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-
-		add(txA_Log); // add textArea to panel (this class)
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		this.add(scroll, BorderLayout.CENTER); // add textArea to panel (this class)
 	}
 
 	/**
