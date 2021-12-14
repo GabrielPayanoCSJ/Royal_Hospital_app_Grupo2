@@ -1,11 +1,13 @@
 package hospital.ftp.client.view;
 
 import java.awt.EventQueue;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import javax.swing.JButton;
+import javax.swing.*;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JPasswordField;
@@ -19,6 +21,7 @@ public class InterfazCorreo extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtFcorreo;
 	private JPasswordField passPassword;
+	private static JButton btnLogin = new JButton("Log-In");
 
 	//Implementar comprobación si es email: https://mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
 	
@@ -36,6 +39,15 @@ public class InterfazCorreo extends JFrame {
 				}
 			}
 		});
+		
+		btnLogin.addActionListener(new ActionListener() 
+		{
+		    public void actionPerformed(ActionEvent e) {
+		    	new FrmMain().setVisible(true); // Main Form to show after the Login Form..
+		    	this.dispose();
+		        
+		    }
+		});
 	}
 
 	/**
@@ -51,7 +63,7 @@ public class InterfazCorreo extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
-		JButton btnLogin = new JButton("Log-In");
+		
 		btnLogin.setBounds(61, 159, 106, 23);
 		contentPane.add(btnLogin);
 		
