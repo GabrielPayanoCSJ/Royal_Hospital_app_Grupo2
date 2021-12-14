@@ -54,6 +54,8 @@ public class FTPClientePrueba {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+		
+		
 	}
 
 }
