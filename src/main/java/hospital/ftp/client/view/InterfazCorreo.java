@@ -20,6 +20,8 @@ public class InterfazCorreo extends JFrame {
 	private JTextField txtFcorreo;
 	private JPasswordField passPassword;
 
+	//Implementar comprobación si es email: https://mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
+	
 	/**
 	 * Launch the application.
 	 */
@@ -40,6 +42,7 @@ public class InterfazCorreo extends JFrame {
 	 * Create the frame.
 	 */
 	public InterfazCorreo() {
+		setResizable(false);
 		setTitle("Log Correo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 241, 300);
