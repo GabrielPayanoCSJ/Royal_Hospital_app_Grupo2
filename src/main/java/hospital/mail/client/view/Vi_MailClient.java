@@ -26,7 +26,7 @@ public class Vi_MailClient extends JFrame {
 
 		createInboxTable();
 		
-//		createPanelLayout();
+		//createPanelLayout();
 		
 		defaultOperations();
 

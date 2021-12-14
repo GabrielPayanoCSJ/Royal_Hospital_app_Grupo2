@@ -8,7 +8,7 @@ import javax.swing.JPanel;
 /**
  * Buttons' panel with a buttons (ArrayList of type JButton) that contains a
  * button for all actions (create, delete, upload, download and exit). The
- * buttons will be visible or not depending on the permissions.
+ * buttons will be visible or not depending on the permissions. 
  * 
  * @author Jorge Fernández Ruiz
  * @date 14/12/2021

@@ -7,7 +7,7 @@ import javax.swing.ScrollPaneConstants;
 
 /**
  * Log's panel with a txA_Log (JTextArea), where will write all the information
- * of any operation and error, and a scroll (JScrollPane) in txA_Log.
+ * of any operation and error, and a scroll (JScrollPane) in txA_Log. 
  * 
  * @author Jorge Fernández Ruiz
  * @date 14/12/2021
