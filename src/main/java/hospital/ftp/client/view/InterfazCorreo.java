@@ -21,32 +21,26 @@ public class InterfazCorreo extends JFrame {
 	private JPanel contentPane;
 	private JTextField txtFcorreo;
 	private JPasswordField passPassword;
+	private JButton btnVolver;
 	private static JButton btnLogin = new JButton("Log-In");
-
-	//Implementar comprobación si es email: https://mkyong.com/regular-expressions/how-to-validate-email-address-with-regular-expression/
 	
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
+		
+		
+		
+		final InterfazCorreo frame = new InterfazCorreo();
 		EventQueue.invokeLater(new Runnable() {
+			
 			public void run() {
 				try {
-					InterfazCorreo frame = new InterfazCorreo();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
 			}
-		});
-		
-		btnLogin.addActionListener(new ActionListener() 
-		{
-		    public void actionPerformed(ActionEvent e) {
-		    	new FrmMain().setVisible(true); // Main Form to show after the Login Form..
-		    	this.dispose();
-		        
-		    }
 		});
 	}
 
@@ -87,7 +81,7 @@ public class InterfazCorreo extends JFrame {
 		txtpnContrasea.setBounds(74, 62, 69, 20);
 		contentPane.add(txtpnContrasea);
 		
-		JButton btnVolver = new JButton("Volver");
+		btnVolver = new JButton("Volver");
 		btnVolver.setBounds(61, 193, 106, 23);
 		contentPane.add(btnVolver);
 	}
