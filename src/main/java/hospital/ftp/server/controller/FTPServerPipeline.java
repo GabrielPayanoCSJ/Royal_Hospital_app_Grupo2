@@ -20,15 +20,15 @@ public class FTPServerPipeline {
 	public FTPServerPipeline() {
 	}
 
-	
+	//Comprobar si es correcto de esta manera
 	public void UploadFile(FTPClient cliente,String origen,String destino) {
-		try {
+		/*try {
 			InputStream fis = new FileInputStream(origen);
 			cliente.storeFile(destino, fis);
 			fis.close();
 		} catch (Exception e) {
 			System.out.println("Excepción en el upload file");
-		}
+		}*/
 	}
 	
 	public void DownloadFile() {
