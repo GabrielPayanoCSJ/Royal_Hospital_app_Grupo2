@@ -67,24 +67,31 @@ public class Language {
 	 * @param langOption
 	 */
 	public static void selectLanguage(int langOption) {
+		
+		/**
+		 * 
+		 */
+		lang_uk = new Lang_enUK(); // DEFAULT LENGUAGE - ENGLISH TEXTS
+		
+		lang_es = new Lang_esES(); // SPANISH TEXTS
 
 		/**
 		 * 
 		 */
 		ArrayList<ArrayList<String>> langTexts = null;
 		boolean isExist = true;
+		
 
 		switch (langOption) {
 		case 0:
-			lang_uk = new Lang_enUK();
 			langTexts = lang_uk.getEnUK();
 			break;
 		case 1:
-			lang_es = new Lang_esES();
 			langTexts = lang_es.getEsES();
 			break;
 		default:
 			Tool.showConsoleMessage("Option[ " + langOption + " ] doesn't exist.", true);
+			langTexts = lang_uk.getEnUK();
 			isExist = false;
 			break;
 		}
@@ -119,6 +126,7 @@ public class Language {
 				mailServer_txts = langTexts.get(option);
 				break;
 			default:
+				
 				Tool.showConsoleMessage("Option [ " + option + " ] doesn't exist.", true);
 				break;
 			}

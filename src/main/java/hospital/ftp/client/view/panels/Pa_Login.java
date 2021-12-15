@@ -4,6 +4,7 @@
 package hospital.ftp.client.view.panels;
 
 import javax.swing.BorderFactory;
+import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -14,7 +15,11 @@ import java.awt.Font;
 import javax.swing.SwingConstants;
 import java.awt.ComponentOrientation;
 import javax.swing.border.EmptyBorder;
+
+import hospital.languages.Language;
+
 import java.awt.Dimension;
+import java.awt.FlowLayout;
 
 
 /**
@@ -25,25 +30,24 @@ public class Pa_Login extends JPanel {
 
 	private JLabel lbl_user;
 	private JLabel lbl_passwd;
-	
 	private JTextField tfield_user;
 	private JTextField tfiled_passwd;
-	
 	private JButton btn_connect;
 	
 	/**
 	 * 
 	 */
 	public Pa_Login() {
-		this.setName("panel_login");
+//		this.setName("panel_login");
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
+		this.btn_connect = new JButton(Language.getFtpClient_txts(8));
 		lbl_user = new JLabel("User:");
 		lbl_user.setBorder(new EmptyBorder(5, 5, 5, 5));
-		lbl_user.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_user.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl_user.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		lbl_passwd = new JLabel("Password:");
 		lbl_passwd.setBorder(new EmptyBorder(5, 5, 0, 5));
-		lbl_passwd.setHorizontalAlignment(SwingConstants.LEFT);
+		lbl_passwd.setHorizontalAlignment(SwingConstants.RIGHT);
 		lbl_passwd.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		
 		tfield_user = new JTextField();
@@ -52,11 +56,12 @@ public class Pa_Login extends JPanel {
 		tfiled_passwd = new JTextField();
 		lbl_passwd.setLabelFor(tfiled_passwd);
 		this.setLayout(new GridLayout(1, 2, 0, 0));
-
 		this.add(lbl_user);
 		this.add(tfield_user);
 		this.add(lbl_passwd);
 		this.add(tfiled_passwd);
+		this.add(new JLabel());
+		this.add(btn_connect);
 	}
 
 	/**

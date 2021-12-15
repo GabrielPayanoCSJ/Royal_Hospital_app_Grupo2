@@ -59,7 +59,11 @@ public class Lang_esES {
 				"ELIMINAR", // 1
 				"SUBIR", // 2
 				"DESCARGAR", // 3
-				"SALIR" // 4
+				"SALIR", // 4
+				"LOG CLIENTE", // 5
+				"DIRECTORIO REMOTO", // 6
+				"FTP CLIENTE - GRUPO 2", // 7
+				"CONECTAR" // 8 
 		));
 	}
 
