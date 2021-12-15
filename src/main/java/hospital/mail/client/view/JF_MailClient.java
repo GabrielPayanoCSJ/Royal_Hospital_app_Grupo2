@@ -17,7 +17,7 @@ import hospital.mail.client.view.panels.Pa_Side;
  * @author Jorge Fernández Ruiz
  *
  */
-public class Vi_MailClient extends JFrame {
+public class JF_MailClient extends JFrame {
 	private Pa_Side sidePanel;
 	private Pa_Inbox inboxPanel;
 	private Pa_Counter counterPanel;
@@ -26,7 +26,7 @@ public class Vi_MailClient extends JFrame {
 	/**
 	 * Constructor
 	 */
-	public Vi_MailClient() {
+	public JF_MailClient() {
 		// change for lang
 		// create the panels
 		sidePanel = new Pa_Side("WRITE", "READ", "GO TO FTP", "EXIT");
@@ -66,7 +66,7 @@ public class Vi_MailClient extends JFrame {
 	// only fot test
 	public static void main(String[] args) {
 		Language.selectLanguage(1);
-		Vi_MailClient jframe = new Vi_MailClient();
+		JF_MailClient jframe = new JF_MailClient();
 		jframe.setVisible(true);
 	}
 
