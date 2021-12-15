@@ -3,8 +3,6 @@ package hospital.ftp.client.view.panels;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
-
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;

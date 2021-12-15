@@ -1,9 +1,6 @@
-package hospital.ftp.client.view;
+package hospital.mail.client.view;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -12,7 +9,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JPasswordField;
 
-public class InterfazCorreo extends JFrame {
+public class JF_MailLogIn extends JFrame {
 
 	/**
 	 * 
@@ -31,7 +28,7 @@ public class InterfazCorreo extends JFrame {
 		
 		
 		
-		final InterfazCorreo frame = new InterfazCorreo();
+		final JF_MailLogIn frame = new JF_MailLogIn();
 		EventQueue.invokeLater(new Runnable() {
 			
 			public void run() {
@@ -47,7 +44,7 @@ public class InterfazCorreo extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public InterfazCorreo() {
+	public JF_MailLogIn() {
 		setResizable(false);
 		setTitle("Log Correo");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
