@@ -10,6 +10,8 @@ import java.awt.*;
 import javax.swing.*;
 import javax.swing.border.*;
 
+import hospital.languages.Language;
+
 /**
  * @author Guillermo González de Miguel
  * @version 1.0
@@ -32,7 +34,7 @@ public class Pa_Directory extends JPanel {
 	 */
 	public Pa_Directory() {
 		this.setLayout(new BorderLayout(0, 0));
-		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), "REMOTO"), new EmptyBorder(5,5,5,5)));
+		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), Language.getFtpClient_txts(6)), new EmptyBorder(5,5,5,5)));
 		this.tree = new JTree();
 		this.scroll = new JScrollPane(tree);
 		this.scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);

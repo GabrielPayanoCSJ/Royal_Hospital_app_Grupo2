@@ -54,7 +54,17 @@ public class Lang_enUK {
 	 * @return
 	 */
 	private ArrayList<String> loadFTPClientTxts() {
-		return new ArrayList<String>(Arrays.asList(""));
+		return new ArrayList<String>(Arrays.asList( // LIST FTP CLIENT TEXTS
+				"CREATE DIRECTORY", // 0
+				"DELETE", // 1
+				"UPLOAD", // 2
+				"DOWNLOAD", // 3
+				"EXIT", // 4
+				"CLIENT LOG", // 5
+				"REMOTE DIRECTORY", // 6
+				"FTP CLIENT - GROUP 2", // 7
+				"CONNECT" // 8
+		));
 	}
 
 	/**

@@ -5,23 +5,10 @@ package hospital.ftp.client.view;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-
-import hospital.ftp.client.view.panels.Pa_Buttons;
-import hospital.ftp.client.view.panels.Pa_Directory;
-import hospital.ftp.client.view.panels.Pa_Log;
-import hospital.ftp.client.view.panels.Pa_Login;
-import hospital.languages.Lang_enUK;
+import hospital.ftp.client.view.panels.*;
 import hospital.languages.Language;
-
-import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-
-import javax.swing.JPanel;
-import javax.swing.border.Border;
-
-import java.awt.GridLayout;
+import java.awt.*;
+import javax.swing.*;
 
 /**
  * @author
@@ -37,7 +24,7 @@ public class JF_FTPClient extends JFrame {
 	 * 
 	 */
 	public JF_FTPClient() {
-		super("FTP CLIENTE");
+		super(Language.getFtpClient_txts(7));
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		JPanel btnContainer = new JPanel();
@@ -49,6 +36,8 @@ public class JF_FTPClient extends JFrame {
 		this.panel_log = new Pa_Log();
 		this.panel_button = new Pa_Buttons(Language.getFtpClient_txts(0), Language.getFtpClient_txts(1),
 				Language.getFtpClient_txts(2), Language.getFtpClient_txts(3), Language.getFtpClient_txts(4));
+		
+		this.getContentPane().add(panel_login, BorderLayout.NORTH);
 		centerPanel.setLayout(new GridLayout(2, 1, 0, 0));
 		centerPanel.add(panel_log, BorderLayout.NORTH);
 		centerPanel.add(panel_directory, BorderLayout.SOUTH);
