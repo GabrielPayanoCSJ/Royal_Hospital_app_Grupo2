@@ -76,7 +76,7 @@ public class JF_FTPClient extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		Language.selectLanguage(2);
+		Language.selectLanguage(1);
 		JF_FTPClient jframe = new JF_FTPClient();
 		jframe.setVisible(true);
 	}

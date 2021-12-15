@@ -1,0 +1,27 @@
+/**
+ * 
+ */
+package hospital.ftp.client.controller;
+
+/**
+ * @author prodi
+ *
+ */
+public class FTPClient {
+
+	/**
+	 * 
+	 */
+	public FTPClient() {
+		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}
