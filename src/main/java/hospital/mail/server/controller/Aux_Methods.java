@@ -12,7 +12,7 @@ public class Aux_Methods {
 
 	}
 	
-	public void enviaremail(String origen, String destino,String host,String mensaje) {
+	public void enviaremail(String origen, String destino,String host,String mensaje,String tema) {
 		
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", host);
@@ -26,6 +26,12 @@ public class Aux_Methods {
 		
 		
 			message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
+			message.setSubject(tema);
+			message.setText(mensaje);
+			
+			Transport.send(message);
+			System.out.println("Mensaje enviado");
+			
 		} catch (AddressException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
