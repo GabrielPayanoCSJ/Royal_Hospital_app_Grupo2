@@ -11,12 +11,20 @@ import javax.swing.*;
 import javax.swing.border.*;
 
 /**
- * @author 
+ * @author Guillermo González de Miguel
+ * @version 1.0
  *
  */
 public class Pa_Directory extends JPanel {
 	
+	/**
+	 * 
+	 */
 	private JTree tree;
+	
+	/**
+	 * 
+	 */
 	private JScrollPane scroll;
 	
 	/**

@@ -37,6 +37,7 @@ public class JF_FTPClient extends JFrame {
 	 * 
 	 */
 	public JF_FTPClient() {
+		super("FTP CLIENTE");
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		JPanel btnContainer = new JPanel();
@@ -86,7 +87,7 @@ public class JF_FTPClient extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-//		Language.selectLanguage(1);
+		Language.selectLanguage(1);
 		JF_FTPClient jframe = new JF_FTPClient();
 		jframe.setVisible(true);
 	}

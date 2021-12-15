@@ -35,7 +35,7 @@ public class Pa_Login extends JPanel {
 	 * 
 	 */
 	public Pa_Login() {
-		setName("panel_login");
+		this.setName("panel_login");
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		lbl_user = new JLabel("User:");
 		lbl_user.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -58,6 +58,39 @@ public class Pa_Login extends JPanel {
 		this.add(lbl_passwd);
 		this.add(tfiled_passwd);
 	}
-	
 
+	/**
+	 * @return the lbl_user
+	 */
+	public JLabel getLbl_user() {
+		return lbl_user;
+	}
+
+	/**
+	 * @return the lbl_passwd
+	 */
+	public JLabel getLbl_passwd() {
+		return lbl_passwd;
+	}
+
+	/**
+	 * @return the tfield_user
+	 */
+	public JTextField getTfield_user() {
+		return tfield_user;
+	}
+
+	/**
+	 * @return the tfiled_passwd
+	 */
+	public JTextField getTfiled_passwd() {
+		return tfiled_passwd;
+	}
+
+	/**
+	 * @return the btn_connect
+	 */
+	public JButton getBtn_connect() {
+		return btn_connect;
+	}
 }
