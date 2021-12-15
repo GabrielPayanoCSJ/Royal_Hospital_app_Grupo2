@@ -10,7 +10,6 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 import java.awt.BorderLayout;
-import java.awt.Font;
 
 /**
  * Log's panel with a txA_Log (JTextArea), where will write all the information
@@ -36,6 +35,7 @@ public class Pa_Log extends JPanel {
 	 */
 	public Pa_Log() {
 		this.setLayout(new BorderLayout(0, 0));
+		// change LOG for model
 		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), "LOG"), new EmptyBorder(5,5,5,5)));
 		
 		// Values of TextArea's measures

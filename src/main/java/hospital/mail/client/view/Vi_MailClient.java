@@ -1,35 +1,44 @@
 package hospital.mail.client.view;
 
-import java.util.*;
+import java.awt.BorderLayout;
+
 import javax.swing.*;
 
+import hospital.ftp.client.view.JF_FTPClient;
+import hospital.languages.Language;
+import hospital.mail.client.view.panels.Pa_Counter;
+import hospital.mail.client.view.panels.Pa_Inbox;
+import hospital.mail.client.view.panels.Pa_Side;
+
 public class Vi_MailClient extends JFrame {
-	// create Model
-	private ArrayList<JTextField> texts;
-	private ArrayList<JButton> buttons;
-	private JPanel generalPanel;
-	private JPanel emailPanel;
-	private JPanel sidePanel;
-	private JTable inbox;
+	private Pa_Side sidePanel;
+	private Pa_Inbox inboxPanel;
+	private Pa_Counter counterPanel;
+	private JPanel panel;
 
-	public Vi_MailClient(String title) {
-		super(title);
-
-		generalPanel = new JPanel();
-		emailPanel = new JPanel();
-		sidePanel = new JPanel();
-
-		texts = new ArrayList<>();
-		buttons = new ArrayList<>();
-
-		fillButtons();
-
-		createInboxTable();
+	public Vi_MailClient() {
+		// change for lang
+		// create the panels
+		sidePanel = new Pa_Side("WRITE", "READ", "GO TO FTP", "EXIT");
+		inboxPanel = new Pa_Inbox();
+		counterPanel = new Pa_Counter("TOTAL", "UNSEEN");
 		
-		//createPanelLayout();
+		panel = new JPanel();
+		
+		panel.setLayout(new BorderLayout());
+		
+		appendObjectsPanel();
+		
+		add(panel);
 		
 		defaultOperations();
+	}
 
+	private void appendObjectsPanel() {
+		panel.add(sidePanel, BorderLayout.EAST);
+		panel.add(inboxPanel, BorderLayout.WEST);
+		panel.add(counterPanel, BorderLayout.SOUTH);
+		
 	}
 
 	private void defaultOperations() {
@@ -38,22 +47,12 @@ public class Vi_MailClient extends JFrame {
 		this.setResizable(false);
 		this.setVisible(true);
 	}
-
-	private void createInboxTable() {
-		// change for model's strings
-		Object[] columnName = { "Sender", "Subject" };
-		Object[][] rows = { { "", ""} }; 
-		
-		
-	}
-
-	private void fillButtons() {
-		// change for model's strings
-		buttons.add(new JButton("Write"));
-		buttons.add(new JButton("Read"));
-		buttons.add(new JButton("Go to FTP"));
-		buttons.add(new JButton("Exit"));
-
+	
+	// only fot test
+	public static void main(String[] args) {
+		Language.selectLanguage(1);
+		Vi_MailClient jframe = new Vi_MailClient();
+		jframe.setVisible(true);
 	}
 
 }
