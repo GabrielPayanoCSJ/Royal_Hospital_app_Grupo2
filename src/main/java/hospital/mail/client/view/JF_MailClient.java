@@ -6,9 +6,9 @@ import javax.swing.*;
 
 import hospital.ftp.client.view.JF_FTPClient;
 import hospital.languages.Language;
-import hospital.mail.client.view.panels.Pa_Counter;
-import hospital.mail.client.view.panels.Pa_Inbox;
-import hospital.mail.client.view.panels.Pa_Side;
+import hospital.mail.client.view.panels.Client.Pa_Counter;
+import hospital.mail.client.view.panels.Client.Pa_Inbox;
+import hospital.mail.client.view.panels.Client.Pa_Side;
 
 /**
  * Mails' view, it has panel for the inbox, for the side panel and for the
@@ -25,13 +25,22 @@ public class JF_MailClient extends JFrame {
 
 	/**
 	 * Constructor
+	 * 
+	 * @param txtBtnWrite of type String, the text of the write button.
+	 * @param txtBtnRead  of type String, the text of the read button.
+	 * @param txtBtnFtp   of type String, the text of the go to ftp button.
+	 * @param txtBtnExit  of type String, the text of the exit button
+	 * @param txtInbox    of type String, the text of the head of inbox.
+	 * @param txtTotal    of type String, the text of the total of mails in inbox.
+	 * @param txtUnseen   of type String, the text of the total of mails unseen in
+	 *                    inbox.
 	 */
-	public JF_MailClient() {
-		// change for lang
+	public JF_MailClient(String txtBtnWrite, String txtBtnRead, String txtBtnFtp, String txtBtnExit, String txtInbox,
+			String txtTotal, String txtUnseen) {
 		// create the panels
-		sidePanel = new Pa_Side("WRITE", "READ", "GO TO FTP", "EXIT");
-		inboxPanel = new Pa_Inbox();
-		counterPanel = new Pa_Counter("TOTAL", "UNSEEN");
+		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnFtp, txtBtnExit);
+		inboxPanel = new Pa_Inbox(txtInbox);
+		counterPanel = new Pa_Counter(txtTotal, txtUnseen);
 		panel = new JPanel();
 		panel.setLayout(new BorderLayout());
 
@@ -60,14 +69,40 @@ public class JF_MailClient extends JFrame {
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setResizable(false);
-		this.setVisible(true);
+	}
+
+	/**
+	 * Getter for the side's panel.
+	 * 
+	 * @return the sidePanel of type JPanel.
+	 */
+	public Pa_Side getSidePanel() {
+		return sidePanel;
+	}
+
+	/**
+	 * Getter for the side's panel.
+	 * 
+	 * @return the inboxPanel of type JPanel.
+	 */
+	public Pa_Inbox getInboxPanel() {
+		return inboxPanel;
+	}
+
+	/**
+	 * Getter for the side's panel.
+	 * 
+	 * @return the counterPanel of type JPanel.
+	 */
+	public Pa_Counter getCounterPanel() {
+		return counterPanel;
 	}
 
 	// only fot test
-	public static void main(String[] args) {
-		Language.selectLanguage(1);
-		JF_MailClient jframe = new JF_MailClient();
-		jframe.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		Language.selectLanguage(1);
+//		JF_MailClient jframe = new JF_MailClient();
+//		jframe.setVisible(true);
+//	}
 
 }

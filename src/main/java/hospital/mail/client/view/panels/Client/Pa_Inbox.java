@@ -1,4 +1,4 @@
-package hospital.mail.client.view.panels;
+package hospital.mail.client.view.panels.Client;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
@@ -35,13 +35,14 @@ public class Pa_Inbox extends JPanel {
 	private final int WIDTH;
 
 	/**
-	 * Constructor
+	 * Constructor.
+	 * 
+	 * @param txtHead of type String, the text of panel's head.
 	 */
-	public Pa_Inbox() {
+	public Pa_Inbox(String txtHead) {
 		// set the layout for this panel
 		this.setLayout(new BorderLayout(0, 0));
-		// change INBOX for model
-		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), "INBOX"), new EmptyBorder(5, 5, 5, 5)));
+		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), txtHead), new EmptyBorder(5, 5, 5, 5)));
 
 		// Values of TextArea's measures
 		HEIGHT = 400;

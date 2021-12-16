@@ -1,4 +1,4 @@
-package hospital.mail.client.view.panels;
+package hospital.mail.client.view.panels.Client;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
