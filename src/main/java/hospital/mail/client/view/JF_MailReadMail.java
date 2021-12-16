@@ -25,12 +25,14 @@ public class JF_MailReadMail extends JFrame {
 	/**
 	 * Constructor.
 	 * 
+	 * @param txtTitle           of type String, the view's title.
 	 * @param txtDescriptionHead of type String, the text of the description's head.
 	 * @param txtSender          of type String, the text of sender.
 	 * @param txtIssue           of type String, the text of issue.
 	 * @param txtBodyHead        of type String, the text of the description's head.
 	 */
-	public JF_MailReadMail(String txtDescriptionHead, String txtSender, String txtIssue, String txtBodyHead) {
+	public JF_MailReadMail(String txtTitle, String txtDescriptionHead, String txtSender, String txtIssue,
+			String txtBodyHead) {
 		panel = new JPanel();
 		descPanel = new Pa_Description(txtDescriptionHead, txtSender, txtIssue);
 		bodyPanel = new Pa_Body(txtBodyHead);
@@ -41,13 +43,14 @@ public class JF_MailReadMail extends JFrame {
 
 		this.add(panel);
 
-		defaultOperations();
+		defaultOperations(txtTitle);
 	}
 
 	/**
 	 * Method that set properties of the view.
 	 */
-	private void defaultOperations() {
+	private void defaultOperations(String txtTitle) {
+		this.setTitle(txtTitle);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setResizable(true);

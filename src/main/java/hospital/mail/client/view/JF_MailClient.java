@@ -26,6 +26,7 @@ public class JF_MailClient extends JFrame {
 	/**
 	 * Constructor
 	 * 
+	 * @param txtTitle    of type String, the view's title.
 	 * @param txtBtnWrite of type String, the text of the write button.
 	 * @param txtBtnRead  of type String, the text of the read button.
 	 * @param txtBtnFtp   of type String, the text of the go to ftp button.
@@ -35,8 +36,8 @@ public class JF_MailClient extends JFrame {
 	 * @param txtUnseen   of type String, the text of the total of mails unseen in
 	 *                    inbox.
 	 */
-	public JF_MailClient(String txtBtnWrite, String txtBtnRead, String txtBtnFtp, String txtBtnExit, String txtInbox,
-			String txtTotal, String txtUnseen) {
+	public JF_MailClient(String txtTitle, String txtBtnWrite, String txtBtnRead, String txtBtnFtp, String txtBtnExit,
+			String txtInbox, String txtTotal, String txtUnseen) {
 		// create the panels
 		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnFtp, txtBtnExit);
 		inboxPanel = new Pa_Inbox(txtInbox);
@@ -48,7 +49,7 @@ public class JF_MailClient extends JFrame {
 
 		add(panel);
 
-		defaultOperations();
+		defaultOperations(txtTitle);
 	}
 
 	/**
@@ -64,8 +65,11 @@ public class JF_MailClient extends JFrame {
 
 	/**
 	 * Method that set properties of the view.
+	 * 
+	 * @param txtTitle type of String, the text of title.
 	 */
-	private void defaultOperations() {
+	private void defaultOperations(String txtTitle) {
+		this.setTitle(txtTitle);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.pack();
 		this.setResizable(false);
