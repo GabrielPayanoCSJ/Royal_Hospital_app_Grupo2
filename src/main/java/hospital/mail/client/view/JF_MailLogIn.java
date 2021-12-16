@@ -131,4 +131,16 @@ public class JF_MailLogIn extends JFrame {
 		this.setBounds(100, 100, 241, 300);
 	}
 
+	/**
+	 * Getter of buttons (ArrayList of type JButton). 
+	 * [0] -> btnLogin
+	 * [1] -> btnReturn
+	 * 
+	 * @return the buttons
+	 */
+	public ArrayList<JButton> getButtons() {
+		return buttons;
+	}
+
+	
 }
