@@ -105,4 +105,10 @@ public class Pa_Side extends JPanel {
 		buttons.add(new JButton(txtBtnExit));
 	}
 
+	public ArrayList<JButton> getButtons() {
+		return buttons;
+	}
+
+	
+	
 }

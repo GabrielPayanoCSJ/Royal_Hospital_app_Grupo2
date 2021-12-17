@@ -81,7 +81,7 @@ public class Aux_Methods {
 	        		+ " Integer condimentum nulla nec odio posuere tincidunt. Proin congue consequat ex ut elementum. ";
 
 	        sendFromGMail(from, pass, to, subject, body);
-	        System.out.println("Enviado");
+	        System.out.println("Correo Enviado");
 	    }
 
 	    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {

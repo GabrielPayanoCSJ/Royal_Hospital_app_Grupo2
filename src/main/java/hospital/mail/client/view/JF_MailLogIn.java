@@ -138,7 +138,7 @@ public class JF_MailLogIn extends JFrame {
 	 * 
 	 * @return the buttons
 	 */
-	public ArrayList<JButton> getButtons() {
+	public ArrayList<JButton> getButtonsLogin() {
 		return buttons;
 	}
 
