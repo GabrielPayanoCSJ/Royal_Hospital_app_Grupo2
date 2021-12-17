@@ -1,51 +1,71 @@
 /**
  * 
  */
-
-// PACKAGE
 package hospital.ftp.server.controller;
 
-import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
+import java.util.ArrayList;
 
-import hospital.tools.Tool;
-
+import org.apache.ftpserver.FtpServer;
+import org.apache.ftpserver.FtpServerFactory;
+import org.apache.ftpserver.ftplet.Authority;
+import org.apache.ftpserver.ftplet.FtpException;
+import org.apache.ftpserver.listener.ListenerFactory;
+import org.apache.ftpserver.usermanager.impl.BaseUser;
+import org.apache.ftpserver.usermanager.impl.WritePermission;
 /**
- * @author Guilermo González de Miguel
- * @version 1.0
+ * @author prodi
+ *
  */
 public class FTPServer {
-	
-	private ServerSocket socketServer;
-	private Socket socketClient;
+	private FtpServer ftpserver;
 	private final int PORT = 6000;
-	private Thread hilo;
-	private FTPServerPipeline pipe;
-
+	private String username = "";
+	private String password = "";
+	private String root = "";
+	private FtpServerFactory serverFactory;
+	private ListenerFactory listenerFactory;
+	private BaseUser user;
+	
 	/**
 	 * 
 	 */
 	public FTPServer() {
+		this.serverFactory = new FtpServerFactory();
+		this.listenerFactory = new ListenerFactory();
+		this.listenerFactory.setPort(PORT);
+		
+		serverFactory.addListener("default", listenerFactory.createListener());
+		this.user = new BaseUser();
+		this.user.setName("guillermo");
+		this.user.setPassword("123456");
+		this.user.setHomeDirectory("D:\\Users\\prodi\\Desktop");
+		ArrayList<Authority> authorities = new ArrayList<Authority>();
+		authorities.add(new WritePermission());
+		user.setAuthorities(authorities);
+		
 		try {
-			this.socketServer = new ServerSocket(PORT); // START SERVER SOCKET
+			serverFactory.getUserManager().save(user);
 			
-			
-			while(true) {
-				this.socketClient = new Socket(); // CLIENT SOCKET
-				this.socketClient = this.socketServer.accept(); // ACCEPT REQUEST CLIENT SOCKET.
-				
-//				this.hilo = new Thread(new FTPServer());
-			}
-			
+			this.user = new BaseUser();
+			this.user.setName("paco");
+			this.user.setPassword("123");
+			this.user.setHomeDirectory("D:\\Users\\prodi");
+			ArrayList<Authority> authorities2 = new ArrayList<Authority>();
+			authorities2.add(new WritePermission());
+			user.setAuthorities(authorities2);
+			serverFactory.getUserManager().save(user);
 
 			
-		} catch (IOException e) {
+			
+			
+			FtpServer server = serverFactory.createServer();
+			server.start();
+		} catch (FtpException e) {
+			e.printStackTrace();
 		}
 		
-		
 	}
-
+	
 	/**
 	 * @param args
 	 */
