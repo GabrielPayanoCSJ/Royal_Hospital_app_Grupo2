@@ -25,7 +25,7 @@ import javax.swing.JPanel;
 public class Pa_Side extends JPanel {
 	// label for the hospital's icon
 	private JLabel lblIco;
-	
+
 	private JPanel imgPanel;
 	private JPanel emailButtonsPanel;
 	private JPanel controlPanel;
@@ -46,10 +46,10 @@ public class Pa_Side extends JPanel {
 		imgPanel = new JPanel();
 		emailButtonsPanel = new JPanel();
 		controlPanel = new JPanel();
-		
+
 		buttons = new ArrayList<>();
 
-		lblIco = new JLabel(); 
+		lblIco = new JLabel();
 		lblIco.setBounds(ALLBITS, ABORT, 100, 100);
 		lblIco.setIcon(new ImageIcon(getClass().getResource("/images/crown_77906.png"))); // relative URL
 
@@ -60,7 +60,7 @@ public class Pa_Side extends JPanel {
 		this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
 		appendObjectsPanels();
-		
+
 		appendPanels();
 	}
 
@@ -68,7 +68,7 @@ public class Pa_Side extends JPanel {
 		this.add(imgPanel);
 		this.add(emailButtonsPanel);
 		this.add(controlPanel);
-		
+
 	}
 
 	/**
@@ -78,11 +78,13 @@ public class Pa_Side extends JPanel {
 		imgPanel.add(lblIco);
 
 		for (int i = 0; i < 2; i++) {
+			buttons.get(i).setName(i + "");
 			emailButtonsPanel.add(buttons.get(i));
 			emailButtonsPanel.add(Box.createRigidArea(new Dimension(15, 15))); // spaces between buttons
 		}
 
 		for (int i = 2; i < buttons.size(); i++) {
+			buttons.get(i).setName(i + "");
 			controlPanel.add(buttons.get(i));
 			controlPanel.add(Box.createRigidArea(new Dimension(15, 15)));
 		}
