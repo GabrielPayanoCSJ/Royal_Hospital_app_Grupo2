@@ -62,6 +62,9 @@ public class Language {
 	 */
 	private static ArrayList<String> mailServer_txts;
 
+	
+	private static ArrayList<String> language_txts;
+	
 	/**
 	 * 
 	 * @param langOption
@@ -125,12 +128,21 @@ public class Language {
 			case 5: // MAIL SERVER TEXTS
 				mailServer_txts = langTexts.get(option);
 				break;
+			case 6: // MAIL SERVER TEXTS
+				language_txts = langTexts.get(option);
+				break;
 			default:
-				
 				Tool.showConsoleMessage("Option [ " + option + " ] doesn't exist.", true);
 				break;
 			}
 		}
+	}
+
+	/**
+	 * @return 
+	 */
+	public String getLanguage_txts(int index) {
+		return language_txts.get(index);
 	}
 
 	/**
