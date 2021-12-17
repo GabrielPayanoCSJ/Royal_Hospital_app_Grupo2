@@ -52,7 +52,7 @@ public class Pa_Buttons extends JPanel {
 		for(int i = 0; i < this.buttons.size(); i++) {
 			
 			if(i < this.buttons.size()-1)
-				this.buttons.get(i).setEnabled(false);
+				this.buttons.get(i).setEnabled(true);
 				
 			this.buttons.get(i).setName(String.valueOf(i));
 			this.add(buttons.get(i));

@@ -3,12 +3,23 @@
  */
 package hospital.ftp.client.view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.GridLayout;
+
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import hospital.ftp.client.view.panels.*;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.tree.DefaultMutableTreeNode;
+import javax.swing.tree.TreePath;
+
+import hospital.ftp.client.view.panels.Pa_Buttons;
+import hospital.ftp.client.view.panels.Pa_Directory;
+import hospital.ftp.client.view.panels.Pa_Log;
+import hospital.ftp.client.view.panels.Pa_Login;
 import hospital.languages.Language;
-import java.awt.*;
-import javax.swing.*;
 
 /**
  * @author
@@ -82,5 +93,49 @@ public class JF_FTPClient extends JFrame {
 		JF_FTPClient jframe = new JF_FTPClient();
 		jframe.setVisible(true);
 	}
+	
+	//METHODS TO MANAGE JTREE
+	/**
+	 * 
+	 * @param url an String in URL format by the string provide
+	 * @return
+	 */
+	public static String generateURL(String url) {
+		// Modify the string to be like an URL
+		url = url.replace("\\", "Hospital");
+		url = url.replace("|", "\\");
+		url = url.replace(" ", "");
+		return url;
+	}
+	
+	
+	//METHOD TO CREATE A NEW NODE (FOLDER) INTO THE NODE TREE
+	/**
+	 * 
+	 * @param folderName a String type that have the name of the new node to create in the parent node selected by the user
+	 */
+	public void createNodeDirectory(String folderName) {
+		TreePath path = this.panel_directory.getTree().getSelectionPath();
+		if(path == null) {
+			 JOptionPane.showMessageDialog(null,"No ha seleccionado ninguna Carpeta");
+		}else {
+			DefaultMutableTreeNode selectedNode = (DefaultMutableTreeNode) path.getLastPathComponent();
+			DefaultMutableTreeNode newNode = new DefaultMutableTreeNode(folderName);
+			selectedNode.add(newNode);
+			this.panel_directory.getTree().updateUI();
+		}
+			
+	}
+	
+	//METHOD TO ASK FOR THE NEW NODE NAME TO UPDATE INTO THE JTREE
+	/**
+	 * 
+	 */
+	public void askForNewFolderName() {
+		String newFileName = JOptionPane.showInputDialog("Introduce el Nombre de la carpeta:");
+		JOptionPane.showMessageDialog(null, "Nombre de la carpeta:  " + newFileName);
+		createNodeDirectory(newFileName);
+	}
+
 
 }

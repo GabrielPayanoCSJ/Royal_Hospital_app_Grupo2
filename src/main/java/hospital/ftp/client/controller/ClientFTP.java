@@ -52,7 +52,7 @@ public class ClientFTP {
 		this.plogin.getBtn_connect().addActionListener(new Ev_FTPConnect(this.cliente, jfClient));
 
 		for (int i = 0; i < this.pbutton.getButtons().size(); i++) {
-			this.pbutton.getButtons().get(i).addActionListener(new Ev_FTPButtons());
+			this.pbutton.getButtons().get(i).addActionListener(new Ev_FTPButtons(jfClient));
 		}
 
 	}
@@ -64,8 +64,9 @@ public class ClientFTP {
 	 */
 	class Ev_FTPButtons implements ActionListener {
 
-		public Ev_FTPButtons() {
-			
+		private JF_FTPClient jfClient;
+		public Ev_FTPButtons(JF_FTPClient jfClient) {
+			this.jfClient = jfClient;
 		}
 
 		@Override
@@ -75,6 +76,7 @@ public class ClientFTP {
 			switch (Integer.parseInt(button.getName())) {
 			case 0:
 				System.out.println(Language.getFtpClient_txts(0));
+				jfClient.askForNewFolderName();
 				break;
 			case 1:
 				System.out.println(Language.getFtpClient_txts(1));

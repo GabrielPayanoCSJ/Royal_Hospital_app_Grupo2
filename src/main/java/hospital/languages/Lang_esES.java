@@ -74,7 +74,8 @@ public class Lang_esES {
 				"CONECTAR", // 8 
 				"USUARIO: ", // 9
 				"CONTRASEÑA: ", // 10
-				"RENOMBRAR" // 11
+				"RENOMBRAR", // 11
+				"No ha seleccionado ninguna Carpeta"//12
 		));
 	}
 

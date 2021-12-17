@@ -74,7 +74,8 @@ public class Lang_enUK {
 				"CONNECT", // 8
 				"USER: ", // 9
 				"PASSWORD: ", // 10
-				"RENAME" // 11
+				"RENAME", // 11
+				""//12
 
 		));
 	}
