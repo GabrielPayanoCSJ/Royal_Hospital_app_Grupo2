@@ -1,8 +1,8 @@
 package hospital.ftp.client.view.panels;
 
 import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.util.ArrayList;
+
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
@@ -12,7 +12,7 @@ import javax.swing.JPanel;
 /**
  * Buttons' panel with a buttons (ArrayList of type JButton) that contains a
  * button for all actions (create, delete, upload, download and exit). The
- * buttons will be visible or not depending on the permissions. This panel has a horizontal BoxLoyout.
+ * buttons will be visible or not depending on the permissions.
  * 
  * @author Jorge Fernández Ruiz
  * @date 14/12/2021
@@ -32,26 +32,33 @@ public class Pa_Buttons extends JPanel {
 	 * @param txtBtnExit     of String type, for exit of program and close the
 	 *                       connections.
 	 */
-	public Pa_Buttons(String txtBtnCreate, String txtBtnDelete, String txtBtnUpload, String txtBtnDownload,
+	public Pa_Buttons(String txtBtnCreate, String txtBtnDelete, String txtBtnRename, String txtBtnUpload, String txtBtnDownload,
 			String txtBtnExit) {
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		// create the ArrayList
 		buttons = new ArrayList<>();
-		
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
-		
 		// creation and append the buttons to ArrayList of buttons
 		buttons.add(new JButton(txtBtnCreate));
 		buttons.add(new JButton(txtBtnDelete));
+		buttons.add(new JButton(txtBtnRename));
 		buttons.add(new JButton(txtBtnUpload));
 		buttons.add(new JButton(txtBtnDownload));
 		buttons.add(new JButton(txtBtnExit));
+		
 
 		// append each button to the panel (this class)
-		for (JButton button : buttons) {
-			this.add(button);
+		
+		for(int i = 0; i < this.buttons.size(); i++) {
+			
+			if(i < this.buttons.size()-1)
+				this.buttons.get(i).setEnabled(false);
+				
+			this.buttons.get(i).setName(String.valueOf(i));
+			this.add(buttons.get(i));
 			this.add(Box.createRigidArea(new Dimension(15,15)));
 		}
+		
 	}
 
 	/**

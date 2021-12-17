@@ -34,7 +34,7 @@ public class JF_FTPClient extends JFrame {
 		this.panel_login = new Pa_Login();
 		this.panel_directory = new Pa_Directory();
 		this.panel_log = new Pa_Log();
-		this.panel_button = new Pa_Buttons(Language.getFtpClient_txts(0), Language.getFtpClient_txts(1),
+		this.panel_button = new Pa_Buttons(Language.getFtpClient_txts(0), Language.getFtpClient_txts(1), Language.getFtpClient_txts(11),
 				Language.getFtpClient_txts(2), Language.getFtpClient_txts(3), Language.getFtpClient_txts(4));
 		
 		this.getContentPane().add(panel_login, BorderLayout.NORTH);
@@ -47,6 +47,8 @@ public class JF_FTPClient extends JFrame {
 		this.getContentPane().add(btnContainer, BorderLayout.SOUTH);
 	}
 
+	
+	
 	/**
 	 * @return the panel_login
 	 */
@@ -76,7 +78,7 @@ public class JF_FTPClient extends JFrame {
 	}
 	
 	public static void main(String[] args) {
-		Language.selectLanguage(1);
+		Language.selectLanguage(2);
 		JF_FTPClient jframe = new JF_FTPClient();
 		jframe.setVisible(true);
 	}

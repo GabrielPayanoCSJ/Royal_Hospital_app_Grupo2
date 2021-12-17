@@ -1,18 +1,18 @@
 /**
  * 
  */
-package hospital.ftp.server.controller;
+package hospital.ftp.client.controller;
 
 /**
  * @author prodi
  *
  */
-public class FTPServerPipeline {
+public class FTPUploadFile {
 
 	/**
 	 * 
 	 */
-	public FTPServerPipeline() {
+	public FTPUploadFile() {
 		// TODO Auto-generated constructor stub
 	}
 

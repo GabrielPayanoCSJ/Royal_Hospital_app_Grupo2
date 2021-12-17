@@ -29,7 +29,15 @@ public class Lang_esES {
 				loadFTPClientTxts(), // 2
 				loadFTPServerTxts(), // 3
 				loadMailClientTxts(), // 4
-				loadMailServerTxts() // 5
+				loadMailServerTxts(), // 5
+				loadLanguageTxts() // 6
+		));
+	}
+
+	private ArrayList<String> loadLanguageTxts() {
+		return new ArrayList<String>(Arrays.asList( // LIST LANGUAGES TEXTS
+				"ESPAÑA", // 0
+				"INGLÉS" // 1
 		));
 	}
 
@@ -63,7 +71,10 @@ public class Lang_esES {
 				"LOG CLIENTE", // 5
 				"DIRECTORIO REMOTO", // 6
 				"FTP CLIENTE - GRUPO 2", // 7
-				"CONECTAR" // 8 
+				"CONECTAR", // 8 
+				"USUARIO: ", // 9
+				"CONTRASEÑA: ", // 10
+				"RENOMBRAR" // 11
 		));
 	}
 

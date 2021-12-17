@@ -25,8 +25,10 @@ public class Tool {
 	private static void loadOptionPane(String error, String title, int option) {
 		JOptionPane.showMessageDialog(null, error, title, option);
 	}
-
-
+	
+	public static String inputGUIpane(String quest) {
+		return JOptionPane.showInputDialog(quest);
+	}
 
 	public static void showConsoleError(String error) {
 		showConsoleMessage("\n *** ERROR *** " + error, true);

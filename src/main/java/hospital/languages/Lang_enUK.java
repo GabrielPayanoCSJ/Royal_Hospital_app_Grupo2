@@ -29,7 +29,15 @@ public class Lang_enUK {
 				loadFTPClientTxts(), // 2
 				loadFTPServerTxts(), // 3
 				loadMailClientTxts(), // 4
-				loadMailServerTxts() // 5
+				loadMailServerTxts(), // 5
+				loadLanguageTxts() // 6
+		));
+	}
+
+	private ArrayList<String> loadLanguageTxts() {
+		return new ArrayList<String>(Arrays.asList( // LIST LANGUAGES TEXTS
+				"SPANISH", // 0
+				"ENGLISH" // 1
 		));
 	}
 
@@ -63,7 +71,11 @@ public class Lang_enUK {
 				"CLIENT LOG", // 5
 				"REMOTE DIRECTORY", // 6
 				"FTP CLIENT - GROUP 2", // 7
-				"CONNECT" // 8
+				"CONNECT", // 8
+				"USER: ", // 9
+				"PASSWORD: ", // 10
+				"RENAME" // 11
+
 		));
 	}
 
