@@ -66,9 +66,9 @@ public class Aux_Methods {
 		
 	}
 	
-	 private static String USER_NAME = "testhospitalroyale1";  // GMail user name (just the part before "@gmail.com")
-	    private static String PASSWORD = "estoesuntest"; // GMail password
-	    private static String RECIPIENT = "guillermogonzalezdemiguel.sanjose@alumnado.fundacionloyola.net";
+	 private static String USER_NAME = "testhospitalroyale1";  // GMail username (la parte antes de "@gmail.com")
+	    private static String PASSWORD = "estoesuntest"; // GMail pass
+	    private static String RECIPIENT = "ialonsocalzado.sanjose@alumnado.fundacionloyola.net";
 
 	    public static void main(String[] args) {
 	        String from = USER_NAME;
@@ -81,6 +81,7 @@ public class Aux_Methods {
 	        		+ " Integer condimentum nulla nec odio posuere tincidunt. Proin congue consequat ex ut elementum. ";
 
 	        sendFromGMail(from, pass, to, subject, body);
+	        System.out.println("Enviado");
 	    }
 
 	    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
@@ -158,12 +159,12 @@ public class Aux_Methods {
 	        try
 	        {
 	            folder.open(2);
-	            System.out.println((new StringBuilder("Folder name----")).append
+	            System.out.println((new StringBuilder("Nombre Carpeta----")).append
 	(folder.getFullName()).toString());
 	        }
 	        catch(Exception ex)
 	        {
-	            System.out.println((new StringBuilder("Folder Opening Exception..")).append(ex).toString());
+	            System.out.println((new StringBuilder("Exceoción al abrir carpeta..")).append(ex).toString());
 	        }
 	    }
 
@@ -202,7 +203,7 @@ public class Aux_Methods {
 	                BodyPart bodyPart = mimeMultipart.getBodyPart(i);
 	                if (bodyPart.isMimeType("text/plain")){
 	                    result = result + "\n" + bodyPart.getContent();
-	                    break;  //without break same text appears twice in my tests
+	                    break;  //Sin break vuelve a aparecer el texto
 	                } else if (bodyPart.isMimeType("text/html")){
 	                    String html = (String) bodyPart.getContent();
 	                    result = result + "\n" + Jsoup.parse(html).text();
