@@ -102,11 +102,4 @@ public class JF_MailClient extends JFrame {
 		return counterPanel;
 	}
 
-	// only fot test
-//	public static void main(String[] args) {
-//		Language.selectLanguage(1);
-//		JF_MailClient jframe = new JF_MailClient();
-//		jframe.setVisible(true);
-//	}
-
 }
