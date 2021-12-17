@@ -9,14 +9,11 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
-import hospital.languages.Language;
-
 import java.awt.BorderLayout;
-import java.awt.Font;
 
 /**
  * Log's panel with a txA_Log (JTextArea), where will write all the information
- * of any operation and error, and a scroll (JScrollPane) in txA_Log. 
+ * of any operation and error, and a scroll (JScrollPane) in txA_Log. Has a BorderLayout.
  * 
  * @author Jorge Fernández Ruiz
  * @date 14/12/2021
@@ -38,7 +35,8 @@ public class Pa_Log extends JPanel {
 	 */
 	public Pa_Log() {
 		this.setLayout(new BorderLayout(0, 0));
-		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), Language.getFtpClient_txts(5)), new EmptyBorder(5,5,5,5)));
+		// change LOG for model
+		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), "LOG"), new EmptyBorder(5,5,5,5)));
 		
 		// Values of TextArea's measures
 		HEIGHT = 16;
@@ -46,8 +44,12 @@ public class Pa_Log extends JPanel {
 
 		// Creation of objects
 		txA_Log = new JTextArea(HEIGHT, WIDTH);
+		
+		// this serves if it was written more tan the columns number, the last word will
+		// be write on the next line.
 		txA_Log.setLineWrap(true);
 		txA_Log.setWrapStyleWord(true);
+		
 		scroll = new JScrollPane(txA_Log);
 
 		txA_Log.setEditable(false);
