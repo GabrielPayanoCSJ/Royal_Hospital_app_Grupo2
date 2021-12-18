@@ -5,6 +5,7 @@ package hospital.ftp.client.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
 import java.io.IOException;
 import java.net.SocketException;
 
@@ -34,6 +35,7 @@ public class ClientFTP {
 	private Pa_Log plog;
 	private Pa_Directory pdirectory;
 	private Pa_Buttons pbutton;
+	private final String LOCATION = "C:\\2ºDAM\\ACDA\\pruebas";
 
 	/**
 	 * 
@@ -80,6 +82,12 @@ public class ClientFTP {
 				break;
 			case 1:
 				System.out.println(Language.getFtpClient_txts(1));
+				try {
+					jfClient.scanner(LOCATION);
+				} catch (InterruptedException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}
 				break;
 			case 2:
 				System.out.println(Language.getFtpClient_txts(11));
