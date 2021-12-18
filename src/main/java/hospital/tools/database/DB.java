@@ -46,6 +46,7 @@ public class DB {
 		try {
 			Class.forName(LoadDriverMySQL(driverMySQL));
 			this.conSQL = DriverManager.getConnection(urlDB + "/" + nameDB, userDB, passwdDB);
+			Tool.showGUIinfo("Conexión a la base de datos realizada con exito", "MYSQL CONNECT");
 		} catch (ClassNotFoundException e) {
 			Tool.showConsoleError(Language.getDb_txts(0));
 		} catch (SQLException e) {

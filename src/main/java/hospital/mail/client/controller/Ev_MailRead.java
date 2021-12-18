@@ -1,18 +1,18 @@
 /**
  * 
  */
-package hospital.ftp.client.controller;
+package hospital.mail.client.controller;
 
 /**
  * @author prodi
  *
  */
-public class FTPUploadFile {
+public class Ev_MailRead {
 
 	/**
 	 * 
 	 */
-	public FTPUploadFile() {
+	public Ev_MailRead() {
 		// TODO Auto-generated constructor stub
 	}
 

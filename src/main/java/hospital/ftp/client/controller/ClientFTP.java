@@ -27,6 +27,7 @@ import hospital.tools.Tool;
  * @author Guillermo González de Miguel
  */
 public class ClientFTP {
+	
 	private JF_FTPClient jfClient;
 	private FTPClient cliente;
 
@@ -136,9 +137,9 @@ public class ClientFTP {
 							System.out.println("Directorio actual: " + cliente.printWorkingDirectory());
 
 							FTPFile[] ficheros = cliente.listFiles();
-							boolean exist = cliente.changeWorkingDirectory("/Practica6");
-							FTPFile[] fi = cliente.listFiles();
-							System.out.println(exist + "\n" + cliente.getReplyString());
+//							boolean exist = cliente.changeWorkingDirectory("/Practica6");
+//							FTPFile[] fi = cliente.listFiles();
+//							System.out.println(exist + "\n" + cliente.getReplyString());
 
 							System.out.println("Ficheros en el directorio actual: " + ficheros.length);
 
@@ -149,13 +150,13 @@ public class ClientFTP {
 										.println("\t" + ficheros[i].getName() + " => " + tipos[ficheros[i].getType()]);
 							}
 
-							System.out.println("Ficheros en el directorio actual: " + fi.length);
+//							System.out.println("Ficheros en el directorio actual: " + fi.length);
 
 //							String tipos[] = { "Fichero", "Directorio", "Enlace simb." };
 
-							for (int i = 0; i < fi.length; i++) {
-								System.out.println("\t" + fi[i].getName() + " => " + tipos[fi[i].getType()]);
-							}
+//							for (int i = 0; i < fi.length; i++) {
+//								System.out.println("\t" + fi[i].getName() + " => " + tipos[fi[i].getType()]);
+//							}
 
 //							boolean logout = cliente.logout();
 //
@@ -164,12 +165,12 @@ public class ClientFTP {
 //							else
 //								System.out.println("Error al hacer logout...");
 
-//							cliente.disconnect();
-//							System.out.println("Desconectado...");
+							cliente.disconnect();
+							System.out.println("Desconectado...");
 						} catch (SocketException e2) {
-							e2.printStackTrace();
+//							e2.printStackTrace();
 						} catch (IOException e3) {
-							e3.printStackTrace();
+//							e3.printStackTrace();
 						}
 					} else {
 						System.out.println("Login Incorrecto...");

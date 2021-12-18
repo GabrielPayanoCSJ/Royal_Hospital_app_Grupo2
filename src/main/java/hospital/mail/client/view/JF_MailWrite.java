@@ -17,7 +17,7 @@ import hospital.mail.client.view.panels.WriteMail.Pa_WriteButtons;
  * @date 17/12/2021
  * @version 1.0
  */
-public class JF_MailWriteMail extends JFrame {
+public class JF_MailWrite extends JFrame {
 	private Pa_DescWriteMail desc;
 	private Pa_WriteBody body;
 	private Pa_WriteButtons buttons;
@@ -36,7 +36,7 @@ public class JF_MailWriteMail extends JFrame {
 	 * @param txtBtnCancel   of type String, the text of cancel button.
 	 * @param txtBtnSend     of type String, the text of send button.
 	 */
-	public JF_MailWriteMail(String txtTitle, String txtHeadDesc, String txtHeadBody, String txtHeadIssue,
+	public JF_MailWrite(String txtTitle, String txtHeadDesc, String txtHeadBody, String txtHeadIssue,
 			String txtHeadMessage, String txtSender, String txtAddressee, String txtBtnCancel, String txtBtnSend) {
 		// create panels
 		panel = new JPanel();

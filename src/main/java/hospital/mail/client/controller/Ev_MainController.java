@@ -6,8 +6,6 @@ package hospital.mail.client.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-import javax.swing.JButton;
-
 import hospital.mail.client.view.JF_MailClient;
 import hospital.mail.client.view.JF_MailLogIn;
 
