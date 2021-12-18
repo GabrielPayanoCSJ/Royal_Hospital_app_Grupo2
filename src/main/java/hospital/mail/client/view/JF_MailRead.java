@@ -17,7 +17,7 @@ import hospital.mail.client.view.panels.ReadMail.Pa_Description;
  * @date 15/12/2021
  * @version 1.0
  */
-public class JF_MailReadMail extends JFrame {
+public class JF_MailRead extends JFrame {
 	private JPanel panel;
 	private Pa_Description descPanel;
 	private Pa_Body bodyPanel;
@@ -31,7 +31,7 @@ public class JF_MailReadMail extends JFrame {
 	 * @param txtIssue           of type String, the text of issue.
 	 * @param txtBodyHead        of type String, the text of the description's head.
 	 */
-	public JF_MailReadMail(String txtTitle, String txtDescriptionHead, String txtSender, String txtIssue,
+	public JF_MailRead(String txtTitle, String txtDescriptionHead, String txtSender, String txtIssue,
 			String txtBodyHead) {
 		panel = new JPanel();
 		descPanel = new Pa_Description(txtDescriptionHead, txtSender, txtIssue);
