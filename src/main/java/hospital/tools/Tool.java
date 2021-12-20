@@ -29,6 +29,16 @@ public class Tool {
 	public static String inputGUIpane(String quest) {
 		return JOptionPane.showInputDialog(quest);
 	}
+	
+	public static String inputGUIpane(String quest, String title, String oldName) {
+		return (String) JOptionPane.showInputDialog(null, quest, title, JOptionPane.QUESTION_MESSAGE, null, null,
+				oldName);
+	}
+	
+	public static String inputGUIpane(String quest, String title) {
+		return JOptionPane.showInputDialog(null, quest, title, JOptionPane.QUESTION_MESSAGE);
+	}
+	
 
 	public static void showConsoleError(String error) {
 		showConsoleMessage("\n *** ERROR *** " + error, true);

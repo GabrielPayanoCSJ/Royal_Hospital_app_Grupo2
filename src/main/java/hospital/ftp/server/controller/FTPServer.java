@@ -56,7 +56,7 @@ public class FTPServer {
 			rootDir = file.getAbsolutePath();
 			System.out.println(rootDir);
 		}
-
+		
 		if (rootDir.equals("")) {
 			Tool.showGUIinfo("Debe seleccionar un directorio raíz", "Información");
 			System.exit(1);
@@ -86,7 +86,7 @@ public class FTPServer {
 			int userGroupID = userdb.getUsers().get(i).getGroupID();
 			if (this.userdb.getUsers().get(i).isEnable() && groupdb.isEnable(userGroupID)) {
 				user = new BaseUser();
-				user.setName(userdb.getUsers().get(i).getUsername());
+				user.setName(userdb.getUsers().get(i).getUsername().toLowerCase());
 				user.setPassword(userdb.getUsers().get(i).getPassword());
 
 				String homeDir = createUserDirectory(rootDir, i, userGroupID);

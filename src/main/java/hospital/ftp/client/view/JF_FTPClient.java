@@ -28,14 +28,15 @@ public class JF_FTPClient extends JFrame {
 		JPanel centerPanel = new JPanel();
 		centerPanel.setBorder(BorderFactory.createEmptyBorder(10,10,10,10));
 		JPanel btnContainer = new JPanel();
-		this.setSize(new Dimension(800, 800));
+		this.setSize(new Dimension(900, 800));
+		this.setResizable(false);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout(0, 0));
 		this.panel_login = new Pa_Login();
 		this.panel_directory = new Pa_Directory();
 		this.panel_log = new Pa_Log();
 		this.panel_button = new Pa_Buttons(Language.getFtpClient_txts(0), Language.getFtpClient_txts(1), Language.getFtpClient_txts(11),
-				Language.getFtpClient_txts(2), Language.getFtpClient_txts(3), Language.getFtpClient_txts(4));
+				Language.getFtpClient_txts(2), Language.getFtpClient_txts(3));
 		
 		this.getContentPane().add(panel_login, BorderLayout.NORTH);
 		centerPanel.setLayout(new GridLayout(2, 1, 0, 0));

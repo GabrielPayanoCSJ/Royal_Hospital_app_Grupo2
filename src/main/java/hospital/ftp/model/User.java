@@ -73,6 +73,22 @@ public class User {
 		return exist;
 	}
 
+	public int searchUserGroup(String username) {
+		
+		this.db.getPreStatement("SELECT group_id FROM GR2_USER WHERE username = ?", new ArrayList<Object>(Arrays.asList(username)));
+		
+		int groupID = -1;
+		try {
+			if (this.db.getResSQL().next()) {
+				groupID = this.db.getResSQL().getInt(1);
+			}
+		} catch (SQLException e) {
+			Tool.showGUIinfo("El usuario " + username + " no tiene grupo", "");
+		}
+		
+		return groupID;
+	}
+
 	/**
 	 * @return the users
 	 */
