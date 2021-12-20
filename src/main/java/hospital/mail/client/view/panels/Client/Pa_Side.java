@@ -64,6 +64,9 @@ public class Pa_Side extends JPanel {
 		appendPanels();
 	}
 
+	/**
+	 * Method that append the extra panels to this class (JPanel).
+	 */
 	private void appendPanels() {
 		this.add(imgPanel);
 		this.add(emailButtonsPanel);
@@ -107,10 +110,15 @@ public class Pa_Side extends JPanel {
 		buttons.add(new JButton(txtBtnExit));
 	}
 
+	/**
+	 * Getter of buttons (ArrayList of type JButton).
+	 * 
+	 * [0] -> Write || [1] -> Read || [2] -> Change to Ftp || [3] -> Exit
+	 * 
+	 * @return buttons (ArrayList of type JButton).
+	 */
 	public ArrayList<JButton> getButtons() {
 		return buttons;
 	}
 
-	
-	
 }

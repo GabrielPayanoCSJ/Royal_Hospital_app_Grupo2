@@ -15,8 +15,15 @@ public class Ev_MailClient implements ActionListener {
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		// TODO Auto-generated method stub
-
+		if (e.getSource().equals(principal.getSidePanel().getButtons().get(0))) {
+			WriteMailController writeC = new WriteMailController();
+		} else if (e.getSource().equals(principal.getSidePanel().getButtons().get(1))) {
+			ReadMailController read = new ReadMailController();
+		} else if (e.getSource().equals(principal.getSidePanel().getButtons().get(2))) {
+			// change to ftp
+		} else if (e.getSource().equals(principal.getSidePanel().getButtons().get(3))) {
+			principal.dispose();
+		}
 	}
 
 }
