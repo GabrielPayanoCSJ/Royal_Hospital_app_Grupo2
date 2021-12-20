@@ -68,7 +68,7 @@ public class Utils_Methods {
 	
 	 private static String USER_NAME = "testhospitalroyale1";  // GMail username (la parte antes de "@gmail.com")
 	    private static String PASSWORD = "estoesuntest"; // GMail pass
-	    private static String RECIPIENT = "ialonsocalzado.sanjose@alumnado.fundacionloyola.net";
+	    private static String RECIPIENT = "testhospitalroyale1@gmail.com";
 
 	    public static void main(String[] args) {
 	        String from = USER_NAME;
@@ -305,17 +305,29 @@ public class Utils_Methods {
 	        }
 	    }
 	    
-	    public static boolean userauth(String user,String pass) throws NoSuchProviderException {
-	    	Transport transport = session.getTransport("smtp");
+	    public static boolean userauth(String user,String pass) throws MessagingException {
+	    	boolean exists = false;
+	    	Properties props = System.getProperties();
+	        String host = "smtp.gmail.com";
+	        props.put("mail.smtp.starttls.enable", "true");
+	        props.put("mail.smtp.host", host);
+	        props.put("mail.smtp.user", user);
+	        props.put("mail.smtp.password", pass);
+	        props.put("mail.smtp.port", "587");
+	        props.put("mail.smtp.auth", "true");
+	        Session session = Session.getDefaultInstance(props);
+	    	Transport transport2 = session.getTransport("smtp");
+	    	System.out.println(user + " " + pass);
 	    	try {
-	    		transport.connect("smtp.gmail.com", user, pass);
-	    		return true;
+	    		transport2.connect(host, user, pass);
+	    		exists = true;
+	    		transport2.close();
 			} catch (AuthenticationFailedException e) {
 				System.out.println("Comprueba el usuario y la contraseña");
-				return false;
+				transport2.close();
 			} catch (MessagingException e) {
-				return false;
+				transport2.close();
 			}
-            
+            return exists;
 	    }
 }
