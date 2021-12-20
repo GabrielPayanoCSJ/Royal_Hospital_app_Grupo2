@@ -29,8 +29,6 @@ public class Ev_MainController implements ActionListener {
 	public Ev_MainController(JF_MailLogIn login) {
 		// TODO Auto-generated constructor stub
 		this.login = login;
-		Ev_MailClient cliente = new Ev_MailClient();
-
 	}
 
 	@Override
@@ -46,7 +44,6 @@ public class Ev_MainController implements ActionListener {
 			} catch (NoSuchProviderException e) {
 				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
 			}
-			
 
 		}
 	}
