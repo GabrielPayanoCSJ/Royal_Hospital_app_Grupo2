@@ -75,7 +75,7 @@ public class Lang_esES {
 				"USUARIO: ", // 9
 				"CONTRASEÑA: ", // 10
 				"RENOMBRAR", // 11
-				"No ha seleccionado ninguna Carpeta"//12
+				"DESCONECTAR" // 12
 		));
 	}
 

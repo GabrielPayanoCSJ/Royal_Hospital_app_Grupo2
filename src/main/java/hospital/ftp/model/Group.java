@@ -40,6 +40,7 @@ public class Group {
 		this.enable = enable;
 	}
 
+
 	private ArrayList<Group> getGroupsBD() {
 		this.groups = new ArrayList<Group>();
 		this.db.getStatement("SELECT * FROM GR2_GROUP");
@@ -71,6 +72,47 @@ public class Group {
 		return -1;
 	}
 
+	public boolean checkWritePriv(int groupID) {
+		this.db.getPreStatement("SELECT write_priv FROM GR2_GROUP WHERE id = ?",
+				new ArrayList<Object>(Arrays.asList(groupID)));
+			try {
+				if (this.db.getResSQL().next()) {
+					return this.db.getResSQL().getBoolean(1);
+				}
+			} catch (SQLException e) {
+			}
+		
+		return false;
+	}
+
+	public boolean checkReadPriv(int groupID) {
+		this.db.getPreStatement("SELECT read_priv FROM GR2_GROUP WHERE id = ?",
+				new ArrayList<Object>(Arrays.asList(groupID)));
+		try {
+			if (this.db.getResSQL().next()) {
+				return this.db.getResSQL().getBoolean(1);
+			}
+		} catch (SQLException e) {
+//			e.printStackTrace();
+		}
+		
+		return false;
+	}
+
+	public boolean checkExecutePriv(int groupID) {
+		this.db.getPreStatement("SELECT execute_priv FROM GR2_GROUP WHERE id = ?",
+				new ArrayList<Object>(Arrays.asList(groupID)));
+			
+		try {
+			if (this.db.getResSQL().next()) {
+					return this.db.getResSQL().getBoolean(1);
+			}
+		} catch (SQLException e) {
+		}
+		
+		return false;
+	}
+
 	public String searchGroupname(int id) {
 		this.db.getPreStatement("SELECT groupname FROM GR2_GROUP WHERE id = ?",
 				new ArrayList<Object>(Arrays.asList(id)));
@@ -84,10 +126,9 @@ public class Group {
 
 		return null;
 	}
-	
+
 	public boolean isEnable(int id) {
-		this.db.getPreStatement("SELECT enable FROM GR2_GROUP WHERE id = ?",
-				new ArrayList<Object>(Arrays.asList(id)));
+		this.db.getPreStatement("SELECT enable FROM GR2_GROUP WHERE id = ?", new ArrayList<Object>(Arrays.asList(id)));
 
 		try {
 			if (this.db.getResSQL().next()) {

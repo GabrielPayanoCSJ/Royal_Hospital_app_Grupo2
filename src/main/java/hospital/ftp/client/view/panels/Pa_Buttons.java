@@ -21,7 +21,7 @@ import javax.swing.JPanel;
 public class Pa_Buttons extends JPanel {
 	// ArrayList of buttons
 	private ArrayList<JButton> buttons;
-	
+
 	/**
 	 * Constructor
 	 * 
@@ -32,8 +32,8 @@ public class Pa_Buttons extends JPanel {
 	 * @param txtBtnExit     of String type, for exit of program and close the
 	 *                       connections.
 	 */
-	public Pa_Buttons(String txtBtnCreate, String txtBtnDelete, String txtBtnRename, String txtBtnUpload, String txtBtnDownload,
-			String txtBtnExit) {
+	public Pa_Buttons(String txtBtnCreate, String txtBtnDelete, String txtBtnRename, String txtBtnUpload,
+			String txtBtnDownload) {
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
 		// create the ArrayList
 		buttons = new ArrayList<>();
@@ -44,21 +44,16 @@ public class Pa_Buttons extends JPanel {
 		buttons.add(new JButton(txtBtnRename));
 		buttons.add(new JButton(txtBtnUpload));
 		buttons.add(new JButton(txtBtnDownload));
-		buttons.add(new JButton(txtBtnExit));
-		
+//		buttons.add(new JButton(txtBtnExit));
 
 		// append each button to the panel (this class)
-		
-		for(int i = 0; i < this.buttons.size(); i++) {
-			
-			if(i < this.buttons.size()-1)
-				this.buttons.get(i).setEnabled(true);
-				
+
+		for (int i = 0; i < this.buttons.size(); i++) {
+			this.buttons.get(i).setEnabled(false);
 			this.buttons.get(i).setName(String.valueOf(i));
 			this.add(buttons.get(i));
-			this.add(Box.createRigidArea(new Dimension(15,15)));
+			this.add(Box.createRigidArea(new Dimension(15, 15)));
 		}
-		
 	}
 
 	/**

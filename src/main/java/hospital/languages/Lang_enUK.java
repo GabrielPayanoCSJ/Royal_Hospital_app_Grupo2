@@ -75,7 +75,7 @@ public class Lang_enUK {
 				"USER: ", // 9
 				"PASSWORD: ", // 10
 				"RENAME", // 11
-				""//12
+				"DISCONNECT" // 12
 
 		));
 	}
