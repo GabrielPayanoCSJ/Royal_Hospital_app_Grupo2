@@ -18,25 +18,25 @@ import org.jsoup.Jsoup;
 import com.sun.mail.pop3.POP3Folder;
 import com.sun.mail.pop3.POP3SSLStore;
 
-public class Aux_Methods {
+public class Utils_Methods {
 	
-	Aux_Methods() {
+	Utils_Methods() {
 
 	}
 	
 	//campos para recibir
-	private Session session;
-    private POP3SSLStore store;
-    private String username="testhospitalroyale1";
-    private String password="estoesuntest";
-    private POP3Folder folder;
+	private static Session session;
+    private static  POP3SSLStore store;
+    private static String username="testhospitalroyale1";
+    private static String password="estoesuntest";
+    private static POP3Folder folder;
     public static String numberOfFiles = null;
     public static int toCheck = 0;
     public static Writer output = null;
-    URLName url;
+    static  URLName url;
     public static String receiving_attachments="C:\\Users\\Profesor\\Documents\\Correos";
 	
-	public void enviaremail(String origen, String destino,String host,String mensaje,String tema) {
+	public static void enviaremail(String origen, String destino,String host,String mensaje,String tema) {
 		
 		Properties properties = System.getProperties();
 		properties.setProperty("mail.smtp.host", host);
@@ -68,7 +68,7 @@ public class Aux_Methods {
 	
 	 private static String USER_NAME = "testhospitalroyale1";  // GMail username (la parte antes de "@gmail.com")
 	    private static String PASSWORD = "estoesuntest"; // GMail pass
-	    private static String RECIPIENT = "ialonsocalzado.sanjose@alumnado.fundacionloyola.net";
+	    private static String RECIPIENT = "testhospitalroyale1@gmail.com";
 
 	    public static void main(String[] args) {
 	        String from = USER_NAME;
@@ -133,7 +133,7 @@ public class Aux_Methods {
 	        this.password = password;
 	    }*/
 
-	    public void connect()
+	    public static void connect()
 	    throws Exception
 	    {
 	        String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
@@ -148,7 +148,7 @@ public class Aux_Methods {
 	        store.connect();
 	    }
 
-	    public void openFolder(String folderName)
+	    public static void openFolder(String folderName)
 	    throws Exception
 	    {
 	        folder = (POP3Folder)store.getFolder(folderName);
@@ -192,7 +192,7 @@ public class Aux_Methods {
 	        store.close();
 	    }
 
-	    private String getTextFromMessage(Message message) throws Exception {
+	    private static String getTextFromMessage(Message message) throws Exception {
 	        if (message.isMimeType("text/plain")){
 	            return message.getContent().toString();
 	        }else if (message.isMimeType("multipart/*")) {
@@ -215,7 +215,7 @@ public class Aux_Methods {
 	        return "";
 	    }
 	    
-	    public void printAllMessages()
+	    public static void printAllMessages()
 	    throws Exception
 	    {
 	        Message msgs[] = folder.getMessages();
@@ -303,5 +303,31 @@ public class Aux_Methods {
 	                }
 	            }
 	        }
+	    }
+	    
+	    public static boolean userauth(String user,String pass) throws MessagingException {
+	    	boolean exists = false;
+	    	Properties props = System.getProperties();
+	        String host = "smtp.gmail.com";
+	        props.put("mail.smtp.starttls.enable", "true");
+	        props.put("mail.smtp.host", host);
+	        props.put("mail.smtp.user", user);
+	        props.put("mail.smtp.password", pass);
+	        props.put("mail.smtp.port", "587");
+	        props.put("mail.smtp.auth", "true");
+	        Session session = Session.getDefaultInstance(props);
+	    	Transport transport2 = session.getTransport("smtp");
+	    	System.out.println(user + " " + pass);
+	    	try {
+	    		transport2.connect(host, user, pass);
+	    		exists = true;
+	    		transport2.close();
+			} catch (AuthenticationFailedException e) {
+				System.out.println("Comprueba el usuario y la contraseña");
+				transport2.close();
+			} catch (MessagingException e) {
+				transport2.close();
+			}
+            return exists;
 	    }
 }
