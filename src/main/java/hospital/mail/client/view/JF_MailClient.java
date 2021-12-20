@@ -36,7 +36,8 @@ public class JF_MailClient extends JFrame {
 	 * @param txtUnseen   of type String, the text of the total of mails unseen in
 	 *                    inbox.
 	 */
-	public JF_MailClient() {
+	public JF_MailClient(String txtTitle, String txtBtnWrite, String txtBtnRead, String txtBtnFtp, String txtBtnExit,
+			String txtInbox, String txtTotal, String txtUnseen) {
 		// create the panels
 		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnFtp, txtBtnExit);
 		inboxPanel = new Pa_Inbox(txtInbox);

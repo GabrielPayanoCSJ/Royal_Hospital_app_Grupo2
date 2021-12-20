@@ -68,7 +68,7 @@ public class JF_MailWrite extends JFrame {
 	 */
 	private void defaultOperations(String txtTitle) {
 		this.setTitle(txtTitle);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.pack();
 		this.setResizable(false);
 	}

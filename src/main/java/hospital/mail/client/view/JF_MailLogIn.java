@@ -127,7 +127,7 @@ public class JF_MailLogIn extends JFrame {
 	private void defaultOperations(String txtTitle) {
 		this.setResizable(false);
 		this.setTitle(txtTitle);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setBounds(100, 100, 241, 300);
 	}
 
