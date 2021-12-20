@@ -21,7 +21,6 @@ import hospital.ftp.model.User;
 import hospital.tools.Tool;
 import hospital.tools.database.DB;
 
-
 /**
  * @author prodi
  *
