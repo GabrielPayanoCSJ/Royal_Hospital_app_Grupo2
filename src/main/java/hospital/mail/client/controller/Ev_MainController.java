@@ -6,8 +6,12 @@ package hospital.mail.client.controller;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+import javax.mail.NoSuchProviderException;
+import javax.swing.JOptionPane;
+
 import hospital.mail.client.view.JF_MailClient;
 import hospital.mail.client.view.JF_MailLogIn;
+import hospital.mail.server.controller.Utils_Methods;
 
 /**
  * @author Javier Gómez
@@ -25,15 +29,26 @@ public class Ev_MainController implements ActionListener {
 	public Ev_MainController(JF_MailLogIn login) {
 		// TODO Auto-generated constructor stub
 		this.login = login;
-		this.principal = new JF_MailClient("Cliente Correo", "Redactar", "Leer", "FTP", "Salir", "Inbox",
-				"Contador mensajes", "No leídos");
+		Ev_MailClient cliente = new Ev_MailClient();
+
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-			for (int i = 0; i < principal.getSidePanel().getButtons().size(); i++) {
-				principal.getSidePanel().getButtons().get(i).addActionListener(new Ev_MailClient(principal));
+		if (arg0.getSource().equals(login.getButtonsLogin().get(0))) {
+			try {
+				if (Utils_Methods.userauth(login.getTxtFmail().getText(), login.getPassPassword().getText())) {
+					MailClientControler principalcontroler = new MailClientControler();
+					login.setVisible(false);
+				} else {
+					JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
+				}
+			} catch (NoSuchProviderException e) {
+				JOptionPane.showMessageDialog(null, "Usuario o contraseña incorrectos");
 			}
-}
+			
+
+		}
+	}
 
 }

@@ -142,5 +142,17 @@ public class JF_MailLogIn extends JFrame {
 		return buttons;
 	}
 
+	public ArrayList<JLabel> getLabels() {
+		return labels;
+	}
+
+	public JTextField getTxtFmail() {
+		return txtFmail;
+	}
+
+	public JPasswordField getPassPassword() {
+		return passPassword;
+	}
+
 	
 }
