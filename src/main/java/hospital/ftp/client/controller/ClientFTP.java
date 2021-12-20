@@ -26,6 +26,7 @@ public class ClientFTP {
 
 	/**
 	 * 
+	 * @param language
 	 */
 	public ClientFTP(int language) {
 		this.db = new DB();
