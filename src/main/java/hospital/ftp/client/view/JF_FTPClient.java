@@ -19,6 +19,7 @@ import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.DefaultTreeModel;
+import javax.swing.tree.TreeModel;
 import javax.swing.tree.TreePath;
 
 import org.apache.commons.net.ftp.FTPClient;
@@ -108,6 +109,7 @@ public class JF_FTPClient extends JFrame {
 	// METHODS TO MANAGE JTREE
 	/**
 	 * METHODS TO MANAGE JTREE
+	 * 
 	 * @author Gabriel Payano
 	 * @param url an String in URL format by the string provide.
 	 * @return String Type , returns the url formated (/root/directory/file.txt).
@@ -127,6 +129,7 @@ public class JF_FTPClient extends JFrame {
 	// DELETES THE SELECTED NODE IN THE JTHREE
 	/**
 	 * DELETES THE SELECTED NODE IN THE JTHREE
+	 * 
 	 * @author Gabriel Payano Type void deletes the selected node in the JTree
 	 */
 	public void deleteNode() {
@@ -138,6 +141,7 @@ public class JF_FTPClient extends JFrame {
 	// METHOD TO CREATE A NEW NODE (FOLDER) INTO THE NODE TREE
 	/**
 	 * METHOD TO CREATE A NEW NODE (FOLDER) INTO THE NODE TREE
+	 * 
 	 * @author Gabriel Payano
 	 * @param folderName a String type that have the name of the new node to create
 	 *                   in the parent node selected by the user
@@ -158,6 +162,7 @@ public class JF_FTPClient extends JFrame {
 	// METHOD TO ASK FOR THE NEW NODE NAME TO UPDATE INTO THE JTREE
 	/**
 	 * METHOD TO ASK FOR THE NEW NODE NAME TO UPDATE INTO THE JTREE
+	 * 
 	 * @author Gabriel Payano
 	 */
 	public void askForNewFolderName() {
@@ -166,12 +171,15 @@ public class JF_FTPClient extends JFrame {
 		createNodeDirectory(newFileName);
 	}
 
-	//GENERATES A JTREE TO DISPLAY IN THE PANEL DIRECTORY BASED ON A FILE.
+	// GENERATES A JTREE TO DISPLAY IN THE PANEL DIRECTORY BASED ON A FILE.
 	/**
 	 * GENERATES A JTREE TO DISPLAY IN THE PANEL DIRECTORY BASED ON A FILE.
+	 * 
 	 * @author Gabriel Payano.
-	 * @param directory Type File , contains the pointer to de main directory to list in the JTree.
-	 * @param level Type int , contains the depth level of the directory listing.
+	 * @param directory Type File , contains the pointer to de main directory to
+	 *                  list in the JTree.
+	 * @param level     Type int , contains the depth level of the directory
+	 *                  listing.
 	 * @return JTree Type , returns an JTree based in the directory to list.
 	 */
 	public JTree generateTreeByFile(File directory, int level) {
@@ -183,7 +191,7 @@ public class JF_FTPClient extends JFrame {
 
 		for (int i = 0; i < archivos.length; i++) {
 			File f2 = new File(f, archivos[i]);
-			// Formateo de nivel -IntroducciÃ³n de espacios-
+			// Formateo de nivel -Introducción de espacios-
 			for (int espacios = 0; espacios < actualLevel; espacios++) {
 				System.out.print("  A:");
 
@@ -202,10 +210,12 @@ public class JF_FTPClient extends JFrame {
 	}
 
 	/**
-	 *  DISPLAY THE CONTENT INSIDE A DIRECTORY INTO THE JTREE
+	 * DISPLAY THE CONTENT INSIDE A DIRECTORY INTO THE JTREE
+	 * 
 	 * @author Gabriel Payano.
 	 * @param dir   File Type contains the root directory to display.
-	 * @param root2 DefaultMutableTreeNode Type represent root directory in the tree.
+	 * @param root2 DefaultMutableTreeNode Type represent root directory in the
+	 *              tree.
 	 * @throws InterruptedException Throws an exception in case the method get
 	 *                              interrupted.
 	 */
@@ -275,8 +285,10 @@ public class JF_FTPClient extends JFrame {
 	// GENERATE THE FILE TO DISPLAY INTRO THE JTREE BASED IN THE URL PASED
 	/**
 	 * GENERATE THE FILE TO DISPLAY INTRO THE JTREE BASED IN THE URL PASED
+	 * 
 	 * @author Gabriel Payano.
-	 * @param url String Type , contains the url to generate a file pointing to it in order to list that directory.
+	 * @param url String Type , contains the url to generate a file pointing to it
+	 *            in order to list that directory.
 	 * @throws InterruptedException throws an InterruptedException.
 	 */
 	public void scanner(String url) throws InterruptedException {
@@ -297,12 +309,15 @@ public class JF_FTPClient extends JFrame {
 	/**
 	 * 
 	 * DISPLAY THE CONTENT INSIDE A DIRECTORY INTO THE JTREE
+	 * 
 	 * @author Gabriel Payano.
-	 * @param ftpClient type FTPClient , references the class FTPClient.
-	 * @param parentDir String Type , contains the parent directory to list.
-	 * @param currentDir String Type , contains the current directory that we are listing.
-	 * @param level int Type , contains the depth level of the directory.
-	 * @param root2 DefaultMutableTreeNode Type , contains the node matching the depht level into the directory. 
+	 * @param ftpClient  type FTPClient , references the class FTPClient.
+	 * @param parentDir  String Type , contains the parent directory to list.
+	 * @param currentDir String Type , contains the current directory that we are
+	 *                   listing.
+	 * @param level      int Type , contains the depth level of the directory.
+	 * @param root2      DefaultMutableTreeNode Type , contains the node matching
+	 *                   the depht level into the directory.
 	 * @throws IOException throws an IOException.
 	 */
 	public void listDirectory(FTPClient ftpClient, String parentDir, String currentDir, int level,
@@ -311,7 +326,7 @@ public class JF_FTPClient extends JFrame {
 		// ADDING LISTENER
 		panel_directory.getTree().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
-				URLnodeFormated = generateURL(panel_directory.getTree().getSelectionPath().toString()); //GETTING THE ACTUAL NODE SELECTED
+				URLnodeFormated = generateURL(panel_directory.getTree().getSelectionPath().toString()); // GETTING THEACTUAL NODE SELECTED
 				System.out.println("URL: " + URLnodeFormated);
 			}
 		});
@@ -387,11 +402,12 @@ public class JF_FTPClient extends JFrame {
 	// GENERATE THE FILE TO DISPLAY INTRO THE JTREE BASED IN THe ftpclient
 	/**
 	 * GENERATE THE FILE TO DISPLAY INTRO THE JTREE BASED IN THe ftpclient
+	 * 
 	 * @author Gabriel Payano.
 	 * @param ftpClient type FTPClient , references the class FTPClient.
 	 * @throws InterruptedException throws an InterruptedException.
 	 */
-	public void scannerFTP(FTPClient ftpClient){
+	public void scannerFTP(FTPClient ftpClient) {
 
 		String dirToList = "";
 		String user = panel_login.getTfield_user().getText().toString();
@@ -408,32 +424,50 @@ public class JF_FTPClient extends JFrame {
 			e.printStackTrace();
 		}
 	}
-	
-	public void updateTree(FTPClient ftpClient) {
-		System.out.println("Entro a update Tree");
-	
-		DefaultTreeModel model = (DefaultTreeModel)panel_directory.getTree().getModel();
-		DefaultMutableTreeNode root = (DefaultMutableTreeNode)model.getRoot();
-	
-        TreePath[] paths = panel_directory.getTree().getSelectionPaths();
-        if (paths != null) {
-            for (TreePath path : paths) {
-                DefaultMutableTreeNode node = (DefaultMutableTreeNode)
-                        path.getLastPathComponent();
-                if (node.getParent() != null) {
-                    model.removeNodeFromParent(node);
-                }
-            }
-        }
-	
-		/*
-		root.remove();
-		root.add(new DefaultMutableTreeNode("another_child"));
-		*/
+
+	// DELETES THE SELECTED NODES FROM THE TREE
+	/**
+	 * DELETES THE SELECTED NODES FROM THE TREE
+	 * @author Gabriel Payano
+	 */
+	public void deleteNodeFromTree() {
+
+		DefaultTreeModel model = (DefaultTreeModel) panel_directory.getTree().getModel();
+		DefaultMutableTreeNode root = (DefaultMutableTreeNode) model.getRoot();
+
+		TreePath[] paths = panel_directory.getTree().getSelectionPaths();
+		if (paths != null) {
+			for (TreePath path : paths) {
+				DefaultMutableTreeNode node = (DefaultMutableTreeNode) path.getLastPathComponent();
+				if (node.getParent() != null) {
+					model.removeNodeFromParent(node);
+				}
+			}
+		}
 		model.reload(root);
-		
-		//scannerFTP(ftpClient);
-		System.out.println("Salgo");
 	}
 
+	// SIMULATES THE UPDATE ON THE DIRECTORY BY REPLACING THE ACTUAL TREE NODE WITH
+	// A NEW ONE
+	// AND THEN LISTING ALL THE DIRECTORY AGAIN IN THAT NEW ROOT.
+	/**
+	 *  SIMULATES THE UPDATE ON THE DIRECTORY BY REPLACING THE ACTUAL TREE NODE WITH A NEW ONE AND THEN LISTING ALL THE DIRECTORY AGAIN IN THAT NEW ROOT.
+	 * @author Gabriel Payano.
+	 * @param ftpClient
+	 */
+	public void updateTree(FTPClient ftpClient) {
+		// Create a new model and a new root node to empty the tree
+		DefaultMutableTreeNode root = new DefaultMutableTreeNode("/");
+		DefaultTreeModel model = new DefaultTreeModel(root);
+
+		// Set a new Model to empty the JTree.
+		panel_directory.getTree().setModel(model);
+
+		// Reload the JTree to adapt it to the new Model
+		model.reload(root);
+		panel_directory.getTree().updateUI();
+
+		// Load all directories again to get the new folders.
+		scannerFTP(ftpClient);
+	}
 }

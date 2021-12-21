@@ -15,7 +15,7 @@ import hospital.tools.Tool;
 
 /**
  * 
- * @author Guillermo González de Miguel
+ * @author Guillermo Gonzï¿½lez de Miguel
  * @version 1.0
  * @dateCreated 18/12/2021
  */
@@ -52,26 +52,35 @@ public class Ev_FTPButtons implements ActionListener {
 			// CREATE DIRECTORY
 			System.out.println(Language.getFtpClient_txts(0));
 			FTPUtil.createDirectory(ftpClient, "");
+			
+			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
 		case 1:
 			// DELETE FILES AND DIRECTORIES
 			System.out.println(Language.getFtpClient_txts(1));
-			jfClient.updateTree(ftpClient);
+
+			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
 		case 2:
 			// RENAME FILE OR DIRECTORY
 			System.out.println(Language.getFtpClient_txts(11));
 			FTPUtil.renameFile(ftpClient, "");
+			
+			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
 		case 3:
 			// UPLOAD FILE
 			System.out.println(Language.getFtpClient_txts(2));
 			FTPUtil.uploadFile(ftpClient, null);
+			
+			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
 		case 4:
 			// DOWNLOAD FILE
 			System.out.println(Language.getFtpClient_txts(3));
 			FTPUtil.downloadFile(ftpClient, null);
+			
+			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
 		default:
 			Tool.showConsoleError("This option doesn't exist.");
