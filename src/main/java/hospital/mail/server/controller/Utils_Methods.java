@@ -21,7 +21,7 @@ import com.sun.mail.pop3.POP3SSLStore;
 
 public class Utils_Methods {
 
-	Utils_Methods() {
+	public Utils_Methods() {
 
 	}
 

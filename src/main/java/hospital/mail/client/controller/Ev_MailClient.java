@@ -7,7 +7,7 @@ import javax.mail.Message;
 
 import hospital.ftp.client.controller.ClientFTP;
 import hospital.mail.client.view.JF_MailClient;
-import hospital.mail.server.controller.Aux_Methods;
+import hospital.mail.server.controller.Utils_Methods;
 
 /**
  * Events class of mail client. fill the list of mails that has received and
@@ -19,7 +19,7 @@ import hospital.mail.server.controller.Aux_Methods;
  */
 public class Ev_MailClient implements ActionListener {
 	private JF_MailClient clientView;
-	private Aux_Methods aux;
+	private Utils_Methods aux;
 
 	/**
 	 * Constructor.
@@ -28,7 +28,7 @@ public class Ev_MailClient implements ActionListener {
 	 */
 	public Ev_MailClient(JF_MailClient clientView) {
 		this.clientView = clientView;
-		aux = new Aux_Methods();
+		aux = new Utils_Methods();
 
 		try {
 			// connect for read the received mails
