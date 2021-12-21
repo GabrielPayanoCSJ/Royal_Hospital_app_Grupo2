@@ -20,8 +20,7 @@ import com.sun.mail.pop3.POP3Folder;
 import com.sun.mail.pop3.POP3SSLStore;
 
 /**
- * View for write a mail. Has a panel for the description, for the body and for
- * the buttons (all JPanel). Has a BorderLayout.
+ * Class with the methods and utilities for the correct function on the mail
  * 
  * @author Javier Gómez Villasclaras
  * @date 17/12/2021
@@ -38,7 +37,6 @@ public class Utils_Methods {
 
 	/**
 	 * Variables
-	 * 
 	 */
 	private static Session session;
 	private static POP3SSLStore store;
