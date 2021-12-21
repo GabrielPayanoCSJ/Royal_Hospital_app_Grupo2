@@ -9,11 +9,11 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Counters' panel with a tags (ArrayList of type JLabel) that contains a label
- * with text to show the total of mails [0], a label with the text as a number
- * to show total [1], a label with text to show the total of mails that are
- * unseen [2] and a label with the text as a number to show total of unseen
- * mails [3].
+ * Counters' panel with a tags ({@link ArrayList} of type {@link JLabel}) that
+ * contains a label with text to show the total of mails [0], a label with the
+ * text as a number to show total [1], a label with text to show the total of
+ * mails that are unseen [2] and a label with the text as a number to show total
+ * of unseen mails [3].
  * 
  * @author Jorge Fernández Ruiz
  * @date 15/12/21
@@ -26,10 +26,10 @@ public class Pa_Counter extends JPanel {
 	private JLabel numUnseen;
 
 	/**
-	 * Constuctor
+	 * Constructor.
 	 * 
-	 * @param txtLabelTotal  of type String, the text of total.
-	 * @param txtLabelUnseen of type String, the text of total unseen.
+	 * @param txtLabelTotal  of type {@link String}, the text of total.
+	 * @param txtLabelUnseen of type {@link String}, the text of total unseen.
 	 */
 	public Pa_Counter(String txtLabelTotal, String txtLabelUnseen) {
 		tags = new ArrayList<>();
@@ -53,10 +53,11 @@ public class Pa_Counter extends JPanel {
 	}
 
 	/**
-	 * Method to fill the tags (ArrayList of type JLabel) creating the labels.
+	 * Method to fill the tags ({@link ArrayList} of type {@link JLabel}) creating
+	 * the labels.
 	 * 
-	 * @param txtLabelTotal  of type String, the text of total.
-	 * @param txtLabelUnseen of type String, the text of total unseen.
+	 * @param txtLabelTotal  of type {@link String}, the text of total.
+	 * @param txtLabelUnseen of type {@link String}, the text of total unseen.
 	 */
 	private void fillTags(String txtLabelTotal, String txtLabelUnseen) {
 		tags.add(new JLabel(txtLabelTotal + ":"));
@@ -68,7 +69,7 @@ public class Pa_Counter extends JPanel {
 	/**
 	 * Getter for the label that is used as a counter of total mails.
 	 * 
-	 * @return of type JLabel.
+	 * @return of type {@link JLabel}.
 	 */
 	public JLabel getNumTotal() {
 		return numTotal;
@@ -77,7 +78,7 @@ public class Pa_Counter extends JPanel {
 	/**
 	 * Getter for the label that is used as a counter of total unseen mails.
 	 * 
-	 * @return of type JLabel.
+	 * @return of type {@link JLabel}.
 	 */
 	public JLabel getNumUnseen() {
 		return numUnseen;

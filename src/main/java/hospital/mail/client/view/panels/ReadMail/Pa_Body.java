@@ -12,9 +12,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Body's panel with a txA_body (JTextArea), where will write the message's
- * body, and a scroll (JScrollPane), vertical only if is needed and horizontal
- * never.
+ * Body's panel with a txA_body ({@link JTextArea}), where will write the
+ * message's body, and a scroll ({@link JScrollPane}), vertical only if is
+ * needed and horizontal never.
  * 
  * @author Jorge Fernández Ruiz
  * @date 15/12/2021
@@ -27,9 +27,9 @@ public class Pa_Body extends JPanel {
 	private JScrollPane scroll;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
-	 * @param txtHead of type String, the text of panel's head.
+	 * @param txtHead of type {@link String}, the text of panel's head.
 	 */
 	public Pa_Body(String txtHead) {
 		HEIGTH = 30;
@@ -55,7 +55,7 @@ public class Pa_Body extends JPanel {
 	}
 
 	/**
-	 * Getter of txA_body (JTextArea).
+	 * Getter of txA_body ({@link JTextArea}).
 	 * 
 	 * @return of type JTextArea.
 	 */

@@ -11,10 +11,10 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Description panel, with a panel to the text of sender (JLabel, in tags[0])
- * and the name of sender (JLabel, in tags[1]), and a panel to the text of issue
- * (JLabel, in tags[2]) and the message of issue (JLabel, in tags[3]). Has a
- * BorderLayout.
+ * Description panel, with a panel to the text of sender ({@link JLabel}, in
+ * tags[0]) and the name of sender ({@link JLabel}, in tags[1]), and a panel to
+ * the text of issue ({@link JLabel}, in tags[2]) and the message of issue
+ * ({@link JLabel}, in tags[3]). Has a {@link BorderLayout}.
  * 
  * @author Jorge Fernández Ruiz
  * @date 15/12/2021
@@ -27,9 +27,9 @@ public class Pa_Description extends JPanel {
 	/**
 	 * Constructor
 	 * 
-	 * @param txtHead   of type String, the text of the panel's head.
-	 * @param txtSender of type String, the text of sender.
-	 * @param txtIssue  of type String, the text of issue.
+	 * @param txtHead   of type {@link String}, the text of the panel's head.
+	 * @param txtSender of type {@link String}, the text of sender.
+	 * @param txtIssue  of type {@link String}, the text of issue.
 	 */
 	public Pa_Description(String txtHead, String txtSender, String txtIssue) {
 		this.setLayout(new BorderLayout(0, 0));
@@ -51,7 +51,7 @@ public class Pa_Description extends JPanel {
 
 	/**
 	 * Method that append to the panel (this class) the other panels (in descPanels,
-	 * ArrayList of type JPanel).
+	 * {@link ArrayList} of type {@link JPanel}).
 	 */
 	private void appendPanels() {
 		for (JPanel panel : descPanels) {
@@ -61,7 +61,8 @@ public class Pa_Description extends JPanel {
 	}
 
 	/**
-	 * Method that append the tags (JLabel) in their panels (JPanel).
+	 * Method that append the tags ({@link JLabel}) in their panels
+	 * ({@link JPanel}).
 	 */
 	private void appendTagsPanel() {
 		for (int i = 0; i < descPanels.size(); i++) {
@@ -72,7 +73,8 @@ public class Pa_Description extends JPanel {
 	}
 
 	/**
-	 * Method that append news panel to descPanels (ArrayList of type JPanel).
+	 * Method that append news panel to descPanels ({@link ArrayList} of type
+	 * {@link JPanel}).
 	 */
 	private void fillDescPanel() {
 		descPanels.add(new JPanel());
@@ -80,11 +82,11 @@ public class Pa_Description extends JPanel {
 	}
 
 	/**
-	 * Method that fill tags (ArrayList of type JLabel), in [0] the text of sender,
-	 * [1] the sender, [2] the text of issue, [3] the issue.
+	 * Method that fill tags ({@link ArrayList} of type {@link JLabel}), in [0] the
+	 * text of sender, [1] the sender, [2] the text of issue, [3] the issue.
 	 * 
-	 * @param txtSender of type String, the text of sender.
-	 * @param txtIssue  of type String, the text of issue.
+	 * @param txtSender of type {@link String}, the text of sender.
+	 * @param txtIssue  of type {@link String}, the text of issue.
 	 */
 	private void fillTags(String txtSender, String txtIssue) {
 		tags.add(new JLabel(txtSender + ":"));

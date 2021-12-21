@@ -8,8 +8,8 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * Buttons' panel of write email part. Has a buttons (ArrayList of type JButton)
- * and has a horizontal BoxLayout.
+ * Buttons' panel of write email part. Has a buttons ({@link ArrayList} of type
+ * {@link JButton}) and has a horizontal {@link BoxLayout}.
  * 
  * @author Jorge Ferández Ruiz
  * @date 16/12/2021
@@ -21,8 +21,8 @@ public class Pa_WriteButtons extends JPanel {
 	/**
 	 * Constructor.
 	 * 
-	 * @param txtBtnCancel of type String, the text of cancel button.
-	 * @param txtBtnSend   of type String, the text of send button.
+	 * @param txtBtnCancel of type {@link String}, the text of cancel button.
+	 * @param txtBtnSend   of type {@link String}, the text of send button.
 	 */
 	public Pa_WriteButtons(String txtBtnCancel, String txtBtnSend) {
 		buttons = new ArrayList<>();
@@ -47,11 +47,11 @@ public class Pa_WriteButtons extends JPanel {
 	}
 
 	/**
-	 * Method that fill buttons (ArrayList of type JButton) creating a JButton for
-	 * cancel and other for send.
+	 * Method that fill buttons ({@link ArrayList} of type {@link JButton}) creating
+	 * a {@link JButton} for cancel and other for send.
 	 * 
-	 * @param txtBtnCancel of type String, text of cancel button.
-	 * @param txtBtnSend   of type String, text of send button.
+	 * @param txtBtnCancel of type {@link String}, text of cancel button.
+	 * @param txtBtnSend   of type {@link String}, text of send button.
 	 */
 	private void fillButtons(String txtBtnCancel, String txtBtnSend) {
 		buttons.add(new JButton(txtBtnCancel));
@@ -59,16 +59,10 @@ public class Pa_WriteButtons extends JPanel {
 	}
 
 	/**
-	 * <div> Getter for buttons (ArrayList of type JButton). </div> <div>
-	 * <p>
-	 * [0] -> cancel
-	 * </p>
-	 * <p>
-	 * [1] -> send
-	 * </p>
-	 * </div>
+	 * Getter for buttons ({@link ArrayList} of type {@link JButton}). [0] -> cancel
+	 * || [1] -> send
 	 * 
-	 * @return the buttons
+	 * @return the buttons ({@link ArrayList} of type {@link JButton}).
 	 */
 	public ArrayList<JButton> getButtons() {
 		return buttons;

@@ -5,13 +5,12 @@ import java.awt.BorderLayout;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
-import hospital.languages.Language;
 import hospital.mail.client.view.panels.ReadMail.Pa_Body;
 import hospital.mail.client.view.panels.ReadMail.Pa_Description;
 
 /**
  * View for read a mail. Has a panel for the description, for the body and for
- * the exit button (all JPanel).
+ * the exit button (all {@link JPanel}).
  * 
  * @author Jorge Fernández Ruiz
  * @date 15/12/2021
@@ -25,11 +24,13 @@ public class JF_MailRead extends JFrame {
 	/**
 	 * Constructor.
 	 * 
-	 * @param txtTitle           of type String, the view's title.
-	 * @param txtDescriptionHead of type String, the text of the description's head.
-	 * @param txtSender          of type String, the text of sender.
-	 * @param txtIssue           of type String, the text of issue.
-	 * @param txtBodyHead        of type String, the text of the description's head.
+	 * @param txtTitle           of type {@link String}, the view's title.
+	 * @param txtDescriptionHead of type {@link String}, the text of the
+	 *                           description's head.
+	 * @param txtSender          of type {@link String}, the text of sender.
+	 * @param txtIssue           of type {@link String}, the text of issue.
+	 * @param txtBodyHead        of type {@link String}, the text of the
+	 *                           description's head.
 	 */
 	public JF_MailRead(String txtTitle, String txtDescriptionHead, String txtSender, String txtIssue,
 			String txtBodyHead) {
@@ -57,8 +58,8 @@ public class JF_MailRead extends JFrame {
 	}
 
 	/**
-	 * Method that append to panel (JPanel) the descPanel (JPanel) and the bodyPanel
-	 * (JPanel).
+	 * Method that append to panel ({@link JPanel}) the descPanel ({@link JPanel})
+	 * and the bodyPanel ({@link JPanel}).
 	 */
 	private void appendPanel() {
 		panel.add(descPanel, BorderLayout.NORTH);
@@ -68,7 +69,7 @@ public class JF_MailRead extends JFrame {
 	/**
 	 * Getter of description's panel.
 	 * 
-	 * @return the descPanel of type JPanel.
+	 * @return the descPanel of type {@link JPanel}.
 	 */
 	public Pa_Description getDescPanel() {
 		return descPanel;
@@ -77,7 +78,7 @@ public class JF_MailRead extends JFrame {
 	/**
 	 * Getter of body's panel.
 	 * 
-	 * @return the bodyPanel of type JPanel.
+	 * @return the bodyPanel of type {@link JPanel}.
 	 */
 	public Pa_Body getBodyPanel() {
 		return bodyPanel;

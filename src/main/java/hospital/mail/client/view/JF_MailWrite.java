@@ -11,7 +11,7 @@ import hospital.mail.client.view.panels.WriteMail.Pa_WriteButtons;
 
 /**
  * View for write a mail. Has a panel for the description, for the body and for
- * the buttons (all JPanel). Has a BorderLayout.
+ * the buttons (all {@link JPanel}). Has a {@link BorderLayout}.
  * 
  * @author Jorge Fernández Ruiz
  * @date 17/12/2021
@@ -26,15 +26,15 @@ public class JF_MailWrite extends JFrame {
 	/**
 	 * Constructor.
 	 * 
-	 * @param txtTitle       of type String, the text of title.
-	 * @param txtHeadDesc    of type String, the text of description's head.
-	 * @param txtHeadBody    of type String, the text of body's head.
-	 * @param txtHeadIssue   of type String, the text of issue's head.
-	 * @param txtHeadMessage of type String, the text of message's head.
-	 * @param txtSender      of type String, the text of sender.
-	 * @param txtAddressee   of type String, the text of addressee.
-	 * @param txtBtnCancel   of type String, the text of cancel button.
-	 * @param txtBtnSend     of type String, the text of send button.
+	 * @param txtTitle       of type {@link String}, the text of title.
+	 * @param txtHeadDesc    of type {@link String}, the text of description's head.
+	 * @param txtHeadBody    of type {@link String}, the text of body's head.
+	 * @param txtHeadIssue   of type {@link String}, the text of issue's head.
+	 * @param txtHeadMessage of type {@link String}, the text of message's head.
+	 * @param txtSender      of type {@link String}, the text of sender.
+	 * @param txtAddressee   of type {@link String}, the text of addressee.
+	 * @param txtBtnCancel   of type {@link String}, the text of cancel button.
+	 * @param txtBtnSend     of type {@link String}, the text of send button.
 	 */
 	public JF_MailWrite(String txtTitle, String txtHeadDesc, String txtHeadBody, String txtHeadIssue,
 			String txtHeadMessage, String txtSender, String txtAddressee, String txtBtnCancel, String txtBtnSend) {
@@ -54,7 +54,7 @@ public class JF_MailWrite extends JFrame {
 	}
 
 	/**
-	 * Method that append the panels to the panel (JPanel)
+	 * Method that append the panels to the panel ({@link JPanel})
 	 */
 	private void appendPanel() {
 		panel.add(desc, BorderLayout.NORTH);
@@ -76,7 +76,7 @@ public class JF_MailWrite extends JFrame {
 	/**
 	 * Getter for description panel.
 	 * 
-	 * @return the desc of type Pa_DescWriteMail.
+	 * @return the desc of type {@link Pa_DescWriteMail}.
 	 */
 	public Pa_DescWriteMail getDesc() {
 		return desc;
@@ -85,7 +85,7 @@ public class JF_MailWrite extends JFrame {
 	/**
 	 * Getter for body panel.
 	 * 
-	 * @return the body of type Pa_WriteBody.
+	 * @return the body of type {@link Pa_WriteBody}.
 	 */
 	public Pa_WriteBody getBody() {
 		return body;
@@ -94,7 +94,7 @@ public class JF_MailWrite extends JFrame {
 	/**
 	 * Getter for buttons panel.
 	 * 
-	 * @return the buttons of type Pa_WriteButtons.
+	 * @return the buttons of type {@link Pa_WriteButtons}.
 	 */
 	public Pa_WriteButtons getButtons() {
 		return buttons;

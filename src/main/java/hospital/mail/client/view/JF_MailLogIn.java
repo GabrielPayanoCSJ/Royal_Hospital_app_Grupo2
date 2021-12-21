@@ -11,9 +11,9 @@ import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
 /**
- * Email login's view, has a buttons (ArrayList of type JButton), a panes
- * (ArrayList of type JTextPane), a contentPane (JPanel), txtFmail (JTextField)
- * and passPassWord (JPassWordField).
+ * Email login's view, has a buttons (ArrayList of type {@link JButton}), a
+ * panes (ArrayList of type {@link JTextPane}), a contentPane ({@link JPanel}),
+ * txtFmail ({@link JTextField}) and passPassWord ({@link JPassWordField}).
  * 
  * @author Javier Gómez
  * @date 14/12/2021
@@ -31,12 +31,12 @@ public class JF_MailLogIn extends JFrame {
 	/**
 	 * Constructor of view.
 	 * 
-	 * @param txtTitle        of type String, title's text of the view.
-	 * @param txtBtnLogin     of type String, button text of login.
-	 * @param txtBtnReturn    of type String, button text of return.
-	 * @param txtMailBodyHead of type String, head text of body of the mail.
-	 * @param txtMail         of type String, the text of mail.
-	 * @param txtPassword     of type String, the text of password.
+	 * @param txtTitle        of type {@link String}, title's text of the view.
+	 * @param txtBtnLogin     of type {@link String}, button text of login.
+	 * @param txtBtnReturn    of type {@link String}, button text of return.
+	 * @param txtMailBodyHead of type {@link String}, head text of body of the mail.
+	 * @param txtMail         of type {@link String}, the text of mail.
+	 * @param txtPassword     of type {@link String}, the text of password.
 	 */
 	public JF_MailLogIn(String txtTitle, String txtBtnLogin, String txtBtnReturn, String txtMailBodyHead,
 			String txtMail, String txtPassword) {
@@ -58,7 +58,7 @@ public class JF_MailLogIn extends JFrame {
 	}
 
 	/**
-	 * Method that append to contentPane (JPanel) all objects.
+	 * Method that append to contentPane ({@link JPanel}) all objects.
 	 */
 	private void appendPaneObjects() {
 		contentPane.add(buttons.get(0));
@@ -72,9 +72,9 @@ public class JF_MailLogIn extends JFrame {
 	/**
 	 * Method that set the properties of the objects.
 	 * 
-	 * @param txtMailBodyHead type of String, the text of body's head.
-	 * @param txtMail         type of String, the text of mail.
-	 * @param txtPassword     type of String, the text of password.
+	 * @param txtMailBodyHead type of {@link String}, the text of body's head.
+	 * @param txtMail         type of {@link String}, the text of mail.
+	 * @param txtPassword     type of {@link String}, the text of password.
 	 */
 	private void setObjectsProperties(String txtMailBodyHead, String txtMail, String txtPassword) {
 		// JPanel
@@ -101,7 +101,8 @@ public class JF_MailLogIn extends JFrame {
 	}
 
 	/**
-	 * Method that fill labels (ArrayList of type JLabel) creating news.
+	 * Method that fill labels ({@link ArrayList} of type {@link JLabel}) creating
+	 * news.
 	 */
 	private void fillPanes() {
 		labels.add(new JLabel()); // mail's label
@@ -109,10 +110,10 @@ public class JF_MailLogIn extends JFrame {
 	}
 
 	/**
-	 * Method that fill buttons (ArrayList of type JButton) creating news.
+	 * Method that fill buttons ({@link ArrayList} of type {@link JButton}) creating news.
 	 * 
-	 * @param txtBtnLogin  type of String, the text of login button.
-	 * @param txtBtnReturn type of String, the text of return button.
+	 * @param txtBtnLogin  type of {@link String}, the text of login button.
+	 * @param txtBtnReturn type of {@link String}, the text of return button.
 	 */
 	private void fillButtons(String txtBtnLogin, String txtBtnReturn) {
 		buttons.add(new JButton(txtBtnLogin));
@@ -122,7 +123,7 @@ public class JF_MailLogIn extends JFrame {
 	/**
 	 * Method that set properties of the view.
 	 * 
-	 * @param txtTitle type of String, the text of title.
+	 * @param txtTitle type of {@link String}, the text of title.
 	 */
 	private void defaultOperations(String txtTitle) {
 		this.setResizable(false);
@@ -132,15 +133,13 @@ public class JF_MailLogIn extends JFrame {
 	}
 
 	/**
-	 * Getter of buttons (ArrayList of type JButton). 
-	 * [0] -> btnLogin
-	 * [1] -> btnReturn
+	 * Getter of buttons ({@link ArrayList} of type {@link JButton}). [0] -> btnLogin || [1] ->
+	 * btnReturn
 	 * 
-	 * @return the buttons
+	 * @return the buttons of type {@link JButton}.
 	 */
 	public ArrayList<JButton> getButtonsLogin() {
 		return buttons;
 	}
 
-	
 }
