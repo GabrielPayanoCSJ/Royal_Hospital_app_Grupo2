@@ -2,7 +2,9 @@ package hospital.mail.client.view.panels.Client;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.util.Date;
 
+import javax.mail.Address;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -14,9 +16,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Inbox's panel with a emails (JList), where will write the inbox (date -
- * sender - issue), a scroll (JScrollPane) in emails, and emailList
- * (DefaultListModel) that is the model for the emails.
+ * Inbox's panel with a emails ({@link JList}), where will write the inbox (date
+ * - sender - issue), a scroll ({@link JScrollPane}) in emails, and emailList
+ * ({@link DefaultListModel}) that is the model for the emails.
  * 
  * @author Jorge Fernández Ruiz
  * @date 15/12/21
@@ -37,7 +39,7 @@ public class Pa_Inbox extends JPanel {
 	/**
 	 * Constructor.
 	 * 
-	 * @param txtHead of type String, the text of panel's head.
+	 * @param txtHead of type {@link String}, the text of panel's head.
 	 */
 	public Pa_Inbox(String txtHead) {
 		// set the layout for this panel
@@ -65,20 +67,38 @@ public class Pa_Inbox extends JPanel {
 	}
 
 	/**
-	 * Method to add a new element into the email list and update the list (JList).
+	 * Method to add a new element into the email list and update the list
+	 * ({@link JList}).
 	 * 
-	 * @param sender of type String, the person that sent the mail.
-	 * @param issue  of type String, the issue of the mail.
-	 * @param date   of type String, the date when was written the mail.
+	 * @param addresses of type {@link String}, the person that sent the mail.
+	 * @param issue     of type {@link String}, the issue of the mail.
+	 * @param date      of type {@link String}, the date when was written the mail.
 	 */
-	public void appendNewEmail(String sender, String issue, String date) {
-		String text = date + " - " + sender + " - " + issue;
-		emailList.addElement(text);
-		emails.setModel(emailList);
+	public void appendNewEmail(Address[] addresses, String issue, Date date) {
+		if (addresses.length == 1) {
+			String text = date + " - " + addresses + " - " + issue;
+			emailList.addElement(text);
+			emails.setModel(emailList);
+		} else if (addresses.length > 1) {
+			String text = date + " - ";
+
+			String someAddresses = "";
+
+			for (int i = 0; i < addresses.length; i++) {
+				someAddresses += addresses[i];
+				someAddresses += " | ";
+			}
+
+			text += someAddresses + " - " + issue;
+
+			emailList.addElement(text);
+			emails.setModel(emailList);
+		}
+
 	}
 
 	/**
-	 * Getter of emails (JList).
+	 * Getter of emails ({@link JList}).
 	 * 
 	 * @return of type JList, returns the emails' list.
 	 */

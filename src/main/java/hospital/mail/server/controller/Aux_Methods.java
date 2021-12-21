@@ -20,7 +20,7 @@ import com.sun.mail.pop3.POP3SSLStore;
 
 public class Aux_Methods {
 	
-	Aux_Methods() {
+	public Aux_Methods() {
 
 	}
 	
@@ -70,19 +70,19 @@ public class Aux_Methods {
 	    private static String PASSWORD = "estoesuntest"; // GMail pass
 	    private static String RECIPIENT = "ialonsocalzado.sanjose@alumnado.fundacionloyola.net";
 
-	    public static void main(String[] args) {
-	        String from = USER_NAME;
-	        String pass = PASSWORD;
-	        String[] to = { RECIPIENT }; // list of recipient email addresses
-	        String subject = "Ejemplo de envio de email";
-	        String body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet massa sapien. "
-	        		+ "Etiam fringilla eros sed purus tempor, at molestie turpis blandit. Vestibulum id justo odio. "
-	        		+ "In hac habitasse platea dictumst. Nunc libero lectus, facilisis et sem quis, ornare gravida nulla."
-	        		+ " Integer condimentum nulla nec odio posuere tincidunt. Proin congue consequat ex ut elementum. ";
-
-	        sendFromGMail(from, pass, to, subject, body);
-	        System.out.println("Correo Enviado");
-	    }
+//	    public static void main(String[] args) {
+//	        String from = USER_NAME;
+//	        String pass = PASSWORD;
+//	        String[] to = { RECIPIENT }; // list of recipient email addresses
+//	        String subject = "Ejemplo de envio de email";
+//	        String body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet massa sapien. "
+//	        		+ "Etiam fringilla eros sed purus tempor, at molestie turpis blandit. Vestibulum id justo odio. "
+//	        		+ "In hac habitasse platea dictumst. Nunc libero lectus, facilisis et sem quis, ornare gravida nulla."
+//	        		+ " Integer condimentum nulla nec odio posuere tincidunt. Proin congue consequat ex ut elementum. ";
+//
+//	        sendFromGMail(from, pass, to, subject, body);
+//	        System.out.println("Correo Enviado");
+//	    }
 
 	    private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
 	        Properties props = System.getProperties();
@@ -148,7 +148,7 @@ public class Aux_Methods {
 	        store.connect();
 	    }
 
-	    public void openFolder(String folderName)
+		public void openFolder(String folderName)
 	    throws Exception
 	    {
 	        folder = (POP3Folder)store.getFolder(folderName);
@@ -186,7 +186,13 @@ public class Aux_Methods {
 	        return folder.getNewMessageCount();
 	    }
 
-	    public void disconnect()
+		public POP3Folder getFolder() {
+			return folder;
+		}
+
+
+
+		public void disconnect()
 	    throws Exception
 	    {
 	        store.close();

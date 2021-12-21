@@ -1,6 +1,5 @@
 package hospital.mail.client.view.panels.Client;
 
-import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.util.ArrayList;
 
@@ -13,9 +12,10 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
- * Side panel with a lblIco (JLabel), that contains as image the icon for the
- * hospital, and an buttons (ArrayList of type JButton), that contains the
- * buttons of write, read, ftp and exit. This panel has a BorderLayout.
+ * Side panel with a lblIco ({@link JLabel}), that contains as image the icon
+ * for the hospital, and an buttons ({@link ArrayList} of type {@link JButton}),
+ * that contains the buttons of write, read, FTP and exit. This panel has a
+ * vertical {@link BoxLayout}.
  * 
  * @author Jorge Fernández Ruiz
  * @date 14/12/2021
@@ -34,15 +34,13 @@ public class Pa_Side extends JPanel {
 	private ArrayList<JButton> buttons;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
-	 * @param txtBtnWrite of type String, the text of button's write.
-	 * @param txtBtnRead  of type String, the text of button's read.
-	 * @param txtBtnFtp   of type String, the text of button's ftp for change the
-	 *                    view.
-	 * @param txtBtnExit  of type String, the text of button's exit.
+	 * @param txtBtnWrite of type {@link String}, the text of button's write.
+	 * @param txtBtnRead  of type {@link String}, the text of button's read.
+	 * @param txtBtnExit  of type {@link String}, the text of button's exit.
 	 */
-	public Pa_Side(String txtBtnWrite, String txtBtnRead, String txtBtnFtp, String txtBtnExit) {
+	public Pa_Side(String txtBtnWrite, String txtBtnRead, String txtBtnExit) {
 		imgPanel = new JPanel();
 		emailButtonsPanel = new JPanel();
 		controlPanel = new JPanel();
@@ -53,7 +51,7 @@ public class Pa_Side extends JPanel {
 		lblIco.setBounds(ALLBITS, ABORT, 100, 100);
 		lblIco.setIcon(new ImageIcon(getClass().getResource("/images/crown_77906.png"))); // relative URL
 
-		fillButtons(txtBtnWrite, txtBtnRead, txtBtnFtp, txtBtnExit);
+		fillButtons(txtBtnWrite, txtBtnRead, txtBtnExit);
 
 		// set border and the layout
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -65,7 +63,7 @@ public class Pa_Side extends JPanel {
 	}
 
 	/**
-	 * Method that append the extra panels to this class (JPanel).
+	 * Method that append the extra panels to this class ({@link JPanel}).
 	 */
 	private void appendPanels() {
 		this.add(imgPanel);
@@ -95,27 +93,26 @@ public class Pa_Side extends JPanel {
 	}
 
 	/**
-	 * Method that fill the buttons (ArrayList of type JButton).
+	 * Method that fill the buttons ({@link ArrayList} of type {@link JButton}).
 	 * 
-	 * @param txtBtnWrite of type String, the text of button's write.
-	 * @param txtBtnRead  of type String, the text of button's read.
-	 * @param txtBtnFtp   of type String, the text of button's ftp for change the
-	 *                    view.
-	 * @param txtBtnExit  of type String, the text of button's exit.
+	 * @param txtBtnWrite of type {@link String}, the text of button's write.
+	 * @param txtBtnRead  of type {@link String}, the text of button's read.
+	 * @param txtBtnFtp   of type {@link String}, the text of button's FTP for
+	 *                    change the view.
+	 * @param txtBtnExit  of type {@link String}, the text of button's exit.
 	 */
-	private void fillButtons(String txtBtnWrite, String txtBtnRead, String txtBtnFtp, String txtBtnExit) {
+	private void fillButtons(String txtBtnWrite, String txtBtnRead, String txtBtnExit) {
 		buttons.add(new JButton(txtBtnWrite));
 		buttons.add(new JButton(txtBtnRead));
-		buttons.add(new JButton(txtBtnFtp));
 		buttons.add(new JButton(txtBtnExit));
 	}
 
 	/**
-	 * Getter of buttons (ArrayList of type JButton).
+	 * Getter of buttons ({@link ArrayList} of type {@link JButton}).
 	 * 
-	 * [0] -> Write || [1] -> Read || [2] -> Change to Ftp || [3] -> Exit
+	 * [0] -> Write || [1] -> Read || [2] -> Exit
 	 * 
-	 * @return buttons (ArrayList of type JButton).
+	 * @return buttons ({@link ArrayList} of type {@link JButton}).
 	 */
 	public ArrayList<JButton> getButtons() {
 		return buttons;

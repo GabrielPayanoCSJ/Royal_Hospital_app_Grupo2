@@ -4,8 +4,6 @@ import java.awt.BorderLayout;
 
 import javax.swing.*;
 
-import hospital.ftp.client.view.JF_FTPClient;
-import hospital.languages.Language;
 import hospital.mail.client.view.panels.Client.Pa_Counter;
 import hospital.mail.client.view.panels.Client.Pa_Inbox;
 import hospital.mail.client.view.panels.Client.Pa_Side;
@@ -26,20 +24,20 @@ public class JF_MailClient extends JFrame {
 	/**
 	 * Constructor
 	 * 
-	 * @param txtTitle    of type String, the view's title.
-	 * @param txtBtnWrite of type String, the text of the write button.
-	 * @param txtBtnRead  of type String, the text of the read button.
-	 * @param txtBtnFtp   of type String, the text of the go to ftp button.
-	 * @param txtBtnExit  of type String, the text of the exit button
-	 * @param txtInbox    of type String, the text of the head of inbox.
-	 * @param txtTotal    of type String, the text of the total of mails in inbox.
-	 * @param txtUnseen   of type String, the text of the total of mails unseen in
+	 * @param txtTitle    of type {@link String}, the view's title.
+	 * @param txtBtnWrite of type {@link String}, the text of the write button.
+	 * @param txtBtnRead  of type {@link String}, the text of the read button.
+	 * @param txtBtnFtp   of type {@link String}, the text of the go to FTP button.
+	 * @param txtBtnExit  of type {@link String}, the text of the exit button
+	 * @param txtInbox    of type {@link String}, the text of the head of inbox.
+	 * @param txtTotal    of type {@link String}, the text of the total of mails in inbox.
+	 * @param txtUnseen   of type {@link String}, the text of the total of mails unseen in
 	 *                    inbox.
 	 */
 	public JF_MailClient(String txtTitle, String txtBtnWrite, String txtBtnRead, String txtBtnFtp, String txtBtnExit,
 			String txtInbox, String txtTotal, String txtUnseen) {
 		// create the panels
-		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnFtp, txtBtnExit);
+		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnExit);
 		inboxPanel = new Pa_Inbox(txtInbox);
 		counterPanel = new Pa_Counter(txtTotal, txtUnseen);
 		panel = new JPanel();
@@ -53,8 +51,8 @@ public class JF_MailClient extends JFrame {
 	}
 
 	/**
-	 * Method that append to panel (JPanel) the rest of panels, sidePanel,
-	 * inboxPanel and counterPanel (all JPanel).
+	 * Method that append to panel ({@link JPanel}) the rest of panels, sidePanel,
+	 * inboxPanel and counterPanel (all {@link JPanel}).
 	 */
 	private void appendObjectsPanel() {
 		panel.add(sidePanel, BorderLayout.EAST);
@@ -66,7 +64,7 @@ public class JF_MailClient extends JFrame {
 	/**
 	 * Method that set properties of the view.
 	 * 
-	 * @param txtTitle type of String, the text of title.
+	 * @param txtTitle type of {@link String}, the text of title.
 	 */
 	private void defaultOperations(String txtTitle) {
 		this.setTitle(txtTitle);
@@ -78,7 +76,7 @@ public class JF_MailClient extends JFrame {
 	/**
 	 * Getter for the side's panel.
 	 * 
-	 * @return the sidePanel of type JPanel.
+	 * @return the sidePanel of type {@link JPanel}.
 	 */
 	public Pa_Side getSidePanel() {
 		return sidePanel;
