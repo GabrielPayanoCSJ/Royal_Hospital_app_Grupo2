@@ -56,7 +56,7 @@ public class Ev_FTPButtons implements ActionListener {
 		case 1:
 			// DELETE FILES AND DIRECTORIES
 			System.out.println(Language.getFtpClient_txts(1));
-
+			jfClient.updateTree(ftpClient);
 			break;
 		case 2:
 			// RENAME FILE OR DIRECTORY

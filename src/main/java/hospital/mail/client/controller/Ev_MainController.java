@@ -22,12 +22,12 @@ public class Ev_MainController implements ActionListener {
 	 * @param login
 	 * 
 	 */
-	public Ev_MainController(JF_MailLogIn login) {
+/*	public Ev_MainController(JF_MailLogIn login) {
 		// TODO Auto-generated constructor stub
 		this.login = login;
 		this.principal = new JF_MailClient("Cliente Correo", "Redactar", "Leer", "FTP", "Salir", "Inbox",
 				"Contador mensajes", "No leídos");
-	}
+	}*/
 
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
