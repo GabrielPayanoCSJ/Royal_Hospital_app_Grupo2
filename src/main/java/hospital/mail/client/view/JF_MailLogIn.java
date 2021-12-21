@@ -127,7 +127,7 @@ public class JF_MailLogIn extends JFrame {
 	private void defaultOperations(String txtTitle) {
 		this.setResizable(false);
 		this.setTitle(txtTitle);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setBounds(100, 100, 241, 300);
 	}
 
@@ -140,6 +140,18 @@ public class JF_MailLogIn extends JFrame {
 	 */
 	public ArrayList<JButton> getButtonsLogin() {
 		return buttons;
+	}
+
+	public ArrayList<JLabel> getLabels() {
+		return labels;
+	}
+
+	public JTextField getTxtFmail() {
+		return txtFmail;
+	}
+
+	public JPasswordField getPassPassword() {
+		return passPassword;
 	}
 
 	

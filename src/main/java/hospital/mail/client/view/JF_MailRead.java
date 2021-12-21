@@ -51,7 +51,7 @@ public class JF_MailRead extends JFrame {
 	 */
 	private void defaultOperations(String txtTitle) {
 		this.setTitle(txtTitle);
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.pack();
 		this.setResizable(true);
 	}
@@ -82,11 +82,4 @@ public class JF_MailRead extends JFrame {
 	public Pa_Body getBodyPanel() {
 		return bodyPanel;
 	}
-
-	// only for test
-//	public static void main(String[] args) {
-//		Language.selectLanguage(1);
-//		JF_MailReadMail jframe = new JF_MailReadMail();
-//		jframe.setVisible(true);
-//	}
 }
