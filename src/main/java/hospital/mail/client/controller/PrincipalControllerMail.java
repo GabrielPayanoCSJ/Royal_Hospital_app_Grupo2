@@ -28,4 +28,8 @@ public class PrincipalControllerMail {
 			login.getButtonsLogin().get(i).addActionListener(new Ev_MainController(login));
 		}
 	}
+	
+//	public static void main(String[] args) {
+//		new PrincipalControllerMail();
+//	}
 }

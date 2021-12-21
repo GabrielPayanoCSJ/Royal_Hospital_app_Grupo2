@@ -110,7 +110,8 @@ public class JF_MailLogIn extends JFrame {
 	}
 
 	/**
-	 * Method that fill buttons ({@link ArrayList} of type {@link JButton}) creating news.
+	 * Method that fill buttons ({@link ArrayList} of type {@link JButton}) creating
+	 * news.
 	 * 
 	 * @param txtBtnLogin  type of {@link String}, the text of login button.
 	 * @param txtBtnReturn type of {@link String}, the text of return button.
@@ -133,13 +134,25 @@ public class JF_MailLogIn extends JFrame {
 	}
 
 	/**
-	 * Getter of buttons ({@link ArrayList} of type {@link JButton}). [0] -> btnLogin || [1] ->
-	 * btnReturn
+	 * Getter of buttons ({@link ArrayList} of type {@link JButton}). [0] ->
+	 * btnLogin || [1] -> btnReturn
 	 * 
 	 * @return the buttons of type {@link JButton}.
 	 */
 	public ArrayList<JButton> getButtonsLogin() {
 		return buttons;
+	}
+
+	public ArrayList<JLabel> getLabels() {
+		return labels;
+	}
+
+	public JTextField getTxtFmail() {
+		return txtFmail;
+	}
+
+	public JPasswordField getPassPassword() {
+		return passPassword;
 	}
 
 }
