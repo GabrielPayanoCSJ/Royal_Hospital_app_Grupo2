@@ -74,9 +74,9 @@ public class Pa_Inbox extends JPanel {
 	 * @param issue     of type {@link String}, the issue of the mail.
 	 * @param date      of type {@link String}, the date when was written the mail.
 	 */
-	public void appendNewEmail(Address[] addresses, String issue, Date date) {
+	public void appendNewEmail(Address[] addresses, String issue, Date date) {		
 		if (addresses.length == 1) {
-			String text = date + " - " + addresses + " - " + issue;
+			String text = date + " - " + addresses[0] + " - " + issue;
 			emailList.addElement(text);
 			emails.setModel(emailList);
 		} else if (addresses.length > 1) {
@@ -104,6 +104,15 @@ public class Pa_Inbox extends JPanel {
 	 */
 	public JList<String> getEmails() {
 		return emails;
+	}
+
+	/**
+	 * Getter of email list {@link DefaultListModel}.
+	 * 
+	 * @return the emailList of type DefaultListModel.
+	 */
+	public DefaultListModel getEmailList() {
+		return emailList;
 	}
 
 }

@@ -39,6 +39,8 @@ public class Ev_MailClient implements ActionListener {
 
 		fillMails();
 		changeCounts();
+		
+		clientView.setVisible(true);
 	}
 
 	/**
@@ -46,9 +48,10 @@ public class Ev_MailClient implements ActionListener {
 	 */
 	private void fillMails() {
 		try {
-			aux.openFolder("C:\\Users\\mazen\\OneDrive\\Escritorio\\Emails Integrado");
+			aux.openFolder("INBOX");
 
 			Message msgs[] = aux.getFolder().getMessages();
+			clientView.getInboxPanel().getEmailList().clear();
 
 			for (Message message : msgs) {
 				clientView.getInboxPanel().appendNewEmail(message.getFrom(), message.getSubject(),

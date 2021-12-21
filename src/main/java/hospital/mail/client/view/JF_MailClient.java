@@ -1,6 +1,7 @@
 package hospital.mail.client.view;
 
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 
 import javax.swing.*;
 
@@ -69,7 +70,7 @@ public class JF_MailClient extends JFrame {
 	private void defaultOperations(String txtTitle) {
 		this.setTitle(txtTitle);
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.pack();
+		this.setSize(new Dimension(900, 400));
 		this.setResizable(false);
 	}
 

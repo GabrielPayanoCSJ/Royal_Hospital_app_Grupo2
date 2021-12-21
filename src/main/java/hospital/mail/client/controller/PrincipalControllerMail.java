@@ -29,7 +29,7 @@ public class PrincipalControllerMail {
 		}
 	}
 	
-//	public static void main(String[] args) {
-//		new PrincipalControllerMail();
-//	}
+	public static void main(String[] args) {
+		new PrincipalControllerMail();
+	}
 }
