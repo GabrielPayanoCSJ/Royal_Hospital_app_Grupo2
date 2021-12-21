@@ -158,6 +158,7 @@ public class Utils_Methods {
 
 	/**
 	 * Connection method for POP3.
+	 * 
 	 * @author Javier Gómez Villasclaras
 	 */
 	public static void connect() throws Exception {
@@ -209,7 +210,6 @@ public class Utils_Methods {
 	 * Connection method for POP3.
 	 * 
 	 * This method will save the emails for later display of such.
-	 * it will also translate the text from HTML to plain text thanks to Jsoup.
 	 * 
 	 * @param message We will utilize this to read the text of the message
 	 * 
@@ -237,12 +237,10 @@ public class Utils_Methods {
 		return "";
 	}
 
-	
 	/**
 	 * Main method to present the text in the view
 	 * 
-	 * It makes an array of messages then it makes a "for"
-	 * loop to present them.
+	 * It makes an array of messages then it makes a "for" loop to present them.
 	 * 
 	 * @author Javier Gómez Villasclaras
 	 */
@@ -263,10 +261,8 @@ public class Utils_Methods {
 	}
 
 	/**
-	 * Connection method for POP3.
+	 * Method to save file.
 	 * 
-	 * it will also translate the text from HTML to plain text thanks to Jsoup.
-	 * @param message We will utilize this to read the text of the message
 	 * @author Javier Gómez Villasclaras
 	 */
 	public static int saveFile(File saveFile, Part part) throws Exception {
@@ -285,6 +281,13 @@ public class Utils_Methods {
 		return count;
 	}
 
+	/**
+	 * Method to translate the message from multimedia type to plain text
+	 * 
+	 * @param m The message to translate.
+	 * 
+	 * @author Javier Gómez Villasclaras
+	 */
 	private static void dumpEnvelope(Message m) throws Exception {
 		String body = "";
 		String path = "";
