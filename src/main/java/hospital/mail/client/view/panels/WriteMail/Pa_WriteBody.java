@@ -2,7 +2,6 @@ package hospital.mail.client.view.panels.WriteMail;
 
 import java.awt.BorderLayout;
 
-import javax.swing.BoxLayout;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
@@ -14,9 +13,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Body's panel with a txA_body (JTextArea), where will write the message's
- * body, and a scroll (JScrollPane), vertical only if is needed and horizontal
- * never.
+ * Body's panel with a txA_body ({@link JTextArea}), where will write the
+ * message's body, and a scroll ({@link JScrollPane}), vertical only if is
+ * needed and horizontal never. Has a {@link BorderLayout}.
  * 
  * @author Jorge Fernández Ruiz
  * @date 15/12/2021
@@ -32,9 +31,11 @@ public class Pa_WriteBody extends JPanel {
 	private JScrollPane scroll;
 
 	/**
-	 * Constructor
+	 * Constructor.
 	 * 
-	 * @param txtHeadBody of type String, the text of panel's head.
+	 * @param txtHeadBody    of type {@link String}, the text of body's head.
+	 * @param txtHeadIssue   of type {@link String}, the text of issue's head.
+	 * @param txtHeadMessage of type {@link String}, the text of message's head.
 	 */
 	public Pa_WriteBody(String txtHeadBody, String txtHeadIssue, String txtHeadMessage) {
 		HEIGTH = 30;
@@ -68,9 +69,14 @@ public class Pa_WriteBody extends JPanel {
 		txA_body.setLineWrap(true);
 		txA_body.setWrapStyleWord(true);
 
+		// create scroll and properties
+		scroll = new JScrollPane(txA_body);
+		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+
 		// append the objects into its panels
 		panelTxtIssue.add(txtIssue); // control max characters
-		panelTxtMessage.add(txA_body);
+		panelTxtMessage.add(scroll);
 
 		// append to this class (extends JPanel) the extra panels
 		this.add(panelTxtIssue, BorderLayout.NORTH);
@@ -78,18 +84,18 @@ public class Pa_WriteBody extends JPanel {
 	}
 
 	/**
-	 * Getter of txtIssue (JTextField).
+	 * Getter of txtIssue ({@link JTextField}).
 	 * 
-	 * @return the txtIssue
+	 * @return the txtIssue of type {@link JTextField}.
 	 */
 	public JTextField getTxtIssue() {
 		return txtIssue;
 	}
 
 	/**
-	 * Getter of txA_body (JTextArea).
+	 * Getter of txA_body ({@link JTextArea}).
 	 * 
-	 * @return of type JTextArea.
+	 * @return of type {@link JTextArea}.
 	 */
 	public JTextArea getTxA_body() {
 		return txA_body;

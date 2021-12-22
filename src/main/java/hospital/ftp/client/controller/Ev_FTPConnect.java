@@ -111,6 +111,8 @@ public class Ev_FTPConnect implements ActionListener {
 		} else {
 			Tool.showGUIerror("No se ha introducido ningún usuario", "CAMPOS DE LOGIN VACÍOS");
 		}
+
+			jfClient.scannerFTP(ftpClient);
 	}
 
 	/**

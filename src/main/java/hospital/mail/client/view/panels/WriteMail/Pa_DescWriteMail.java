@@ -12,8 +12,9 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * Description's panel for write emails. Has a tags (ArrayList of type JLabel)
- * and a txFDesc (ArrayList of type JTextField). Has a horizontal BoxLayout.
+ * Description's panel for write emails. Has a tags ({@link ArrayList} of type
+ * {@link JLabel}) and a txFDesc ({@link ArrayList} of type {@link JTextField}).
+ * Has a horizontal {@link BoxLayout}.
  * 
  * @author Jorge Fernández Ruiz
  * @date 16/12/2021
@@ -26,9 +27,9 @@ public class Pa_DescWriteMail extends JPanel {
 	/**
 	 * Constructor.
 	 * 
-	 * @param txtDescHead  of type String, the text of description's head.
-	 * @param txtSender    of type String, the text of sender.
-	 * @param txtAddressee of type String, the text of addressee.
+	 * @param txtDescHead  of type {@link String}, the text of description's head.
+	 * @param txtSender    of type {@link String}, the text of sender.
+	 * @param txtAddressee of type {@link String}, the text of addressee.
 	 */
 	public Pa_DescWriteMail(String txtDescHead, String txtSender, String txtAddressee) {
 		// create the arrays
@@ -44,7 +45,7 @@ public class Pa_DescWriteMail extends JPanel {
 
 	/**
 	 * Method that append to the panel (this class) all objects, in order label and
-	 * its textField.
+	 * its {@link JTextField}.
 	 */
 	private void appendObjects() {
 		for (int i = 0; i < tags.size(); i++) {
@@ -56,7 +57,8 @@ public class Pa_DescWriteMail extends JPanel {
 	/**
 	 * Method that set some properties to the panel (this class).
 	 * 
-	 * @param txtDescHead of type String, the text for the description's head.
+	 * @param txtDescHead of type {@link String}, the text for the description's
+	 *                    head.
 	 */
 	private void panelProperties(String txtDescHead) {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
@@ -65,8 +67,9 @@ public class Pa_DescWriteMail extends JPanel {
 	}
 
 	/**
-	 * Method that fill txFDesc (ArrayList of type JTextFlied) creating a textField
-	 * disabled, for the sender, and other new, for the Addressee.
+	 * Method that fill txFDesc ({@link ArrayList} of type {@link JTextFlied})
+	 * creating a {@link JTextField} disabled, for the sender, and other new, for
+	 * the addressee.
 	 */
 	private void fillDesc() {
 		JTextField txFsender = new JTextField();
@@ -77,11 +80,11 @@ public class Pa_DescWriteMail extends JPanel {
 	}
 
 	/**
-	 * Method that fill tags (ArrayList of type JLabel) creating a label for the
-	 * text of sender and other for the addressee.
+	 * Method that fill tags ({@link ArrayList} of type {@link JLabel}) creating a
+	 * label for the text of sender and other for the addressee.
 	 * 
-	 * @param txtSender    of type String, the text for the sender.
-	 * @param txtAddressee of type String, the text for the addressee.
+	 * @param txtSender    of type {@link String}, the text for the sender.
+	 * @param txtAddressee of type {@link String}, the text for the addressee.
 	 */
 	private void fillTags(String txtSender, String txtAddressee) {
 		tags.add(new JLabel("  " + txtSender + ":  "));
@@ -89,10 +92,10 @@ public class Pa_DescWriteMail extends JPanel {
 	}
 
 	/**
-	 * Getter for the txFDesc (ArrayList of type JTextField). [0] -> sender [1] ->
-	 * addressee
+	 * Getter for the txFDesc ({@link ArrayList} of type {@link JTextField}). [0] ->
+	 * sender [1] -> addressee
 	 * 
-	 * @return the txFDesc of type JTextField.
+	 * @return the txFDesc of type {@link JTextField}.
 	 */
 	public ArrayList<JTextField> getTxFDesc() {
 		return txFDesc;
