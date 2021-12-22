@@ -7,7 +7,6 @@ import java.awt.event.MouseListener;
 
 import javax.mail.Message;
 
-import hospital.ftp.client.controller.ClientFTP;
 import hospital.mail.client.view.JF_MailClient;
 import hospital.mail.server.controller.Utils_Methods;
 
@@ -55,9 +54,10 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 			Message msgs[] = aux.getFolder().getMessages();
 			clientView.getInboxPanel().getEmailList().clear();
 
-			for (Message message : msgs) {
-				clientView.getInboxPanel().appendNewEmail(message.getFrom(), message.getSubject(),
-						message.getSentDate());
+			for (int i = msgs.length - 1; i >= 0; i--) {
+				clientView.getInboxPanel().appendNewEmail(msgs[i].getFrom(), msgs[i].getSubject(),
+						msgs[i].getSentDate());
+
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -76,13 +76,12 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 		}
 	}
 
-	/**
-	 * Method event which calls its corresponding controller.
-	 */
+	// Buttons event
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		if (e.getSource().equals(clientView.getSidePanel().getButtons().get(0))) {
 			new WriteMailController();
+			System.out.println("Write is open");
 		} else if (e.getSource().equals(clientView.getSidePanel().getButtons().get(1))) {
 			new ReadMailController(clientView.getInboxPanel());
 			System.out.println("Read is open");
@@ -91,6 +90,7 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 		}
 	}
 
+	// Mouse events
 	@Override
 	public void mouseClicked(MouseEvent event) {
 		if (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1) {
@@ -101,25 +101,25 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 
 	@Override
 	public void mousePressed(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Not implemented
 
 	}
 
 	@Override
 	public void mouseReleased(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Not implemented
 
 	}
 
 	@Override
 	public void mouseEntered(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Not implemented
 
 	}
 
 	@Override
 	public void mouseExited(MouseEvent e) {
-		// TODO Auto-generated method stub
+		// Not implemented
 
 	}
 

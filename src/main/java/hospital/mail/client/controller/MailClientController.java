@@ -22,17 +22,15 @@ public class MailClientController {
 	public MailClientController(int language) {
 		Language.selectLanguage(language);
 		// change to language array
-		view = new JF_MailClient("test", "test", "test", "test", "test", "test", "test", "test");
-		view.getInboxPanel().getEmailList().clear();
-		
+		view = new JF_MailClient("title", "write", "read", "exit", "test", "test", "test");
 		addEvents();
 
 		view.setVisible(true);
 	}
 
 	/**
-	 * Add the event listener for each button that are in Ev_MailClient (listener
-	 * class).
+	 * Add the event listener for each button that are in {@link Ev_MailClient}
+	 * (listener class) and a mouse listener to email list for read them (.
 	 */
 	private void addEvents() {
 		for (int i = 0; i < view.getSidePanel().getButtons().size(); i++) {

@@ -2,11 +2,14 @@ package hospital.mail.client.view.panels.Client;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.mail.Address;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
 import javax.swing.DefaultListModel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -53,7 +56,7 @@ public class Pa_Inbox extends JPanel {
 		WIDTH = 600;
 
 		// creation of the list for the emails' list
-		emailList = new DefaultListModel();
+		emailList = new DefaultListModel<String>();
 
 		// Creation of objects
 		emails = new JList<>();
@@ -76,16 +79,19 @@ public class Pa_Inbox extends JPanel {
 	 * @param issue     of type {@link String}, the issue of the mail.
 	 * @param date      of type {@link String}, the date when was written the mail.
 	 * @throws ParseException
+	 * @throws AddressException 
 	 */
-	public void appendNewEmail(Address[] addresses, String issue, Date date) throws ParseException {
-		String mailDate = date.getDate() + "/" + date.getMonth() + "/" + date.getYear() + " - " + date.getHours() + ":" + date.getMinutes();
-
+	public void appendNewEmail(Address[] addresses, String issue, Date date) throws ParseException, AddressException {
+		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
+		String formatDate = format.format(date); 
+		
 		if (addresses.length == 1) {
-			String text = mailDate + " - " + addresses[0] + " - " + issue;
+			InternetAddress addresse = new InternetAddress(addresses[0].toString());
+			String text = formatDate + " - " + addresse.toUnicodeString() + " - " + issue;
 			emailList.addElement(text);
 			emails.setModel(emailList);
 		} else if (addresses.length > 1) {
-			String text = mailDate + " - ";
+			String text = formatDate + " - ";
 
 			String someAddresses = "";
 
@@ -112,16 +118,12 @@ public class Pa_Inbox extends JPanel {
 	}
 
 	/**
-	 * @return the emailList
-	 */
-	public DefaultListModel<String> getEmailList() {
-		return emailList;
-	}
-
-	/**
 	 * Getter of email list {@link DefaultListModel}.
 	 * 
 	 * @return the emailList of type DefaultListModel.
 	 */
+	public DefaultListModel<String> getEmailList() {
+		return emailList;
+	}
 
 }

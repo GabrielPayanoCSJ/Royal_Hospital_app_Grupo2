@@ -28,8 +28,10 @@ public class Utils_Methods {
 	// campos para recibir
 	private static Session session;
 	private static POP3SSLStore store;
-	private static String username = "testhospitalroyale1";
-	private static String password = "estoesuntest";
+//	private static String username = "testhospitalroyale1";
+	private static String username = "jorgefernandezruiz.sanjose@alumnado.fundacionloyola.net";
+//	private static String password = "estoesuntest";
+	private static String password = "50008606";
 	private static POP3Folder folder;
 	public static String numberOfFiles = null;
 	public static int toCheck = 0;
@@ -232,12 +234,14 @@ public class Utils_Methods {
 	private static void dumpEnvelope(Message m) throws Exception {
 		String body = "";
 		String path = "";
-		int size = 0;
+		int size = 0;		
+		
 		Object content = m.getContent();
 		if (content instanceof String) {
 			body = (String) content;
 		} else if (content instanceof Multipart) {
 			Multipart mp = (Multipart) content;
+			m.setContent(body, "text/html;charset=utf-8");
 			for (int j = 0; j < mp.getCount(); j++) {
 				Part part = mp.getBodyPart(j);
 				String disposition = part.getDisposition();
