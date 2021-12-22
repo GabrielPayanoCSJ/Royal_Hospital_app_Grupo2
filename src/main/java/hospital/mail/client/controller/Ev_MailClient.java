@@ -2,6 +2,8 @@ package hospital.mail.client.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 
 import javax.mail.Message;
 
@@ -17,7 +19,7 @@ import hospital.mail.server.controller.Utils_Methods;
  * @date 21/12/2021
  * @version 1.0
  */
-public class Ev_MailClient implements ActionListener {
+public class Ev_MailClient implements ActionListener, MouseListener {
 	private JF_MailClient clientView;
 	private Utils_Methods aux;
 
@@ -39,7 +41,7 @@ public class Ev_MailClient implements ActionListener {
 
 		fillMails();
 		changeCounts();
-		
+
 		clientView.setVisible(true);
 	}
 
@@ -83,9 +85,42 @@ public class Ev_MailClient implements ActionListener {
 			new WriteMailController();
 		} else if (e.getSource().equals(clientView.getSidePanel().getButtons().get(1))) {
 			new ReadMailController(clientView.getInboxPanel());
+			System.out.println("Read is open");
 		} else if (e.getSource().equals(clientView.getSidePanel().getButtons().get(2))) {
 			clientView.dispose();
 		}
+	}
+
+	@Override
+	public void mouseClicked(MouseEvent event) {
+		if (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1) {
+			new ReadMailController(clientView.getInboxPanel());
+			System.out.println("Read is open");
+		}
+	}
+
+	@Override
+	public void mousePressed(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseReleased(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseEntered(MouseEvent e) {
+		// TODO Auto-generated method stub
+
+	}
+
+	@Override
+	public void mouseExited(MouseEvent e) {
+		// TODO Auto-generated method stub
+
 	}
 
 }

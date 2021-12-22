@@ -23,6 +23,8 @@ public class MailClientController {
 		Language.selectLanguage(language);
 		// change to language array
 		view = new JF_MailClient("test", "test", "test", "test", "test", "test", "test", "test");
+		view.getInboxPanel().getEmailList().clear();
+		
 		addEvents();
 
 		view.setVisible(true);
@@ -36,6 +38,7 @@ public class MailClientController {
 		for (int i = 0; i < view.getSidePanel().getButtons().size(); i++) {
 			view.getSidePanel().getButtons().get(i).addActionListener(new Ev_MailClient(view));
 		}
+		view.getInboxPanel().getEmails().addMouseListener(new Ev_MailClient(view));
 	}
 
 }

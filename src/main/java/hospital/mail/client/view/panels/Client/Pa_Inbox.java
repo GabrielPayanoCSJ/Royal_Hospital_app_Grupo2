@@ -2,6 +2,8 @@ package hospital.mail.client.view.panels.Client;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import javax.mail.Address;
@@ -30,7 +32,7 @@ public class Pa_Inbox extends JPanel {
 	// Objects
 	private JList<String> emails;
 	private JScrollPane scroll;
-	private DefaultListModel emailList;
+	private DefaultListModel<String> emailList;
 
 	// JList's measures
 	private final int HEIGHT;
@@ -73,14 +75,17 @@ public class Pa_Inbox extends JPanel {
 	 * @param addresses of type {@link String}, the person that sent the mail.
 	 * @param issue     of type {@link String}, the issue of the mail.
 	 * @param date      of type {@link String}, the date when was written the mail.
+	 * @throws ParseException
 	 */
-	public void appendNewEmail(Address[] addresses, String issue, Date date) {		
+	public void appendNewEmail(Address[] addresses, String issue, Date date) throws ParseException {
+		String mailDate = date.getDate() + "/" + date.getMonth() + "/" + date.getYear() + " - " + date.getHours() + ":" + date.getMinutes();
+
 		if (addresses.length == 1) {
-			String text = date + " - " + addresses[0] + " - " + issue;
+			String text = mailDate + " - " + addresses[0] + " - " + issue;
 			emailList.addElement(text);
 			emails.setModel(emailList);
 		} else if (addresses.length > 1) {
-			String text = date + " - ";
+			String text = mailDate + " - ";
 
 			String someAddresses = "";
 
@@ -107,12 +112,16 @@ public class Pa_Inbox extends JPanel {
 	}
 
 	/**
+	 * @return the emailList
+	 */
+	public DefaultListModel<String> getEmailList() {
+		return emailList;
+	}
+
+	/**
 	 * Getter of email list {@link DefaultListModel}.
 	 * 
 	 * @return the emailList of type DefaultListModel.
 	 */
-	public DefaultListModel getEmailList() {
-		return emailList;
-	}
 
 }
