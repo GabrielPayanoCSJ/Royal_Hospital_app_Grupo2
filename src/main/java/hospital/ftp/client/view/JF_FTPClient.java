@@ -123,6 +123,7 @@ public class JF_FTPClient extends JFrame {
 		url = url.replace("]", "");
 		url = url.substring(1);
 		url = url.trim();
+		//url += "/";
 		return url;
 	}
 
