@@ -10,10 +10,14 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
+
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
+
 import org.apache.commons.net.ftp.FTP;
 import org.apache.commons.net.ftp.FTPClient;
 import org.apache.commons.net.ftp.FTPFile;
+
 import hospital.tools.Tool;
 
 /**
@@ -194,28 +198,52 @@ public class FTPUtil {
 	 *                     renamed
 	 * 
 	 * @author Guillermo González de Miguel
+	 * 
+	 * Modify by Gabriel Payano
 	 */
-	public static void renameFile(FTPClient ftpClient, String pathSelected) {
+	public static void renameFile(FTPClient ftpClient, String pathSelected , String pathSelectedMinus) {
+		System.out.println("---------------IN RENAME------------------");
 
+		System.out.println("PATH SELECTED: " + pathSelected);
+		System.out.println("PATH SELECTED Minus : " + pathSelectedMinus );
 		File renameFile = new File(pathSelected);
 
 		try {
 			String title = "RENOMBRAR ";
+			String aux;
 			if (renameFile.isDirectory())
 				title += "DIRECTORIO";
 			else
 				title += "FICHERO";
 
+			/*
+			 * Original Part by: Guillermo boolean success =
+			 * ftpClient.rename(renameFile.getName(),
+			 * Tool.inputGUIpane("Introduzca el nuevo nombre", title,
+			 * renameFile.getName()).toString());
+			 */
+
+			/**
+			 * @author Gabriel Payano Modify by: Gabriel Payano
+			 */
 			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
-			boolean success = ftpClient.rename(renameFile.getName(),
-					Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName()));
+			
+			System.out.println("EL GET NAME TIENE: " + renameFile.getName());
+
+			boolean success = ftpClient.rename(pathSelected, pathSelectedMinus + Tool.inputGUIpane("Introduzca el nuevo nombre", title,
+					  renameFile.getName()).toString());
+			if (success) {
+				System.out.println("THE HAS CHANGE TO THE NEW ONE");
+			}
 		} catch (IOException e) {
 			Tool.showGUIerror(
 					"Ha habido un fallo al realizar la operacion renombrar.\n" + "Sistema dice: " + e.getMessage(),
 					"ERROR AL RENOMBRAR");
 		}
+
+		System.out.println("---------------OUT OF RENAME------------------");
 	}
-	
+
 	public static void showResponse(FTPClient ftpClient) {
 		System.out.println(ftpClient.getReplyStrings().length);
 		System.out.println(ftpClient.getReplyString());

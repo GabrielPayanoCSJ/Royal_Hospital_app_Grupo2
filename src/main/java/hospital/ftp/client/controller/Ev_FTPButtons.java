@@ -64,21 +64,21 @@ public class Ev_FTPButtons implements ActionListener {
 		case 2:
 			// RENAME FILE OR DIRECTORY
 			System.out.println(Language.getFtpClient_txts(11));
-			FTPUtil.renameFile(ftpClient, "");
+			FTPUtil.renameFile(ftpClient, jfClient.generateURL(getPathTree()), getPathTreeMinus());
 			
 			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
 		case 3:
 			// UPLOAD FILE
 			System.out.println(Language.getFtpClient_txts(2));
-			FTPUtil.uploadFile(ftpClient, null);
+			FTPUtil.uploadFile(ftpClient, jfClient.generateURL(getPathTree()));
 			
 			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
 		case 4:
 			// DOWNLOAD FILE
 			System.out.println(Language.getFtpClient_txts(3));
-			FTPUtil.downloadFile(ftpClient, null);
+			FTPUtil.downloadFile(ftpClient, jfClient.generateURL(getPathTree()));
 			
 			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
@@ -90,6 +90,29 @@ public class Ev_FTPButtons implements ActionListener {
 	
 	private String getPathTree() {
 		return jfClient.getPanel_directory().getTree().getSelectionPath().toString();
+	}
+	
+	/**
+	 * @author Gabriel Payano
+	 * @return
+	 */
+	private String getPathTreeMinus() {
+		
+		String path = jfClient.getPanel_directory().getTree().getSelectionPath().toString();
+		String url = "";
+		path = path.replace("[", "");
+		path = path.replace("]", "");
+		path = path.replace(",", "/");
+		path = path.replace(" ", "");
+		
+		String[] parts = path.split("/");
+		System.out.println("Selected PAth es: " + path);
+		System.out.println("LA ÚLTIMA PALABRA ES: " + parts[parts.length-1]);
+
+		//parts[parts.length-1] -> Last word of the Selected Path in the tree node
+		url = path.replace(parts[parts.length-1],"");//Deleting the last word
+		url = url.substring(1);
+		return url;
 	}
 
 }
