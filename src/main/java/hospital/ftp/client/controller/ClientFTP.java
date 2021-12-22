@@ -3,6 +3,7 @@ package hospital.ftp.client.controller;
 
 // IMPORTS
 import org.apache.commons.net.ftp.FTPClient;
+
 import hospital.ftp.client.view.JF_FTPClient;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.Log;
@@ -35,7 +36,6 @@ public class ClientFTP {
 		this.group = new Group(db);
 		this.log = new Log(db);
 		Language.selectLanguage(language);
-
 		this.ftpCliente = new FTPClient();
 		this.jfClient = new JF_FTPClient();
 		this.jfClient.setVisible(true);
@@ -49,7 +49,6 @@ public class ClientFTP {
 			this.jfClient.getPanel_button().getButtons().get(i).addActionListener(
 					new Ev_FTPButtons(this.ftpCliente, this.jfClient, this.user, this.group, this.log));
 		}
-		
 	}
 
 	/**

@@ -53,7 +53,7 @@ public class Log {
 	 * @return
 	 */
 	private ArrayList<Log> getLogDB() {
-		this.db.getStatement("SELECT * FROM GR2_INFO_LOG");
+		this.db.getStatement("SELECT * FROM GR2_INFO_LOG_CLIENT");
 		ResultSet r = this.db.getResSQL();
 		try {
 			while (r.next()) {

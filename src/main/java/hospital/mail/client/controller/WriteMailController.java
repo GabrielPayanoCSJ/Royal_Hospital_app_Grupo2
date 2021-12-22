@@ -6,7 +6,7 @@ public class WriteMailController {
 	private JF_MailWrite write;
 	
 	public WriteMailController() {
-		write = new JF_MailWrite();
+//		write = new JF_MailWrite();
 	}
 
 }

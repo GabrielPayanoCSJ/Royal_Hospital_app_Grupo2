@@ -1,11 +1,7 @@
 package hospital.mail.client.controller;
 
-import java.awt.event.WindowAdapter;
-
 import javax.swing.JButton;
-
 import hospital.mail.client.view.JF_MailLogIn;
-import main.controller.EV_Principal;
 
 public class PrincipalControllerMail {
 

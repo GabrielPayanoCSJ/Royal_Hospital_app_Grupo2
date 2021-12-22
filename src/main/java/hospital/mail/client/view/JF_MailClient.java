@@ -38,17 +38,17 @@ public class JF_MailClient extends JFrame {
 	 */
 	public JF_MailClient() {
 		// create the panels
-		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnFtp, txtBtnExit);
-		inboxPanel = new Pa_Inbox(txtInbox);
-		counterPanel = new Pa_Counter(txtTotal, txtUnseen);
-		panel = new JPanel();
-		panel.setLayout(new BorderLayout());
+//		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnFtp, txtBtnExit);
+//		inboxPanel = new Pa_Inbox(txtInbox);
+//		counterPanel = new Pa_Counter(txtTotal, txtUnseen);
+//		panel = new JPanel();
+//		panel.setLayout(new BorderLayout());
 
 		appendObjectsPanel();
 
 		add(panel);
 
-		defaultOperations(txtTitle);
+//		defaultOperations(txtTitle);
 	}
 
 	/**
