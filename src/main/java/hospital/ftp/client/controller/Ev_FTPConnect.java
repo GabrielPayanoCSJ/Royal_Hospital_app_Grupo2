@@ -10,6 +10,9 @@ import javax.swing.JButton;
 import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import org.apache.commons.net.ftp.FTPClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import hospital.ftp.client.view.JF_FTPClient;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.Log;
@@ -23,7 +26,7 @@ import hospital.tools.Tool;
  * @dateCreated 18/12/2021
  */
 public class Ev_FTPConnect implements ActionListener {
-
+	private Logger logClient;
 	private final String HOST = "localhost";
 	private final int PORT = 6000;
 	private FTPClient ftpClient;
@@ -43,6 +46,7 @@ public class Ev_FTPConnect implements ActionListener {
 	 * @param log
 	 */
 	public Ev_FTPConnect(FTPClient ftpClient, JF_FTPClient jfClient, User user, Group group, Log log) {
+//		this.logClient = LoggerFactory.getLogger(this.getClass().getSimpleName());
 		this.ftpClient = ftpClient;
 		this.jfClient = jfClient;
 		this.user = user;
@@ -79,6 +83,7 @@ public class Ev_FTPConnect implements ActionListener {
 			try {
 				System.out.println("Nos conectamos a: " + HOST);
 				this.ftpClient.connect(HOST, PORT);
+				FTPUtil.showResponse(ftpClient);
 				String userLogin = this.tfielduser.getText().toLowerCase();
 				String passwdLogin = "";
 				for (int i = 0; i < this.pfieldpass.getPassword().length; i++) {

@@ -161,7 +161,7 @@ public class FTPUtil {
 				for (int i = 0; i < files.length; i++) {
 					if (files[i].getName().contains(file.getName())) {
 						if (files[i].isFile()) {
-							System.out.println(file.getPath());
+//							System.out.println(file.getPath());
 							pathToCreate = file.getParent() + File.separator;
 						}
 						i = files.length;
@@ -214,5 +214,12 @@ public class FTPUtil {
 					"Ha habido un fallo al realizar la operacion renombrar.\n" + "Sistema dice: " + e.getMessage(),
 					"ERROR AL RENOMBRAR");
 		}
+	}
+	
+	public static void showResponse(FTPClient ftpClient) {
+		System.out.println(ftpClient.getReplyStrings().length);
+		System.out.println(ftpClient.getReplyString());
+//		System.out.println(ftpClient.getr);
+		System.out.println(ftpClient.getReplyCode());
 	}
 }
