@@ -51,7 +51,7 @@ public class Ev_FTPButtons implements ActionListener {
 		case 0:
 			// CREATE DIRECTORY
 			System.out.println(Language.getFtpClient_txts(0));
-			FTPUtil.createDirectory(ftpClient, "");
+			FTPUtil.createDirectory(ftpClient, jfClient.generateURL(getPathTree()));
 			
 			jfClient.updateTree(ftpClient); //Update the node after Change.
 			break;
@@ -86,6 +86,10 @@ public class Ev_FTPButtons implements ActionListener {
 			Tool.showConsoleError("This option doesn't exist.");
 			break;
 		}
+	}
+	
+	private String getPathTree() {
+		return jfClient.getPanel_directory().getTree().getSelectionPath().toString();
 	}
 
 }
