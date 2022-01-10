@@ -289,7 +289,6 @@ public class Utils_Methods {
 	private static void dumpEnvelope(Message m) throws Exception {
 		String body = "";
 		String path = "";
-
 		Object content = m.getContent();
 		if (content instanceof String) {
 			body = (String) content;
@@ -423,4 +422,11 @@ public class Utils_Methods {
 		return pop3Props;
 	}
 
+	public static void setUsername(String username) {
+		Utils_Methods.username = username;
+	}
+
+	public static void setPassword(String password) {
+		Utils_Methods.password = password;
+	}
 }
