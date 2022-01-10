@@ -8,6 +8,7 @@ import java.awt.event.MouseListener;
 import javax.mail.Message;
 
 import hospital.mail.client.view.JF_MailClient;
+import hospital.mail.client.view.panels.Client.Pa_Inbox;
 import hospital.mail.server.controller.Utils_Methods;
 
 /**
@@ -83,8 +84,9 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 			new WriteMailController();
 			System.out.println("Write is open");
 		} else if (e.getSource().equals(clientView.getSidePanel().getButtons().get(1))) {
-			new ReadMailController(clientView.getInboxPanel());
+			new ReadMailController(clientView.getInboxPanel(), aux);
 			System.out.println("Read is open");
+			
 		} else if (e.getSource().equals(clientView.getSidePanel().getButtons().get(2))) {
 			clientView.dispose();
 		}

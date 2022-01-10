@@ -4,7 +4,7 @@
 package hospital.mail.client.controller;
 
 /**
- * @author prodi
+ * @author Guillermo González de Miguel
  *
  */
 public class Ev_MailRead {
