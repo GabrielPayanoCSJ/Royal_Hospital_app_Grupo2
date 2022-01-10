@@ -12,11 +12,11 @@ import hospital.mail.client.view.JF_MailLogIn;
  * @editDate 20/12/2021
  * @version 1.1
  */
-public class PrincipalControllerMail {
+public class LoginControllerMail {
 
 	private JF_MailLogIn login;
 
-	public PrincipalControllerMail() {
+	public LoginControllerMail() {
 		this.login = new JF_MailLogIn("Log-In Mail", "Acceder", "Volver", "Body", "Mail: ", "Contraseña: ");
 		loginListener();
 
@@ -30,6 +30,6 @@ public class PrincipalControllerMail {
 	}
 
 	public static void main(String[] args) {
-		new PrincipalControllerMail();
+		new LoginControllerMail();
 	}
 }
