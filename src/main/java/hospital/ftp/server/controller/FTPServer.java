@@ -39,9 +39,12 @@ import hospital.tools.database.DB;
 public class FTPServer {
 	private static final String HOST = "localhost";
 	private static final int PORT = 6000;
+	private static final int SERVER_PORT = 7000;
 	private FtpServerFactory serverFactory;
 	private ListenerFactory listenerFactory;
 	private FtpServer server;
+	private ServerSocket servSocket;
+	private Socket clientSocket;
 	private DB db;
 	private User userdb;
 	private Group groupdb;
@@ -84,10 +87,14 @@ public class FTPServer {
 			System.exit(1);
 		}
 
-		if (generateUserFTP(rootDir))
-				startFTPSever();
-		else
+		if (generateUserFTP(rootDir)) {
+			startFTPSever();
+			
+			// método llamada al while true (serverSocket)
+			
+		} else {
 			Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
+		}
 	}
 
 	private void enableLog4j() {
@@ -174,9 +181,11 @@ public class FTPServer {
 				String addr = this.listenerFactory.getServerAddress();
 				if (this.listenerFactory.getServerAddress().equals("localhost"))
 					addr += "/127.0.0.1";
-				
-				Tool.showGUIerror("No es posible iniciar el servidor FTP, " + addr + ":" + this.listenerFactory.getPort()
-				+ " está en uso.\n\nCompruebe que no disponga de otro servidor activado.", "ERROR SERVIDOR FTP NO PUEDE INICIAR");
+
+				Tool.showGUIerror(
+						"No es posible iniciar el servidor FTP, " + addr + ":" + this.listenerFactory.getPort()
+								+ " está en uso.\n\nCompruebe que no disponga de otro servidor activado.",
+						"ERROR SERVIDOR FTP NO PUEDE INICIAR");
 			}
 
 		}
