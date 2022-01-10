@@ -89,12 +89,12 @@ public class FTPServer {
 			System.exit(1);
 		}
 
-		if (generateUserFTP(rootDir))
+		if (generateUserFTP(rootDir)) {
 			startFTPSever();
-
-		else
+			startThread();
+		} else {
 			Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
-
+		}
 	}
 
 	/**
@@ -184,14 +184,14 @@ public class FTPServer {
 	}
 
 	private void startThread() {
-		
+
 		ServerFTPPipeline pipeline = new ServerFTPPipeline();
-		
+
 		try {
 			while (true) {
 				this.clientSocket = new Socket();
 				this.clientSocket = this.serverSocket.accept();
-				this.thread  = new Thread(new ServerFTPThread(this.clientSocket, pipeline));
+				this.thread = new Thread(new ServerFTPThread(this.clientSocket, pipeline));
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
