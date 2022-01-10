@@ -46,21 +46,16 @@ public class FTPServer {
 	private User userdb;
 	private Group groupdb;
 
-	private ServerSocket serverSocket;
-	private Socket clientSocket;
-	private final int PORT_SERVERSOCKET = 7000;
-	private Thread thread;
-
 	/**
 	 * 
 	 */
 	public FTPServer() {
 		Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
-//////		log.
-////		log.trace("DEBUG");
-////		log.info("Hello world");
-////		log.debug("Hello world 2");
-////		log.warn("MENSAJE DE FALLO");
+////		log.
+//		log.trace("DEBUG");
+//		log.info("Hello world");
+//		log.debug("Hello world 2");
+//		log.warn("MENSAJE DE FALLO");
 		this.db = new DB();
 		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
 		this.serverFactory = new FtpServerFactory();
@@ -69,9 +64,9 @@ public class FTPServer {
 		this.listenerFactory.setPort(PORT);
 		this.serverFactory.addListener("default", listenerFactory.createListener());
 
-//		System.out.println(this.listenerFactory.getPort());
-//		System.out.println(this.listenerFactory.getServerAddress());
-//		System.out.println(this.listenerFactory.getIdleTimeout());
+		System.out.println(this.listenerFactory.getPort());
+		System.out.println(this.listenerFactory.getServerAddress());
+		System.out.println(this.listenerFactory.getIdleTimeout());
 
 		String rootDir = "";
 		JFileChooser f = new JFileChooser();
@@ -89,12 +84,13 @@ public class FTPServer {
 			System.exit(1);
 		}
 
-		if (generateUserFTP(rootDir)) {
-			startFTPSever();
-			startThread();
-		} else {
+		if (generateUserFTP(rootDir))
+				startFTPSever();
+		else
 			Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
-		}
+	}
+
+	private void enableLog4j() {
 	}
 
 	/**
@@ -156,6 +152,10 @@ public class FTPServer {
 		return homeDir;
 	}
 
+//	private void createFTPserver() {
+//		this.server = this.serverFactory.createServer();
+//	}
+
 	/**
 	 * @throws IOException
 	 * 
@@ -164,6 +164,7 @@ public class FTPServer {
 		try {
 			this.server = this.serverFactory.createServer();
 //			this.server.resume();
+
 			this.server.start();
 
 		} catch (FtpException e1) {
@@ -173,28 +174,11 @@ public class FTPServer {
 				String addr = this.listenerFactory.getServerAddress();
 				if (this.listenerFactory.getServerAddress().equals("localhost"))
 					addr += "/127.0.0.1";
-
-				Tool.showGUIerror(
-						"No es posible iniciar el servidor FTP, " + addr + ":" + this.listenerFactory.getPort()
-								+ " está en uso.\n\nCompruebe que no disponga de otro servidor activado.",
-						"ERROR SERVIDOR FTP NO PUEDE INICIAR");
+				
+				Tool.showGUIerror("No es posible iniciar el servidor FTP, " + addr + ":" + this.listenerFactory.getPort()
+				+ " está en uso.\n\nCompruebe que no disponga de otro servidor activado.", "ERROR SERVIDOR FTP NO PUEDE INICIAR");
 			}
 
-		}
-	}
-
-	private void startThread() {
-
-		ServerFTPPipeline pipeline = new ServerFTPPipeline();
-
-		try {
-			while (true) {
-				this.clientSocket = new Socket();
-				this.clientSocket = this.serverSocket.accept();
-				this.thread = new Thread(new ServerFTPThread(this.clientSocket, pipeline));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
 		}
 	}
 

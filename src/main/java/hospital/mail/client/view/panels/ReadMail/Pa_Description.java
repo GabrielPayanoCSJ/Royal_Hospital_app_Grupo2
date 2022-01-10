@@ -33,6 +33,7 @@ public class Pa_Description extends JPanel {
 	 */
 	public Pa_Description(String txtHead, String txtSender, String txtIssue) {
 		this.setLayout(new BorderLayout(0, 0));
+		// change LOG for model
 		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), txtHead), new EmptyBorder(5, 5, 5, 5)));
 
 		// create the ArrayLists

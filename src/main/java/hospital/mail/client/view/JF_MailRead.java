@@ -63,7 +63,7 @@ public class JF_MailRead extends JFrame {
 	 */
 	private void appendPanel() {
 		panel.add(descPanel, BorderLayout.NORTH);
-		panel.add(bodyPanel, BorderLayout.SOUTH);
+		panel.add(bodyPanel, BorderLayout.CENTER);
 	}
 
 	/**

@@ -12,7 +12,10 @@ public class ReadMailController {
 		this.pa_Inbox = pa_Inbox;
 		this.aux = aux;
 		
-		new JF_MailRead("Lectura correo", "CABECERA", "Desde", "Asunto", "CUERPO").setVisible(true);
+		
+		
+		
+		new JF_MailRead("Lectura correo", "CABECERA", "Desde:", "Hacia:", "CUERPO").setVisible(true);
 		
 	}
 }
