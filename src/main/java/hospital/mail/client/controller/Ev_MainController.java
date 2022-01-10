@@ -52,7 +52,7 @@ public class Ev_MainController implements ActionListener {
 		} catch (NoSuchProviderException e) {
 			Tool.showGUIerror("Usuario o contraseña incorrectos", "Error de Login");
 		} catch (MessagingException e) {
-			System.out.println("Wow");
+			System.out.println("Excepción de 'Messaging' ");
 			e.printStackTrace();
 		}
 	}
