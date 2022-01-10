@@ -92,9 +92,10 @@ public class Ev_FTPButtons implements ActionListener {
 		return jfClient.getPanel_directory().getTree().getSelectionPath().toString();
 	}
 	
+	//RETURNS THE URL FORMATED WITHOUT THE LAST FOLDER.
 	/**
 	 * @author Gabriel Payano
-	 * @return
+	 * @return String Type , return the URL Formated to without the last file/folder.
 	 */
 	private String getPathTreeMinus() {
 		
