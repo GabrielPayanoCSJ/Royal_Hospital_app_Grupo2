@@ -30,12 +30,13 @@ public class JF_MailClient extends JFrame {
 	 * @param txtBtnRead  of type {@link String}, the text of the read button.
 	 * @param txtBtnExit  of type {@link String}, the text of the exit button
 	 * @param txtInbox    of type {@link String}, the text of the head of inbox.
-	 * @param txtTotal    of type {@link String}, the text of the total of mails in inbox.
-	 * @param txtUnseen   of type {@link String}, the text of the total of mails unseen in
+	 * @param txtTotal    of type {@link String}, the text of the total of mails in
 	 *                    inbox.
+	 * @param txtUnseen   of type {@link String}, the text of the total of mails
+	 *                    unseen in inbox.
 	 */
-	public JF_MailClient(String txtTitle, String txtBtnWrite, String txtBtnRead, String txtBtnExit,
-			String txtInbox, String txtTotal, String txtUnseen) {
+	public JF_MailClient(String txtTitle, String txtBtnWrite, String txtBtnRead, String txtBtnExit, String txtInbox,
+			String txtTotal, String txtUnseen) {
 		// create the panels
 		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnExit);
 		inboxPanel = new Pa_Inbox(txtInbox);
