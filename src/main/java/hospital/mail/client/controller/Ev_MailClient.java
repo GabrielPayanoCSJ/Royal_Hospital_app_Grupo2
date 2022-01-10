@@ -96,7 +96,7 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 	@Override
 	public void mouseClicked(MouseEvent event) {
 		if (event.getClickCount() == 2 && event.getButton() == MouseEvent.BUTTON1) {
-			new ReadMailController(clientView.getInboxPanel());
+			new ReadMailController(clientView.getInboxPanel(), aux);
 			System.out.println("Read is open");
 		}
 	}
