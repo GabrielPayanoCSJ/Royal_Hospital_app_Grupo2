@@ -109,8 +109,12 @@ public class FTPUtil {
 	 * 
 	 * @param remotePath of type String, remote path selected for the upload of a
 	 *                   file.
+	 *                   
+	 * @param pathSelectedMinus type String , parent folder name for the file to be renamed     
 	 * 
 	 * @author Guillermo González de Miguel
+	 * 
+	 * Modify by Gabriel Payano
 	 */
 	public static void uploadFile(FTPClient ftpClient, String remotePath) {
 
@@ -118,11 +122,14 @@ public class FTPUtil {
 
 		if (fileSelected != "") {
 			File localFile = new File(fileSelected);
-			String remoteFile = remotePath + localFile.getName();
+			String remoteFile = remotePath + "/" +  localFile.getName();
 			InputStream inputStream = null;
 			try {
 				inputStream = new FileInputStream(localFile);
 				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+				//System.out.println("REMOTE FILE: " + remoteFile);
+				//System.out.println("INPUT STREAM: " + inputStream.toString());
+				//System.out.println("PATH SELECTED Minus : " + pathSelectedMinus );
 				boolean success = ftpClient.storeFile(remoteFile, inputStream);
 				inputStream.close();
 
@@ -196,16 +203,17 @@ public class FTPUtil {
 	 * 
 	 * @param pathSelected of type String, path of the directory or file to be
 	 *                     renamed
+	 *                     
+	 * @param pathSelectedMinus type String , parent folder name for the file to be renamed
 	 * 
 	 * @author Guillermo González de Miguel
 	 * 
 	 * Modify by Gabriel Payano
 	 */
 	public static void renameFile(FTPClient ftpClient, String pathSelected , String pathSelectedMinus) {
-		System.out.println("---------------IN RENAME------------------");
-
-		System.out.println("PATH SELECTED: " + pathSelected);
-		System.out.println("PATH SELECTED Minus : " + pathSelectedMinus );
+		//System.out.println("---------------IN RENAME------------------");
+		//System.out.println("PATH SELECTED: " + pathSelected);
+		//System.out.println("PATH SELECTED Minus : " + pathSelectedMinus );
 		File renameFile = new File(pathSelected);
 
 		try {
@@ -228,7 +236,7 @@ public class FTPUtil {
 			 */
 			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 			
-			System.out.println("EL GET NAME TIENE: " + renameFile.getName());
+			//System.out.println("EL GET NAME TIENE: " + renameFile.getName());
 
 			boolean success = ftpClient.rename(pathSelected, pathSelectedMinus + Tool.inputGUIpane("Introduzca el nuevo nombre", title,
 					  renameFile.getName()).toString());
@@ -241,7 +249,7 @@ public class FTPUtil {
 					"ERROR AL RENOMBRAR");
 		}
 
-		System.out.println("---------------OUT OF RENAME------------------");
+		//System.out.println("---------------OUT OF RENAME------------------");
 	}
 
 	public static void showResponse(FTPClient ftpClient) {
