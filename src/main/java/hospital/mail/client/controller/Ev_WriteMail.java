@@ -46,6 +46,7 @@ public class Ev_WriteMail implements ActionListener {
 	public void actionPerformed(ActionEvent arg0) {
 		if (Pattern.matches(regexPattern,(CharSequence) to)) {
 			Utils_Methods.enviaremail(from.getText(), to.getText(), host, body.getText(), subject.getText());
+			write.dispose();
 		}else {
 			Tool.showGUIerror("Error destinatario", "Fallo en el formato del email destinatario(Asegurate que es formato *@*.*) "); 
 		}
