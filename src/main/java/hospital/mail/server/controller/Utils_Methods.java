@@ -50,12 +50,16 @@ public class Utils_Methods {
 
 	// private static String username = "testhospitalroyale1";
 	// private static String password = "estoesuntest";
+	 private static String username = "";
+	 private static String password = "";
+
 	// private static String USER_NAME = "testhospitalroyale1"; // GMail username
+
 	// (la parte antes de "@gmail.com")
 	// private static String PASSWORD = "estoesuntest"; // GMail pass
 	// private static String RECIPIENT = "testhospitalroyale1@gmail.com";
 
-	public static void sendEmail(String from, String to, String host, String menssage, String subject) {
+	public static void sendEmail(String to, String host, String menssage, String subject) {
 		properties.setProperty("mail.smtp.host", host);
 		session = Session.getDefaultInstance(properties);
 
@@ -74,12 +78,12 @@ public class Utils_Methods {
 		}
 	}
 
-	public static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
-		createSession(from, pass, true);
+	public static void sendFromGMail(String[] to, String subject, String body) {
+		createSession(true);
 		message = new MimeMessage(session);
 
 		try {
-			message.setFrom(new InternetAddress(from));
+			message.setFrom(new InternetAddress(username));
 			InternetAddress[] toAddress = new InternetAddress[to.length];
 
 			// Recorremos el array de direcciones
@@ -95,7 +99,7 @@ public class Utils_Methods {
 			message.setText(body);
 			
 			transport = session.getTransport("smtp");
-			transport.connect(SMTP, from, pass);
+			transport.connect(SMTP, username, password);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 			
@@ -108,13 +112,18 @@ public class Utils_Methods {
 
 	public static boolean userauth(String from, String pass) throws MessagingException {
 		boolean exists = false;
-		createSession(from, pass, true);
+		createSession(true);
 		transport = session.getTransport("smtp");	
 
 //		System.out.println(from + " " + pass);
 		try {
 			transport.connect(SMTP, from, pass);
 			exists = true;
+			
+			// SAVE DATA EMAIL
+			username = from;
+			password = pass;
+			
 			transport.close();
 		} catch (AuthenticationFailedException e) {
 			System.out.println("Comprueba el usuario y la contraseña");
@@ -129,15 +138,15 @@ public class Utils_Methods {
 	 * @param from
 	 * @param pass
 	 */
-	private static void createSession(String from, String pass, boolean type) {
+	private static void createSession(boolean type) {
 
 		if(type) { // SMTP SESSION
 			
 			properties = System.getProperties();
 			properties.put("mail.smtp.starttls.enable", "true");
 			properties.put("mail.smtp.host", SMTP);
-			properties.put("mail.smtp.user", from);
-			properties.put("mail.smtp.password", pass);
+			properties.put("mail.smtp.user", username);
+			properties.put("mail.smtp.password", password);
 			properties.put("mail.smtp.port", String.valueOf(PORT_SMTP));
 			properties.put("mail.smtp.auth", "true");
 			
@@ -162,8 +171,8 @@ public class Utils_Methods {
 	 * username; this.password = password; }
 	 */
 
-	public static void connect(String username, String password) throws Exception {
-		createSession(null, null, false); // SESSION POP3
+	public static void connect() throws Exception {
+		createSession(false); // SESSION POP3
 		url = new URLName("pop3", POP3, PORT_POP3, "", username, password);
 		store = new POP3SSLStore(session, url);
 		store.connect();
@@ -300,6 +309,13 @@ public class Utils_Methods {
 	
 	public void closeFolder() throws Exception {
 		folder.close(false);
+	}
+
+	/**
+	 * @return the username
+	 */
+	public static String getUsername() {
+		return username;
 	}
 
 	public static int getMessageCount() throws Exception {

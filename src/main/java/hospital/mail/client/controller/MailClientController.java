@@ -54,9 +54,19 @@ public class MailClientController {
 			
 			
 
+<<<<<<< Updated upstream
 			
 			
 			
+=======
+<<<<<<< HEAD
+			Utils_Methods.connect();
+=======
+			
+			
+			
+>>>>>>> 8293f833f22c7ccbd24b835a79ff7edecd5a837a
+>>>>>>> Stashed changes
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
