@@ -5,7 +5,6 @@ package hospital.mail.client.controller;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.util.regex.Pattern;
 
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
@@ -35,10 +34,10 @@ public class Ev_WriteMail implements ActionListener {
 	 * @param write
 	 * 
 	 */
-	public Ev_WriteMail(JF_MailWrite write) {
+	public Ev_WriteMail(JF_MailWrite write,String mail) {
 		this.write = write;
 		subject = write.getBody().getTxtIssue();
-		from = log.getTxtFmail().getText();
+		from = mail;
 		to = write.getDesc().getTxFDesc().get(1);
 		body = write.getBody().getTxA_body();
 	}
