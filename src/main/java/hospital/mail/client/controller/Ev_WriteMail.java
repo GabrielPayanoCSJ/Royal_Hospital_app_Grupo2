@@ -49,7 +49,7 @@ public class Ev_WriteMail implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (Tool.checkEmail(to.getText())) {
-			Utils_Methods.enviaremail(from, to.getText(), host, body.getText(), subject.getText());
+			Utils_Methods.sendEmail(from, to.getText(), host, body.getText(), subject.getText());
 			write.dispose();
 		}else {
 			Tool.showGUIerror("Error destinatario", "Fallo en el formato del email destinatario(Asegurate que es formato *@*.*) "); 
