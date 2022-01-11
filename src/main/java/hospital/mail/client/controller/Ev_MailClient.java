@@ -20,7 +20,7 @@ import hospital.mail.server.controller.Utils_Methods;
  * @version 1.0
  */
 public class Ev_MailClient implements ActionListener, MouseListener {
-
+	private String mail;
 	private JF_MailClient clientView;
 
 	/**
@@ -28,8 +28,9 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 	 * 
 	 * @param clientView of type {@link JF_MailClient}.
 	 */
-	public Ev_MailClient(JF_MailClient clientView) {
+	public Ev_MailClient(JF_MailClient clientView, String mail) {
 		this.clientView = clientView;
+		this.mail = mail;
 	}
 
 	// Buttons event
@@ -37,7 +38,7 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 	public void actionPerformed(ActionEvent ev) {
 
 		if (ev.getSource().equals(this.clientView.getSidePanel().getButtons().get(0))) {
-			new WriteMailController();
+			new WriteMailController(mail);
 //			System.out.println("Write is open");
 		} else if (ev.getSource().equals(this.clientView.getSidePanel().getButtons().get(1))) {
 			new ReadMailController(getMessage(this.clientView.getInboxPanel().getEmails().getSelectedIndex()));

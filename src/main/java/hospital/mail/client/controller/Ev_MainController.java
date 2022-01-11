@@ -9,9 +9,15 @@ import java.awt.event.ActionListener;
  */
 public class Ev_MainController implements ActionListener {
 
+	String mail;
+	
+	public Ev_MainController(String mail) {
+		this.mail=mail;
+	}
+	
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new MailClientController(0);
+		new MailClientController(0,mail);
 	}
 
 }

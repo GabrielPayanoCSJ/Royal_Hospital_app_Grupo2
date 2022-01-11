@@ -16,15 +16,16 @@ import hospital.mail.server.controller.Utils_Methods;
  */
 public class MailClientController {
 	private JF_MailClient clientView;
+	private String mail;
 	
 	/**
 	 * Constructor.
 	 * 
 	 * @param language of type {@link Integer}, the language number.
 	 */
-	public MailClientController(int language) {
+	public MailClientController(int language,String mail) {
 		Language.selectLanguage(language);
-
+		this.mail=mail;
 		try {
 			Utils_Methods.connect();
 		} catch (Exception e) {
@@ -46,10 +47,10 @@ public class MailClientController {
 	private void addEvents() {
 		
 		for (int i = 0; i < clientView.getSidePanel().getButtons().size(); i++) {
-			clientView.getSidePanel().getButtons().get(i).addActionListener(new Ev_MailClient(clientView));
+			clientView.getSidePanel().getButtons().get(i).addActionListener(new Ev_MailClient(clientView,mail));
 		}
 		
-		clientView.getInboxPanel().getEmails().addMouseListener(new Ev_MailClient(clientView));
+		clientView.getInboxPanel().getEmails().addMouseListener(new Ev_MailClient(clientView,mail));
 		
 	}
 	
