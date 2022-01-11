@@ -28,7 +28,7 @@ public class LoginControllerMail {
 	 */
 	private void loginListener() {
 		for (int i = 0; i < login.getButtonsLogin().size(); i++) {
-			login.getButtonsLogin().get(i).addActionListener(new Ev_MainController(this.login.getTxtFmail().getText()));
+			login.getButtonsLogin().get(i).addActionListener(new Ev_MainController(login));
 		}
 	}
 

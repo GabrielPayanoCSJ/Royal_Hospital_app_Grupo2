@@ -45,8 +45,8 @@ public class Utils_Methods {
 	private static final int PORT_SMTP = 587;
 	private static final int PORT_POP3 = 995;
 
-	private static String username = "jorgefernandezruiz.sanjose@alumnado.fundacionloyola.net";
-	private static String password = "50008606";
+//	private static String username = "jorgefernandezruiz.sanjose@alumnado.fundacionloyola.net";
+//	private static String password = "50008606";
 
 	// private static String username = "testhospitalroyale1";
 	// private static String password = "estoesuntest";
@@ -162,7 +162,7 @@ public class Utils_Methods {
 	 * username; this.password = password; }
 	 */
 
-	public static void connect() throws Exception {
+	public static void connect(String username, String password) throws Exception {
 		createSession(null, null, false); // SESSION POP3
 		url = new URLName("pop3", POP3, PORT_POP3, "", username, password);
 		store = new POP3SSLStore(session, url);
