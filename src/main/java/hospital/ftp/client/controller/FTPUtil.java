@@ -149,60 +149,70 @@ public class FTPUtil {
 	}
 
 	/* DELETES------------------ */
-	
-	//Main deleted method thats calls the delete method for each case.
-/**
- * Main deleted method thats calls the delete method for each case.
- * @author Gabriel Payano
- * @param ftpClient 	   of type FTPClient, used for the operations with the
- *                          FTP server
- * @param parentDir        Type string , name of the parent directory selected by the user
- * @param currentDir       Type string , contains the current directory name into the directory list of a folder(Directory)
- */
+
+	// Main deleted method thats calls the delete method for each case.
+	/**
+	 * Main deleted method thats calls the delete method for each case.
+	 * 
+	 * @author Gabriel Payano
+	 * @param ftpClient  of type FTPClient, used for the operations with the FTP
+	 *                   server
+	 * @param parentDir  Type string , name of the parent directory selected by the
+	 *                   user
+	 * @param currentDir Type string , contains the current directory name into the
+	 *                   directory list of a folder(Directory)
+	 */
 	public static void manageDelete(FTPClient ftpClient, String parentDir, String currentDir) {
-			
-		switch(parentDir) {
+
+		switch (parentDir) {
 		case "/medicos":
 			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de medicos");
 			break;
 		case "/pacientes":
 			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de pacientes");
 			break;
+		case "/doctors":
+			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de medicos");
+			break;
+		case "/patients":
+			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de pacientes");
+			break;
 		case "":
 			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de ra�z");
 			break;
 		default:
-			if(deleteFile(ftpClient, parentDir)) {
+			if (deleteFile(ftpClient, parentDir)) {
 				System.out.println("-----------");
 				System.out.println("Is a File");
-			
-			}else if(deleteEmptyFolder(ftpClient, parentDir)) {
+
+			} else if (deleteEmptyFolder(ftpClient, parentDir)) {
 				System.out.println("-----------");
 				System.out.println("Is an empty directory");
-			}else {
+			} else {
 				System.out.println("-----------");
 				System.out.println("Is a Directory with elements");
-				deleteFileRecursive(ftpClient , parentDir ,currentDir );
-				
+				deleteFileRecursive(ftpClient, parentDir, currentDir);
+
 			}
-			 break;
+			break;
 		}
 
 	}
 
-	
-	//Delete a file in the server by the remote path.
+	// Delete a file in the server by the remote path.
 	/**
 	 * Delete a file in the server by the remote path.
+	 * 
 	 * @author Gabriel Payano
-	 * @param ftpclient  of type FTPClient, used for the operations with the
-	 *                          FTP server
-	 * @param remotePath   Type String , path of the remote file in the server to delete
+	 * @param ftpclient  of type FTPClient, used for the operations with the FTP
+	 *                   server
+	 * @param remotePath Type String , path of the remote file in the server to
+	 *                   delete
 	 * @return type Boolean , indicates if the file is correctly deleted.
 	 */
 	public static boolean deleteFile(FTPClient ftpclient, String remotePath) {
-		//System.out.println("REMOTE fILE: " + remotePath);
-		//System.out.println("--------------------DELETE FILE----------");
+		// System.out.println("REMOTE fILE: " + remotePath);
+		// System.out.println("--------------------DELETE FILE----------");
 		try {
 			boolean deleted = ftpclient.deleteFile(remotePath);
 			if (deleted) {
@@ -217,107 +227,112 @@ public class FTPUtil {
 
 		return false;
 	}
-	
-	
-	//Deletes the whole directory selected by the user , if is not empty it deletes de content on it and then deletes that directory
+
+	// Deletes the whole directory selected by the user , if is not empty it deletes
+	// de content on it and then deletes that directory
 	/**
-	 * Deletes the whole directory selected by the user , if is not empty it deletes de content on it and then deletes that directory
+	 * Deletes the whole directory selected by the user , if is not empty it deletes
+	 * de content on it and then deletes that directory
+	 * 
 	 * @author Gabriel Payano
-	 * @param ftpClient  of type FTPClient, used for the operations with the
-	 *                          FTP server
-	 * @param parentDir  Type string , name of the parent directory selected by the user
-	 * @param currentDir Type string , contains the current directory name into the directory list of a folder(Directory)
+	 * @param ftpClient  of type FTPClient, used for the operations with the FTP
+	 *                   server
+	 * @param parentDir  Type string , name of the parent directory selected by the
+	 *                   user
+	 * @param currentDir Type string , contains the current directory name into the
+	 *                   directory list of a folder(Directory)
 	 */
 	public static void deleteFileRecursive(FTPClient ftpClient, String parentDir, String currentDir) {
-		
-		//System.out.println("DELETE RECURSIVO----------------------------");
-		
-		//System.out.println("Current vale: " + currentDir);
-		
-		 String dirToList = parentDir;
-	        if (!currentDir.equals("")) {
-	            dirToList += "/" + currentDir;
-	        }
-	 
-	        System.out.println("DIR TO LIST: " + dirToList);
-	        FTPFile[] subFiles = null;
-			try {
-				subFiles = ftpClient.listFiles(dirToList);
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}
-	 
-	        if (subFiles != null && subFiles.length > 0) {
-	            for (FTPFile aFile : subFiles) {
-	                String currentFileName = aFile.getName();
-	                System.out.println("ACTUAL: " + currentFileName);
-	                if (currentFileName.equals(".") || currentFileName.equals("..")) {
-	                    // skip parent directory and the directory itself
-	                    continue;
-	                }
-	                String filePath = parentDir + "/" + currentDir + "/"
-	                        + currentFileName;
-	                if (currentDir.equals("")) {
-	                    filePath = parentDir + "/" + currentFileName;
-	                }
-	 
-	                if (aFile.isDirectory()) {
-	                    // remove the sub directory
-	                	deleteFileRecursive(ftpClient, dirToList, currentFileName);
-	                } else {
-	                    // delete the file
-	                    boolean deleted = false;
-						try {
-							deleted = ftpClient.deleteFile(filePath);
-						} catch (IOException e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
-	                    if (deleted) {
-	                        System.out.println("DELETED the file: " + filePath);
-	                    } else {
-	                        System.out.println("CANNOT delete the file: "
-	                                + filePath);
-	                    }
-	                }
-	            }
-	 
-	            // finally, remove the directory itself
-	            boolean removed = false;
-	            try {
-					removed = ftpClient.removeDirectory(dirToList);
-				} catch (IOException e) {
-					// TODO Auto-generated catch block
-					e.printStackTrace();
+
+		// System.out.println("DELETE RECURSIVO----------------------------");
+
+		// System.out.println("Current vale: " + currentDir);
+
+		String dirToList = parentDir;
+		if (!currentDir.equals("")) {
+			dirToList += "/" + currentDir;
+		}
+
+		System.out.println("DIR TO LIST: " + dirToList);
+		FTPFile[] subFiles = null;
+		try {
+			subFiles = ftpClient.listFiles(dirToList);
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+		}
+
+		if (subFiles != null && subFiles.length > 0) {
+			for (FTPFile aFile : subFiles) {
+				String currentFileName = aFile.getName();
+				System.out.println("ACTUAL: " + currentFileName);
+				if (currentFileName.equals(".") || currentFileName.equals("..")) {
+					// skip parent directory and the directory itself
+					continue;
 				}
-				
-	            if (removed) {
-	                System.out.println("REMOVED the directory: " + dirToList);
-	            } else {
-	                System.out.println("CANNOT remove the directory: " + dirToList);
-	            }
-	        }
-	        
-	        else {
-	        	deleteEmptyFolder(ftpClient , dirToList);
-	        }
-	        
-	        //System.out.println("---------------------------------------------DELETE RECURSIVO");
-	    }
-	
+				String filePath = parentDir + "/" + currentDir + "/" + currentFileName;
+				if (currentDir.equals("")) {
+					filePath = parentDir + "/" + currentFileName;
+				}
+
+				if (aFile.isDirectory()) {
+					// remove the sub directory
+					deleteFileRecursive(ftpClient, dirToList, currentFileName);
+				} else {
+					// delete the file
+					boolean deleted = false;
+					try {
+						deleted = ftpClient.deleteFile(filePath);
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					if (deleted) {
+						System.out.println("DELETED the file: " + filePath);
+					} else {
+						System.out.println("CANNOT delete the file: " + filePath);
+					}
+				}
+			}
+
+			// finally, remove the directory itself
+			boolean removed = false;
+			try {
+				removed = ftpClient.removeDirectory(dirToList);
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+
+			if (removed) {
+				System.out.println("REMOVED the directory: " + dirToList);
+			} else {
+				System.out.println("CANNOT remove the directory: " + dirToList);
+			}
+		}
+
+		else {
+			deleteEmptyFolder(ftpClient, dirToList);
+		}
+
+		// System.out.println("---------------------------------------------DELETE
+		// RECURSIVO");
+	}
+
 //	Deletes an empty directory on the server by the path given.
-/**
- * Deletes an empty directory on the server by the path given.
- * @author Gabriel Payano.
- * @param ftpclient of type FTPClient, used for the operations with the
- *                          FTP server
- * @param remotePath Type String , path of the remote file in the server to delete
- * @return Type boolean , indicates if the directory is deleted properly 
- */
+	/**
+	 * Deletes an empty directory on the server by the path given.
+	 * 
+	 * @author Gabriel Payano.
+	 * @param ftpclient  of type FTPClient, used for the operations with the FTP
+	 *                   server
+	 * @param remotePath Type String , path of the remote file in the server to
+	 *                   delete
+	 * @return Type boolean , indicates if the directory is deleted properly
+	 */
 	public static boolean deleteEmptyFolder(FTPClient ftpclient, String remotePath) {
-		//System.out.println("-----------INTO DELETE EMPTY FOLDER--------");
-		//System.out.println("Cadena a borrar: " + remotePath);
+		// System.out.println("-----------INTO DELETE EMPTY FOLDER--------");
+		// System.out.println("Cadena a borrar: " + remotePath);
 		try {
 			boolean deleted = ftpclient.removeDirectory(remotePath);
 			if (deleted) {
@@ -400,45 +415,69 @@ public class FTPUtil {
 	 *         Modify by Gabriel Payano
 	 */
 	public static void renameFile(FTPClient ftpClient, String pathSelected, String pathSelectedMinus) {
+		/*
 		System.out.println("---------------IN RENAME------------------");
 		System.out.println("PATH SELECTED: " + pathSelected);
-		System.out.println("PATH SELECTED Minus : " + pathSelectedMinus );
-		File renameFile = new File(pathSelected);
+		System.out.println("PATH SELECTED Minus : " + pathSelectedMinus);
+		System.out.println("ÚLTIMA PALABRA: " + pathSelectedMinus);
+*/
+		switch (pathSelected) {
+		case " ":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de Raíz");
+			break;
+		case "/medicos":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de medicos");
+			break;
+		case "/pacientes":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de pacientes");
+			break;
+		case "/doctors":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de medicos");
+			break;
+		case "/patients":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de pacientes");
+			break;
+		default:
+			File renameFile = new File(pathSelected);
 
-		try {
-			String title = "RENOMBRAR ";
-			String aux;
-			if (renameFile.isDirectory())
-				title += "DIRECTORIO";
-			else
-				title += "FICHERO";
+			try {
+				String title = "RENOMBRAR ";
+				String aux;
+				if (renameFile.isDirectory())
+					title += "DIRECTORIO";
+				else
+					title += "FICHERO";
 
-			/*
-			 * Original Part by: Guillermo boolean success =
-			 * ftpClient.rename(renameFile.getName(),
-			 * Tool.inputGUIpane("Introduzca el nuevo nombre", title,
-			 * renameFile.getName()).toString());
-			 */
+				/*
+				 * Original Part by: Guillermo boolean success =
+				 * ftpClient.rename(renameFile.getName(),
+				 * Tool.inputGUIpane("Introduzca el nuevo nombre", title,
+				 * renameFile.getName()).toString());
+				 */
 
-			/**
-			 * @author Gabriel Payano Modify by: Gabriel Payano
-			 */
-			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+				/**
+				 * @author Gabriel Payano Modify by: Gabriel Payano
+				 */
+				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
-			// System.out.println("EL GET NAME TIENE: " + renameFile.getName());
+				// System.out.println("EL GET NAME TIENE: " + renameFile.getName());
 
-			boolean success = ftpClient.rename(pathSelected, pathSelectedMinus
-					+ Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName()).toString());
-			if (success) {
-				System.out.println("THE HAS CHANGE TO THE NEW ONE");
+				boolean success = ftpClient.rename(pathSelected, pathSelectedMinus
+						+ Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName()).toString());
+				if (success) {
+					System.out.println("THE HAS CHANGE TO THE NEW ONE");
+				}
+			} catch (IOException e) {
+				Tool.showGUIerror(
+						"Ha habido un fallo al realizar la operacion renombrar.\n" + "Sistema dice: " + e.getMessage(),
+						"ERROR AL RENOMBRAR");
 			}
-		} catch (IOException e) {
-			Tool.showGUIerror(
-					"Ha habido un fallo al realizar la operacion renombrar.\n" + "Sistema dice: " + e.getMessage(),
-					"ERROR AL RENOMBRAR");
+
+			// System.out.println("---------------OUT OF RENAME------------------");
+			break;
 		}
 
-		// System.out.println("---------------OUT OF RENAME------------------");
+		
 	}
 
 	public static void showResponse(FTPClient ftpClient) {
