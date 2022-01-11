@@ -17,12 +17,15 @@ public class LoginControllerMail {
 	private JF_MailLogIn login;
 
 	public LoginControllerMail() {
-		this.login = new JF_MailLogIn("Log-In Mail", "Acceder", "Volver", "Body", "Mail: ", "Contraseña: ");
+		this.login = new JF_MailLogIn("Log-In Mail", "Acceder", "Salir", "Body", "Mail: ", "Contraseña: ");
 		loginListener();
 
 		this.login.setVisible(true);
 	}
 
+	/**
+	 * 
+	 */
 	private void loginListener() {
 		for (int i = 0; i < login.getButtonsLogin().size(); i++) {
 			login.getButtonsLogin().get(i).addActionListener(new Ev_MainController());

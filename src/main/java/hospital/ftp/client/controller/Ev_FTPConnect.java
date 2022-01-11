@@ -83,7 +83,7 @@ public class Ev_FTPConnect implements ActionListener {
 			try {
 				System.out.println("Nos conectamos a: " + HOST);
 				this.ftpClient.connect(HOST, PORT);
-				FTPUtil.showResponse(ftpClient);
+//				FTPUtil.showResponse(ftpClient);
 				String userLogin = this.tfielduser.getText().toLowerCase();
 				String passwdLogin = "";
 				for (int i = 0; i < this.pfieldpass.getPassword().length; i++) {

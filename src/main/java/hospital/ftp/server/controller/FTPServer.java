@@ -64,9 +64,9 @@ public class FTPServer {
 		this.listenerFactory.setPort(PORT);
 		this.serverFactory.addListener("default", listenerFactory.createListener());
 
-		System.out.println(this.listenerFactory.getPort());
-		System.out.println(this.listenerFactory.getServerAddress());
-		System.out.println(this.listenerFactory.getIdleTimeout());
+//		System.out.println(this.listenerFactory.getPort());
+//		System.out.println(this.listenerFactory.getServerAddress());
+//		System.out.println(this.listenerFactory.getIdleTimeout());
 
 		String rootDir = "";
 		JFileChooser f = new JFileChooser();

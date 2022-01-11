@@ -1,5 +1,10 @@
 package hospital.mail.client.view;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Font;
+import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -10,6 +15,8 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
 
+import hospital.mail.client.view.panels.Client.Pa_Inbox;
+
 /**
  * Email login's view, has a buttons (ArrayList of type {@link JButton}), a
  * panes (ArrayList of type {@link JTextPane}), a contentPane ({@link JPanel}),
@@ -19,7 +26,11 @@ import javax.swing.border.EmptyBorder;
  * @date 14/12/2021
  * @editor Jorge Fernández Ruiz
  * @editDate 16/12/2021
- * @version 1.1
+ * 
+ * @editor Guillermo González de Miguel
+ * @editDate 11/01/2022
+ * 
+ * @version 1.2
  */
 public class JF_MailLogIn extends JFrame {
 	private ArrayList<JButton> buttons;
@@ -40,6 +51,10 @@ public class JF_MailLogIn extends JFrame {
 	 */
 	public JF_MailLogIn(String txtTitle, String txtBtnLogin, String txtBtnReturn, String txtMailBodyHead,
 			String txtMail, String txtPassword) {
+
+		super(txtTitle);
+		// this.setResizable(false);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		// create objects
 		txtFmail = new JTextField();
 		contentPane = new JPanel();
@@ -47,26 +62,41 @@ public class JF_MailLogIn extends JFrame {
 		buttons = new ArrayList<>();
 		labels = new ArrayList<>();
 
-		fillButtons(txtBtnLogin, txtBtnReturn);
-		fillPanes();
-		setObjectsProperties(txtMailBodyHead, txtMail, txtPassword);
-		appendPaneObjects();
+		
+		JPanel panel2 = new JPanel();
+		JLabel title = new JLabel("ACCESO CORREO");
+		title.setFont(new Font("Sans-serif", Font.BOLD, 54));
+		panel2.setLayout(new FlowLayout(FlowLayout.CENTER));
+		panel2.add(title);
+		setSize(new Dimension(400,400));
+		setLayout(new BorderLayout(0, 0));
 
-		this.setContentPane(contentPane);
 
-		defaultOperations(txtTitle);
+//		fillButtons(txtBtnLogin, txtBtnReturn);
+//		fillPanes();
+//		setObjectsProperties(txtMailBodyHead, txtMail, txtPassword);
+//		appendPaneObjects();
+		add(panel2, BorderLayout.NORTH);
+//		this.setContentPane(contentPane);
+//		setUndecorated(true);
+//		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
 	}
 
 	/**
 	 * Method that append to contentPane ({@link JPanel}) all objects.
 	 */
 	private void appendPaneObjects() {
-		contentPane.add(buttons.get(0));
-		contentPane.add(buttons.get(1));
-		contentPane.add(txtFmail);
+		
+		contentPane.setLayout(new GridLayout(3,2));
+		
 		contentPane.add(labels.get(0));
+		contentPane.add(txtFmail);
+		
 		contentPane.add(labels.get(1));
 		contentPane.add(passPassword);
+
+		contentPane.add(buttons.get(1));
+		contentPane.add(buttons.get(0));
 	}
 
 	/**
@@ -79,25 +109,14 @@ public class JF_MailLogIn extends JFrame {
 	private void setObjectsProperties(String txtMailBodyHead, String txtMail, String txtPassword) {
 		// JPanel
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
-
-		// JButtons (ArrayList)
-		buttons.get(0).setBounds(61, 159, 106, 23);
-		buttons.get(1).setBounds(61, 193, 106, 23);
+//		contentPane.setLayout(null);
 
 		// JTextField
 		txtFmail.setToolTipText(txtMailBodyHead);
-		txtFmail.setBounds(10, 31, 207, 20);
-		txtFmail.setColumns(10);
 
 		// JLabels (ArrayList)
 		labels.get(0).setText(txtMail);
-		labels.get(0).setBounds(84, 11, 48, 20);
 		labels.get(1).setText(txtPassword);
-		labels.get(1).setBounds(74, 62, 69, 20);
-
-		// JPasswordField
-		passPassword.setBounds(10, 90, 207, 20);
 	}
 
 	/**
@@ -119,18 +138,6 @@ public class JF_MailLogIn extends JFrame {
 	private void fillButtons(String txtBtnLogin, String txtBtnReturn) {
 		buttons.add(new JButton(txtBtnLogin));
 		buttons.add(new JButton(txtBtnReturn));
-	}
-
-	/**
-	 * Method that set properties of the view.
-	 * 
-	 * @param txtTitle type of {@link String}, the text of title.
-	 */
-	private void defaultOperations(String txtTitle) {
-		this.setResizable(false);
-		this.setTitle(txtTitle);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-		this.setBounds(100, 100, 241, 300);
 	}
 
 	/**

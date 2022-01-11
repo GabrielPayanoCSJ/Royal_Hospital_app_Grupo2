@@ -284,8 +284,6 @@ public class Utils_Methods {
 		}
 	}
 
-	
-
 //    public static void main(String[] args) {
 //    String from = USER_NAME;
 //    String pass = PASSWORD;
