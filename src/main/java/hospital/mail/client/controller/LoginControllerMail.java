@@ -17,7 +17,7 @@ public class LoginControllerMail {
 	private JF_MailLogIn login;
 
 	public LoginControllerMail() {
-		this.login = new JF_MailLogIn("Log-In Mail", "ACCESO CORREO", "Acceder", "Salir", "Body", "Mail: ", "Contraseña: ");
+		this.login = new JF_MailLogIn("Log-In Mail", "Acceder", "Salir", "Body", "Mail: ", "Contraseña: ");
 		loginListener();
 
 		this.login.setVisible(true);
