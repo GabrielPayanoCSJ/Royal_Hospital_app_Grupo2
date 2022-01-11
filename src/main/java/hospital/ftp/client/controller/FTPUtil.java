@@ -79,12 +79,13 @@ public class FTPUtil {
 	public static void downloadFile(FTPClient ftpClient, String localPath) {
 		String localSavePath = chooseFile(new File(localPath).getName(), "SELECCIONE UNA UBICACI�N PARA GUARDARLO",
 				"GUARDAR");
-
 		if (localSavePath != "") {
-
 			try {
 
-				OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(localSavePath)));
+				File downlFile = new File(localSavePath);
+				System.out.println("DESCARGADO: " + downlFile.getAbsolutePath());
+
+				OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(downlFile));
 				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 				boolean success = ftpClient.retrieveFile(localPath, outputStream);
 
