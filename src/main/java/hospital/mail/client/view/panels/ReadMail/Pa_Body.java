@@ -6,6 +6,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.border.Border;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.EmptyBorder;
 import javax.swing.border.EtchedBorder;
@@ -45,13 +46,11 @@ public class Pa_Body extends JPanel {
 		// be write on the next line.
 		txA_body.setLineWrap(true);
 		txA_body.setWrapStyleWord(true);
-
 		scroll = new JScrollPane(txA_body);
-
 		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
 		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 
-		this.add(scroll);
+		this.add(scroll, BorderLayout.CENTER);
 	}
 
 	/**

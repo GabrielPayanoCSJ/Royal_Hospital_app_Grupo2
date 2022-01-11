@@ -2,7 +2,6 @@ package hospital.mail.client.view.panels.Client;
 
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -38,8 +37,8 @@ public class Pa_Inbox extends JPanel {
 	private DefaultListModel<String> emailList;
 
 	// JList's measures
-	private final int HEIGHT;
-	private final int WIDTH;
+//	private final int HEIGHT;
+//	private final int WIDTH;
 
 	/**
 	 * Constructor.
@@ -52,22 +51,22 @@ public class Pa_Inbox extends JPanel {
 		this.setBorder(new CompoundBorder(new TitledBorder(new EtchedBorder(), txtHead), new EmptyBorder(5, 5, 5, 5)));
 
 		// Values of TextArea's measures
-		HEIGHT = 400;
-		WIDTH = 600;
+//		HEIGHT = 400;
+//		WIDTH = 600;
 
 		// creation of the list for the emails' list
-		emailList = new DefaultListModel<String>();
-
+		this.emailList = new DefaultListModel<String>();
+		
 		// Creation of objects
-		emails = new JList<>();
-		emails.setPreferredSize(new Dimension(WIDTH, HEIGHT));
+		this.emails = new JList<>();
+//		emails.setPreferredSize(new Dimension(WIDTH, HEIGHT));
 
 		// creation of scroll bar
-		scroll = new JScrollPane(emails);
+		this.scroll = new JScrollPane(this.emails);
 
 		// vertical scroll always visible and horizontal not
-		scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
-		scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+		this.scroll.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+		this.scroll.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		this.add(scroll, BorderLayout.CENTER); // add JList to panel (this class)
 	}
 
@@ -79,17 +78,19 @@ public class Pa_Inbox extends JPanel {
 	 * @param issue     of type {@link String}, the issue of the mail.
 	 * @param date      of type {@link String}, the date when was written the mail.
 	 * @throws ParseException
-	 * @throws AddressException 
+	 * @throws AddressException
 	 */
-	public void appendNewEmail(Address[] addresses, String issue, Date date) throws ParseException, AddressException {
+	public void appendNewEmail(int idList, Address[] addresses, String issue, Date date)
+			throws ParseException, AddressException {
 		SimpleDateFormat format = new SimpleDateFormat("dd/MM/yyyy - HH:mm");
-		String formatDate = format.format(date); 
-		
+		String formatDate = format.format(date);
+
 		if (addresses.length == 1) {
 			InternetAddress addresse = new InternetAddress(addresses[0].toString());
-			String text = formatDate + " - " + addresse.toUnicodeString() + " - " + issue;
-			emailList.addElement(text);
-			emails.setModel(emailList);
+			String text = String.valueOf(idList) + " - " + formatDate + " - " + addresse.toUnicodeString() + " - "
+					+ issue;
+			this.emailList.addElement(text);
+			this.emails.setModel(emailList);
 		} else if (addresses.length > 1) {
 			String text = formatDate + " - ";
 
@@ -102,8 +103,8 @@ public class Pa_Inbox extends JPanel {
 
 			text += someAddresses + " - " + issue;
 
-			emailList.addElement(text);
-			emails.setModel(emailList);
+			this.emailList.addElement(text);
+			this.emails.setModel(this.emailList);
 		}
 
 	}

@@ -38,16 +38,13 @@ public class JF_MailClient extends JFrame {
 	public JF_MailClient(String txtTitle, String txtBtnWrite, String txtBtnRead, String txtBtnExit, String txtInbox,
 			String txtTotal, String txtUnseen) {
 		// create the panels
-		sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnExit);
-		inboxPanel = new Pa_Inbox(txtInbox);
-		counterPanel = new Pa_Counter(txtTotal, txtUnseen);
-		panel = new JPanel();
-		panel.setLayout(new BorderLayout());
-
+		this.sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnExit);
+		this.inboxPanel = new Pa_Inbox(txtInbox);
+		this.counterPanel = new Pa_Counter(txtTotal, txtUnseen);
+		this.panel = new JPanel();
+		this.panel.setLayout(new BorderLayout());
 		appendObjectsPanel();
-
-		add(panel);
-
+		add(this.panel);
 		defaultOperations(txtTitle);
 	}
 
@@ -56,10 +53,9 @@ public class JF_MailClient extends JFrame {
 	 * inboxPanel and counterPanel (all {@link JPanel}).
 	 */
 	private void appendObjectsPanel() {
-		panel.add(sidePanel, BorderLayout.EAST);
-		panel.add(inboxPanel, BorderLayout.WEST);
-		panel.add(counterPanel, BorderLayout.SOUTH);
-
+		this.panel.add(this.sidePanel, BorderLayout.EAST);
+		this.panel.add(this.inboxPanel, BorderLayout.CENTER);
+		this.panel.add(this.counterPanel, BorderLayout.SOUTH);
 	}
 
 	/**

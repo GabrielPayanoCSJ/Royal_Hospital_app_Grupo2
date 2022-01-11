@@ -93,4 +93,12 @@ public class Pa_Description extends JPanel {
 		tags.add(new JLabel(txtIssue + ":"));
 		tags.add(new JLabel(""));
 	}
+
+	/**
+	 * @return the tags
+	 */
+	public ArrayList<JLabel> getTags() {
+		return tags;
+	}
+	
 }

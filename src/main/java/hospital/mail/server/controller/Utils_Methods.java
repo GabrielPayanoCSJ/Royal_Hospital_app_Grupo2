@@ -21,83 +21,62 @@ import com.sun.mail.pop3.POP3SSLStore;
 
 public class Utils_Methods {
 
-	public Utils_Methods() {
-
-	}
+//	public Utils_Methods() {
+//
+//	}
 
 	// campos para recibir
-	private static Session session;
 	private static POP3SSLStore store;
-//	private static String username = "testhospitalroyale1";
-	private static String username = "jorgefernandezruiz.sanjose@alumnado.fundacionloyola.net";
-//	private static String password = "estoesuntest";
-	private static String password = "50008606";
 	private static POP3Folder folder;
-	public static String numberOfFiles = null;
-	public static int toCheck = 0;
-	public static Writer output = null;
-	static URLName url;
-	public static String receiving_attachments = "C:\\Users\\Profesor\\Documents\\Correos";
+	private static String numberOfFiles = null;
+	private static int toCheck = 0;
+	private static Writer output = null;
+	private static URLName url;
+	private static String receiving_attachments = "C:\\Users\\Profesor\\Documents\\Correos";
 
-	public static void enviaremail(String origen, String destino, String host, String mensaje, String tema) {
+	private static Session session;
+	private static Properties properties = System.getProperties();
+	private static Transport transport;
+	private static MimeMessage message;
 
-		Properties properties = System.getProperties();
+	private static final String SMTP = "smtp.gmail.com";
+	private static final String POP3 = "pop.gmail.com";
+	
+	private static final int PORT_SMTP = 587;
+	private static final int PORT_POP3 = 995;
+
+	private static String username = "jorgefernandezruiz.sanjose@alumnado.fundacionloyola.net";
+	private static String password = "50008606";
+
+	// private static String username = "testhospitalroyale1";
+	// private static String password = "estoesuntest";
+	// private static String USER_NAME = "testhospitalroyale1"; // GMail username
+	// (la parte antes de "@gmail.com")
+	// private static String PASSWORD = "estoesuntest"; // GMail pass
+	// private static String RECIPIENT = "testhospitalroyale1@gmail.com";
+
+	public static void sendEmail(String from, String to, String host, String menssage, String subject) {
 		properties.setProperty("mail.smtp.host", host);
-
-		Session session = Session.getDefaultInstance(properties);
+		session = Session.getDefaultInstance(properties);
 
 		try {
-
 			// Mime es un tipo de formato de email, lo podemos cambiar
-			MimeMessage message = new MimeMessage(session);
-
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(destino));
-			message.setSubject(tema);
-			message.setText(mensaje);
-
+			message = new MimeMessage(session);
+			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+			message.setSubject(subject);
+			message.setText(menssage);
 			Transport.send(message);
-			System.out.println("Mensaje enviado");
-
+//			System.out.println("Mensaje enviado");
 		} catch (AddressException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		} catch (MessagingException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
 	}
 
-	private static String USER_NAME = "testhospitalroyale1"; // GMail username (la parte antes de "@gmail.com")
-	private static String PASSWORD = "estoesuntest"; // GMail pass
-	private static String RECIPIENT = "testhospitalroyale1@gmail.com";
-
-//	    public static void main(String[] args) {
-//	        String from = USER_NAME;
-//	        String pass = PASSWORD;
-//	        String[] to = { RECIPIENT }; // list of recipient email addresses
-//	        String subject = "Ejemplo de envio de email";
-//	        String body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet massa sapien. "
-//	        		+ "Etiam fringilla eros sed purus tempor, at molestie turpis blandit. Vestibulum id justo odio. "
-//	        		+ "In hac habitasse platea dictumst. Nunc libero lectus, facilisis et sem quis, ornare gravida nulla."
-//	        		+ " Integer condimentum nulla nec odio posuere tincidunt. Proin congue consequat ex ut elementum. ";
-//
-//	        sendFromGMail(from, pass, to, subject, body);
-//	        System.out.println("Correo Enviado");
-//	    }
-
-	private static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
-		Properties props = System.getProperties();
-		String host = "smtp.gmail.com";
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.user", from);
-		props.put("mail.smtp.password", pass);
-		props.put("mail.smtp.port", "587");
-		props.put("mail.smtp.auth", "true");
-
-		Session session = Session.getDefaultInstance(props);
-		MimeMessage message = new MimeMessage(session);
+	public static void sendFromGMail(String from, String pass, String[] to, String subject, String body) {
+		createSession(from, pass, true);
+		message = new MimeMessage(session);
 
 		try {
 			message.setFrom(new InternetAddress(from));
@@ -114,14 +93,67 @@ public class Utils_Methods {
 
 			message.setSubject(subject);
 			message.setText(body);
-			Transport transport = session.getTransport("smtp");
-			transport.connect(host, from, pass);
+			
+			transport = session.getTransport("smtp");
+			transport.connect(SMTP, from, pass);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
+			
 		} catch (AddressException ae) {
 			ae.printStackTrace();
 		} catch (MessagingException me) {
 			me.printStackTrace();
+		}
+	}
+
+	public static boolean userauth(String from, String pass) throws MessagingException {
+		boolean exists = false;
+		createSession(from, pass, true);
+		transport = session.getTransport("smtp");	
+
+//		System.out.println(from + " " + pass);
+		try {
+			transport.connect(SMTP, from, pass);
+			exists = true;
+			transport.close();
+		} catch (AuthenticationFailedException e) {
+			System.out.println("Comprueba el usuario y la contraseña");
+			transport.close();
+		} catch (MessagingException e) {
+			transport.close();
+		}
+		return exists;
+	}
+	
+	/**
+	 * @param from
+	 * @param pass
+	 */
+	private static void createSession(String from, String pass, boolean type) {
+
+		if(type) { // SMTP SESSION
+			
+			properties = System.getProperties();
+			properties.put("mail.smtp.starttls.enable", "true");
+			properties.put("mail.smtp.host", SMTP);
+			properties.put("mail.smtp.user", from);
+			properties.put("mail.smtp.password", pass);
+			properties.put("mail.smtp.port", String.valueOf(PORT_SMTP));
+			properties.put("mail.smtp.auth", "true");
+			
+			session = Session.getDefaultInstance(properties);
+			
+		} else { // POP3 SESSION
+			
+			String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
+			
+			properties = new Properties();
+			properties.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
+			properties.setProperty("mail.pop3.socketFactory.fallback", "false");
+			properties.setProperty("mail.pop3.port", String.valueOf(PORT_POP3));
+			properties.setProperty("mail.pop3.socketFactory.port", String.valueOf(PORT_POP3));
+			
+			session = Session.getInstance(properties, null);
 		}
 	}
 
@@ -131,21 +163,15 @@ public class Utils_Methods {
 	 */
 
 	public static void connect() throws Exception {
-		String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-		Properties pop3Props = new Properties();
-		pop3Props.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
-		pop3Props.setProperty("mail.pop3.socketFactory.fallback", "false");
-		pop3Props.setProperty("mail.pop3.port", "995");
-		pop3Props.setProperty("mail.pop3.socketFactory.port", "995");
-		url = new URLName("pop3", "pop.gmail.com", 995, "", username, password);
-		session = Session.getInstance(pop3Props, null);
+		createSession(null, null, false); // SESSION POP3
+		url = new URLName("pop3", POP3, PORT_POP3, "", username, password);
 		store = new POP3SSLStore(session, url);
 		store.connect();
 	}
 
 	public static void openFolder(String folderName) throws Exception {
 		folder = (POP3Folder) store.getFolder(folderName);
-		System.out.println((new StringBuilder("For test----")).append(folder.getParent().getFullName()).toString());
+//		System.out.println((new StringBuilder("For test----")).append(folder.getParent().getFullName()).toString());
 		if (folder == null)
 			throw new Exception("Invalid folder");
 		try {
@@ -156,27 +182,7 @@ public class Utils_Methods {
 		}
 	}
 
-	public void closeFolder() throws Exception {
-		folder.close(false);
-	}
-
-	public int getMessageCount() throws Exception {
-		return folder.getMessageCount();
-	}
-
-	public int getNewMessageCount() throws Exception {
-		return folder.getNewMessageCount();
-	}
-
-	public POP3Folder getFolder() {
-		return folder;
-	}
-
-	public void disconnect() throws Exception {
-		store.close();
-	}
-
-	private static String getTextFromMessage(Message message) throws Exception {
+	public static String getTextFromMessage(Message message) throws Exception {
 		if (message.isMimeType("text/plain")) {
 			return message.getContent().toString();
 		} else if (message.isMimeType("multipart/*")) {
@@ -231,11 +237,11 @@ public class Utils_Methods {
 		return count;
 	}
 
-	private static void dumpEnvelope(Message m) throws Exception {
+	public static void dumpEnvelope(Message m) throws Exception {
 		String body = "";
 		String path = "";
-		int size = 0;		
-		
+		int size = 0;
+
 		Object content = m.getContent();
 		if (content instanceof String) {
 			body = (String) content;
@@ -278,29 +284,39 @@ public class Utils_Methods {
 		}
 	}
 
-	public static boolean userauth(String user, String pass) throws MessagingException {
-		boolean exists = false;
-		Properties props = System.getProperties();
-		String host = "smtp.gmail.com";
-		props.put("mail.smtp.starttls.enable", "true");
-		props.put("mail.smtp.host", host);
-		props.put("mail.smtp.user", user);
-		props.put("mail.smtp.password", pass);
-		props.put("mail.smtp.port", "587");
-		props.put("mail.smtp.auth", "true");
-		Session session = Session.getDefaultInstance(props);
-		Transport transport2 = session.getTransport("smtp");
-		System.out.println(user + " " + pass);
-		try {
-			transport2.connect(host, user, pass);
-			exists = true;
-			transport2.close();
-		} catch (AuthenticationFailedException e) {
-			System.out.println("Comprueba el usuario y la contraseña");
-			transport2.close();
-		} catch (MessagingException e) {
-			transport2.close();
-		}
-		return exists;
+	
+
+//    public static void main(String[] args) {
+//    String from = USER_NAME;
+//    String pass = PASSWORD;
+//    String[] to = { RECIPIENT }; // list of recipient email addresses
+//    String subject = "Ejemplo de envio de email";
+//    String body = "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur sit amet massa sapien. "
+//    		+ "Etiam fringilla eros sed purus tempor, at molestie turpis blandit. Vestibulum id justo odio. "
+//    		+ "In hac habitasse platea dictumst. Nunc libero lectus, facilisis et sem quis, ornare gravida nulla."
+//    		+ " Integer condimentum nulla nec odio posuere tincidunt. Proin congue consequat ex ut elementum. ";
+//
+//    sendFromGMail(from, pass, to, subject, body);
+//    System.out.println("Correo Enviado");
+//}
+	
+	public void closeFolder() throws Exception {
+		folder.close(false);
+	}
+
+	public static int getMessageCount() throws Exception {
+		return folder.getMessageCount();
+	}
+
+	public static int getNewMessageCount() throws Exception {
+		return folder.getNewMessageCount();
+	}
+
+	public static POP3Folder getFolder() {
+		return folder;
+	}
+
+	public void disconnect() throws Exception {
+		store.close();
 	}
 }
