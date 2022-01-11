@@ -1,10 +1,6 @@
 package hospital.mail.client.view;
 
 import java.awt.BorderLayout;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
-import java.awt.Font;
-import java.awt.GridLayout;
 import java.util.ArrayList;
 
 import javax.swing.JButton;
@@ -12,10 +8,9 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JPasswordField;
+import javax.swing.JRootPane;
 import javax.swing.JTextField;
 import javax.swing.border.EmptyBorder;
-
-import hospital.mail.client.view.panels.Client.Pa_Inbox;
 
 /**
  * Email login's view, has a buttons (ArrayList of type {@link JButton}), a
@@ -26,11 +21,7 @@ import hospital.mail.client.view.panels.Client.Pa_Inbox;
  * @date 14/12/2021
  * @editor Jorge Fernández Ruiz
  * @editDate 16/12/2021
- * 
- * @editor Guillermo González de Miguel
- * @editDate 11/01/2022
- * 
- * @version 1.2
+ * @version 1.1
  */
 public class JF_MailLogIn extends JFrame {
 	private ArrayList<JButton> buttons;
@@ -57,18 +48,11 @@ public class JF_MailLogIn extends JFrame {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		// create objects
 		txtFmail = new JTextField();
-		contentPane = new JPanel();
+
 		passPassword = new JPasswordField();
 		buttons = new ArrayList<>();
 		labels = new ArrayList<>();
 
-		
-		JPanel panel2 = new JPanel();
-		JLabel title = new JLabel("ACCESO CORREO");
-		title.setFont(new Font("Sans-serif", Font.BOLD, 54));
-		panel2.setLayout(new FlowLayout(FlowLayout.CENTER));
-		panel2.add(title);
-		setSize(new Dimension(400,400));
 		setLayout(new BorderLayout(0, 0));
 
 
@@ -76,7 +60,7 @@ public class JF_MailLogIn extends JFrame {
 //		fillPanes();
 //		setObjectsProperties(txtMailBodyHead, txtMail, txtPassword);
 //		appendPaneObjects();
-		add(panel2, BorderLayout.NORTH);
+
 //		this.setContentPane(contentPane);
 //		setUndecorated(true);
 //		getRootPane().setWindowDecorationStyle(JRootPane.NONE);
@@ -87,16 +71,12 @@ public class JF_MailLogIn extends JFrame {
 	 */
 	private void appendPaneObjects() {
 		
-		contentPane.setLayout(new GridLayout(3,2));
-		
-		contentPane.add(labels.get(0));
+		contentPane.add(buttons.get(0));
+		contentPane.add(buttons.get(1));
 		contentPane.add(txtFmail);
-		
+		contentPane.add(labels.get(0));
 		contentPane.add(labels.get(1));
 		contentPane.add(passPassword);
-
-		contentPane.add(buttons.get(1));
-		contentPane.add(buttons.get(0));
 	}
 
 	/**
@@ -109,14 +89,25 @@ public class JF_MailLogIn extends JFrame {
 	private void setObjectsProperties(String txtMailBodyHead, String txtMail, String txtPassword) {
 		// JPanel
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-//		contentPane.setLayout(null);
+		contentPane.setLayout(null);
+
+		// JButtons (ArrayList)
+		buttons.get(0).setBounds(61, 159, 106, 23);
+		buttons.get(1).setBounds(61, 193, 106, 23);
 
 		// JTextField
 		txtFmail.setToolTipText(txtMailBodyHead);
+		txtFmail.setBounds(10, 31, 207, 20);
+		txtFmail.setColumns(10);
 
 		// JLabels (ArrayList)
 		labels.get(0).setText(txtMail);
+		labels.get(0).setBounds(84, 11, 48, 20);
 		labels.get(1).setText(txtPassword);
+		labels.get(1).setBounds(74, 62, 69, 20);
+
+		// JPasswordField
+		passPassword.setBounds(10, 90, 207, 20);
 	}
 
 	/**
@@ -138,6 +129,15 @@ public class JF_MailLogIn extends JFrame {
 	private void fillButtons(String txtBtnLogin, String txtBtnReturn) {
 		buttons.add(new JButton(txtBtnLogin));
 		buttons.add(new JButton(txtBtnReturn));
+	}
+
+	/**
+	 * Method that set properties of the view.
+	 * 
+	 * @param txtTitle type of {@link String}, the text of title.
+	 */
+	private void defaultOperations(String txtTitle) {
+
 	}
 
 	/**
