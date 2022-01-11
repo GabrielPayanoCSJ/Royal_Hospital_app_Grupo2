@@ -48,6 +48,9 @@ public class MailClientController {
 		fillMails();
 		changeCounts();
 		this.clientView.setVisible(true);
+		
+		Thread aux = new Thread(new MailUpdaterList(this));
+		aux.start();
 	}
 
 	/**
@@ -96,6 +99,10 @@ public class MailClientController {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public JF_MailClient getClientView() {
+		return clientView;
 	}
 
 }
