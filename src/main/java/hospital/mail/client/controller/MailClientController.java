@@ -36,7 +36,6 @@ public class MailClientController {
 		for (int i = 0; i < this.loginView.getPassPassword().getPassword().length; i++) {
 			pass += this.loginView.getPassPassword().getPassword()[i];
 		}
-		System.out.println(pass);
 		try {
 			if (Utils_Methods.userauth(user, pass)) {
 				Utils_Methods.connect(this.loginView.getTxtFmail().getText(), pass);
