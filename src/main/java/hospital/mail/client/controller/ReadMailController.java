@@ -1,25 +1,21 @@
 package hospital.mail.client.controller;
 
-import javax.mail.Message;
-
 import hospital.mail.client.view.JF_MailRead;
+import hospital.mail.client.view.panels.Client.Pa_Inbox;
 import hospital.mail.server.controller.Utils_Methods;
 
 public class ReadMailController {
-	private JF_MailRead viMailRead;
+	private Pa_Inbox pa_Inbox;
+	private Utils_Methods aux;
 	
-	public ReadMailController(Message msgs) {
-		viMailRead = new JF_MailRead("Lectura correo", "CABECERA", "Desde", "Asunto", "CUERPO");
+	public ReadMailController(Pa_Inbox pa_Inbox, Utils_Methods aux) {
+		this.pa_Inbox = pa_Inbox;
+		this.aux = aux;
 		
-		try {
-			viMailRead.getDescPanel().getTags().get(1).setText(msgs.getFrom()[0].toString());
-			viMailRead.getDescPanel().getTags().get(3).setText(msgs.getSubject().toString());
-			viMailRead.getBodyPanel().getTxA_body().setText(Utils_Methods.getTextFromMessage(msgs));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 		
-		viMailRead.setVisible(true);
+		
+		
+		new JF_MailRead("Lectura correo", "CABECERA", "Desde:", "Hacia:", "CUERPO").setVisible(true);
 		
 	}
 }

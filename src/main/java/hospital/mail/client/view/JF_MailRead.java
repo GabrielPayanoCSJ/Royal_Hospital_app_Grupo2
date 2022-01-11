@@ -28,18 +28,22 @@ public class JF_MailRead extends JFrame {
 	 * @param txtDescriptionHead of type {@link String}, the text of the
 	 *                           description's head.
 	 * @param txtSender          of type {@link String}, the text of sender.
-	 * @param txtSubject         of type {@link String}, the text of subject.
+	 * @param txtIssue           of type {@link String}, the text of issue.
 	 * @param txtBodyHead        of type {@link String}, the text of the
 	 *                           description's head.
 	 */
-	public JF_MailRead(String txtTitle, String txtDescriptionHead, String txtSender, String txtSubject,
+	public JF_MailRead(String txtTitle, String txtDescriptionHead, String txtSender, String txtIssue,
 			String txtBodyHead) {
-		this.panel = new JPanel();
-		this.descPanel = new Pa_Description(txtDescriptionHead, txtSender, txtSubject);
-		this.bodyPanel = new Pa_Body(txtBodyHead);
-		this.panel.setLayout(new BorderLayout());
+		panel = new JPanel();
+		descPanel = new Pa_Description(txtDescriptionHead, txtSender, txtIssue);
+		bodyPanel = new Pa_Body(txtBodyHead);
+
+		panel.setLayout(new BorderLayout());
+
 		appendPanel();
-		this.add(this.panel);
+
+		this.add(panel);
+
 		defaultOperations(txtTitle);
 	}
 
@@ -58,8 +62,8 @@ public class JF_MailRead extends JFrame {
 	 * and the bodyPanel ({@link JPanel}).
 	 */
 	private void appendPanel() {
-		this.panel.add(this.descPanel, BorderLayout.NORTH);
-		this.panel.add(this.bodyPanel, BorderLayout.CENTER);
+		panel.add(descPanel, BorderLayout.NORTH);
+		panel.add(bodyPanel, BorderLayout.CENTER);
 	}
 
 	/**

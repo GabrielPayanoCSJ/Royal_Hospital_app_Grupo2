@@ -9,6 +9,8 @@ import java.io.IOException;
 import java.net.Socket;
 
 /**
+ * Thread class.
+ * 
  * @author prodi
  *
  */
