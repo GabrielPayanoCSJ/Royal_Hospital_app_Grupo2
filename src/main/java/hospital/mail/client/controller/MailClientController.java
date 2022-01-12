@@ -26,28 +26,33 @@ public class MailClientController {
 	 * 
 	 * @param language of type {@link Integer}, the language number.
 	 */
-	public MailClientController(int language, JF_MailLogIn loginView) {
+	public MailClientController(JF_MailLogIn loginView) {
 		this.loginView = loginView;
-		Language.selectLanguage(language);
+
+		String pass = "";
+		String user = this.loginView.getPaLogin().getTxtFmail().getText();
+		for (int i = 0; i < this.loginView.getPaLogin().getPassPassword().getPassword().length; i++) {
+			pass += this.loginView.getPaLogin().getPassPassword().getPassword()[i];
+		}
 
 		try {
-			String pass = "";
-			for (int i = 0; i < this.loginView.getPassPassword().getPassword().length; i++) {
-				pass += this.loginView.getPassPassword().getPassword()[i];
-			}
-			System.out.println(pass);
+//			if (Utils_Methods.userauth(user, pass)) {
+			Utils_Methods.connect(user, pass);
 
-			Utils_Methods.connect();
+			// change to language array
+			this.clientView = new JF_MailClient("title", "write", "read", "exit", "test", "test", "test");
+			addEvents();
+			fillMails();
+			changeCounts();
+			this.clientView.setVisible(true);
+//			} else {
+//				Tool.showGUIerror("Contraseña o usuario no válidos", "Fallo de autentificación");
+//				loginView.getTxtFmail().setText("");
+//				loginView.getPassPassword().setText("");
+//			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
-		// change to language array
-		clientView = new JF_MailClient("title", "write", "read", "exit", "test", "test", "test");
-		addEvents();
-		fillMails();
-		changeCounts();
-		this.clientView.setVisible(true);
 	}
 
 	/**
@@ -56,14 +61,13 @@ public class MailClientController {
 	 */
 	private void addEvents() {
 
-		for (int i = 0; i < clientView.getSidePanel().getButtons().size(); i++) {
-			clientView.getSidePanel().getButtons().get(i)
-					.addActionListener(new Ev_MailClient(clientView, loginView.getTxtFmail().getText()));
+		for (int i = 0; i < this.clientView.getSidePanel().getButtons().size(); i++) {
+			this.clientView.getSidePanel().getButtons().get(i).addActionListener(
+					new Ev_MailClient(this.clientView, this.loginView.getPaLogin().getTxtFmail().getText()));
 		}
 
-		clientView.getInboxPanel().getEmails()
-				.addMouseListener(new Ev_MailClient(clientView, loginView.getTxtFmail().getText()));
-
+		this.clientView.getInboxPanel().getEmails().addMouseListener(
+				new Ev_MailClient(this.clientView, this.loginView.getPaLogin().getTxtFmail().getText()));
 	}
 
 	/**
@@ -74,10 +78,10 @@ public class MailClientController {
 			Utils_Methods.openFolder("INBOX");
 			Message msgs[] = Utils_Methods.getFolder().getMessages();
 //			System.out.println(msgs.length);
-			clientView.getInboxPanel().getEmailList().clear();
+			this.clientView.getInboxPanel().getEmailList().clear();
 
 			for (int i = msgs.length - 1; i >= 0; i--) {
-				clientView.getInboxPanel().appendNewEmail(msgs[i].getMessageNumber(), msgs[i].getFrom(),
+				this.clientView.getInboxPanel().appendNewEmail(msgs[i].getMessageNumber(), msgs[i].getFrom(),
 						msgs[i].getSubject(), msgs[i].getSentDate());
 			}
 
@@ -91,8 +95,8 @@ public class MailClientController {
 	 */
 	private void changeCounts() {
 		try {
-			clientView.getCounterPanel().getNumTotal().setText(Utils_Methods.getMessageCount() + "");
-			clientView.getCounterPanel().getNumUnseen().setText(Utils_Methods.getNewMessageCount() + "");
+			this.clientView.getCounterPanel().getNumTotal().setText(Utils_Methods.getMessageCount() + "");
+			this.clientView.getCounterPanel().getNumUnseen().setText(Utils_Methods.getNewMessageCount() + "");
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

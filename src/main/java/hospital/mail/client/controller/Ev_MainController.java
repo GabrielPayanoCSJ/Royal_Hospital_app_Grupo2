@@ -4,6 +4,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import hospital.mail.client.view.JF_MailLogIn;
+import hospital.tools.Tool;
 
 /**
  * @author Javier Gómez
@@ -11,15 +12,33 @@ import hospital.mail.client.view.JF_MailLogIn;
  */
 public class Ev_MainController implements ActionListener {
 
-	private JF_MailLogIn login;
-	
-	public Ev_MainController(JF_MailLogIn login) {
-		this.login = login;
+	private JF_MailLogIn loginView;
+
+	public Ev_MainController(JF_MailLogIn loginView) {
+		this.loginView = loginView;
 	}
-	
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
-		new MailClientController(0, login);
+		if (e.getSource().equals(this.loginView.getPaLogin().getButtons().get(0))) {
+
+			if (this.loginView.getPaLogin().getTxtFmail().getText() != ""
+					&& Tool.getPass(this.loginView.getPaLogin().getPassPassword().getPassword()) != null) {
+
+				if (Tool.checkEmailFormat(this.loginView.getPaLogin().getTxtFmail().getText())) {
+					new MailClientController(this.loginView);
+					this.loginView.dispose();
+				} else {
+					Tool.showGUIerror("No es un correo válido.", "ERROR MAIL");
+				}
+
+			} else {
+				Tool.showGUIerror("El campo email o contraseña está vacío.", "ERROR CORREO");
+			}
+
+		} else {
+			this.loginView.dispose();
+		}
 	}
 
 }

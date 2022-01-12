@@ -5,6 +5,7 @@
 // PACKAGE 
 package hospital.tools;
 
+import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 // IMPORTS
@@ -64,5 +65,27 @@ public class Tool {
 		} else {
 			return false;
 		}
+	}
+	
+	public static boolean checkEmailFormat(String email) {
+		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher;
+		matcher = pattern.matcher(email);
+		return matcher.matches();
+	}
+
+	public static String getPass(char[] pass) {
+
+		String strpass = "";
+		if (pass.length != 0) {
+			for (int i = 0; i < pass.length; i++) {
+				strpass += pass[i];
+			}
+		} else {
+			strpass = null;
+		}
+
+		return strpass;
 	}
 }

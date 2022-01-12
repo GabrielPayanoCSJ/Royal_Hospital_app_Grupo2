@@ -17,22 +17,16 @@ public class LoginControllerMail {
 	private JF_MailLogIn login;
 
 	public LoginControllerMail() {
-		this.login = new JF_MailLogIn("Log-In Mail", "ACCESO CORREO", "Acceder", "Salir", "Body", "Mail: ");
+		this.login = new JF_MailLogIn("CLIENTE DE CORREO", "LOGIN CORREO", "CORREO ELECTRÓNICO", "CONTRASEÑA",
+				"ACCEDER", "CANCELAR");
 		loginListener();
 
 		this.login.setVisible(true);
 	}
 
-	/**
-	 * 
-	 */
 	private void loginListener() {
-		for (int i = 0; i < login.getButtonsLogin().size(); i++) {
-			login.getButtonsLogin().get(i).addActionListener(new Ev_MainController(login));
+		for (int i = 0; i < this.login.getPaLogin().getButtons().size(); i++) {
+			this.login.getPaLogin().getButtons().get(i).addActionListener(new Ev_MainController(this.login));
 		}
-	}
-
-	public static void main(String[] args) {
-		new LoginControllerMail();
 	}
 }

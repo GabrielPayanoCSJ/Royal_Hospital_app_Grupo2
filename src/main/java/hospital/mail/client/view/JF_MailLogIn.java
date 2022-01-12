@@ -1,14 +1,15 @@
 package hospital.mail.client.view;
 
-import java.util.ArrayList;
+import java.awt.BorderLayout;
+import java.awt.Color;
+import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
-import javax.swing.JButton;
+import javax.swing.BorderFactory;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JPasswordField;
-import javax.swing.JTextField;
-import javax.swing.border.EmptyBorder;
+
+import hospital.mail.client.view.panels.LoginMail.Pa_Login;
 
 /**
  * Email login's view, has a buttons (ArrayList of type JButton), a panes
@@ -19,104 +20,49 @@ import javax.swing.border.EmptyBorder;
  * @date 14/12/2021
  * @editor Jorge Fernández Ruiz
  * @editDate 16/12/2021
- * @version 1.1
+ * 
+ * @NewReDesign Guillermo González de Miguel
+ * @dateNewReDesign 12/01/2022
+ * 
+ * @version 1.2
  */
 public class JF_MailLogIn extends JFrame {
-	private ArrayList<JButton> buttons;
-	private ArrayList<JLabel> labels;
-	private JPanel contentPane;
-	private JTextField txtFmail;
-	private JPasswordField passPassword;
+	/**
+	 * 
+	 */
+	private Pa_Login paLogin;
+	
+	/**
+	 * 
+	 */
+	private int posX = 0;
+	
+	/**
+	 * 
+	 */
+	private int posY = 0;
 
 	/**
 	 * Constructor of view.
 	 * 
-	 * @param txtTitle        of type String, title's text of the view.
-	 * @param txtBtnLogin     of type String, button text of login.
-	 * @param txtBtnReturn    of type String, button text of return.
-	 * @param txtMailBodyHead of type String, head text of body of the mail.
-	 * @param txtMail         of type String, the text of mail.
-	 * @param txtPassword     of type String, the text of password.
+	 * @param txtTitleFrame of type String, title's text of the view.
+	 * @param txtLblHeader  of type String, head text of body of the mail.
+	 * @param txtLblMail    of type String, the text of mail.
+	 * @param txtLblPass    of type String, the text of password.
+	 * @param txtBtnLogin   of type String, button text of login.
+	 * @param txtBtnCancel  of type String, button text of cancel.
 	 */
-	public JF_MailLogIn(String txtTitle, String txtBtnLogin, String txtBtnReturn, String txtMailBodyHead,
-			String txtMail, String txtPassword) {
-		// create objects
-		txtFmail = new JTextField();
-		contentPane = new JPanel();
-		passPassword = new JPasswordField();
-		buttons = new ArrayList<>();
-		labels = new ArrayList<>();
+	public JF_MailLogIn(String txtTitleFrame, String txtLblHeader, String txtLblMail, String txtLblPass,
+			String txtBtnLogin, String txtBtnCancel) {
 
-		fillButtons(txtBtnLogin, txtBtnReturn);
-		fillPanes();
-		setObjectsProperties(txtMailBodyHead, txtMail, txtPassword);
-		appendPaneObjects();
+		super(txtTitleFrame); // JFRAME TITLE
 
-		this.setContentPane(contentPane);
+		defaultOperations(); // FRAME CONFIGURATION
 
-		defaultOperations(txtTitle);
-	}
-
-	/**
-	 * Method that append to contentPane (JPanel) all objects.
-	 */
-	private void appendPaneObjects() {
-		contentPane.add(buttons.get(0));
-		contentPane.add(buttons.get(1));
-		contentPane.add(txtFmail);
-		contentPane.add(labels.get(0));
-		contentPane.add(labels.get(1));
-		contentPane.add(passPassword);
-	}
-
-	/**
-	 * Method that set the properties of the objects.
-	 * 
-	 * @param txtMailBodyHead type of String, the text of body's head.
-	 * @param txtMail         type of String, the text of mail.
-	 * @param txtPassword     type of String, the text of password.
-	 */
-	private void setObjectsProperties(String txtMailBodyHead, String txtMail, String txtPassword) {
-		// JPanel
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(null);
-
-		// JButtons (ArrayList)
-		buttons.get(0).setBounds(61, 159, 106, 23);
-		buttons.get(1).setBounds(61, 193, 106, 23);
-
-		// JTextField
-		txtFmail.setToolTipText(txtMailBodyHead);
-		txtFmail.setBounds(10, 31, 207, 20);
-		txtFmail.setColumns(10);
-
-		// JLabels (ArrayList)
-		labels.get(0).setText(txtMail);
-		labels.get(0).setBounds(84, 11, 48, 20);
-		labels.get(1).setText(txtPassword);
-		labels.get(1).setBounds(74, 62, 69, 20);
-
-		// JPasswordField
-		passPassword.setBounds(10, 90, 207, 20);
-	}
-
-	/**
-	 * Method that fill labels (ArrayList of type JLabel) creating news.
-	 */
-	private void fillPanes() {
-		labels.add(new JLabel()); // mail's label
-		labels.add(new JLabel()); // password's label
-	}
-
-	/**
-	 * Method that fill buttons (ArrayList of type JButton) creating news.
-	 * 
-	 * @param txtBtnLogin  type of String, the text of login button.
-	 * @param txtBtnReturn type of String, the text of return button.
-	 */
-	private void fillButtons(String txtBtnLogin, String txtBtnReturn) {
-		buttons.add(new JButton(txtBtnLogin));
-		buttons.add(new JButton(txtBtnReturn));
+		// ADD LOGIN PANEL TO FRAME
+		this.paLogin = new Pa_Login(txtLblHeader, txtLblMail, txtLblPass, txtBtnLogin, txtBtnCancel);
+		this.add(paLogin, BorderLayout.CENTER);
+		moveJFrame();
 	}
 
 	/**
@@ -124,56 +70,40 @@ public class JF_MailLogIn extends JFrame {
 	 * 
 	 * @param txtTitle type of String, the text of title.
 	 */
-	private void defaultOperations(String txtTitle) {
-		this.setResizable(false);
-		this.setTitle(txtTitle);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setBounds(100, 100, 241, 300);
+	private void defaultOperations() {
+		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
+		this.setSize(new Dimension(600, 360));
+		this.setLocation(500, 500);
+//		this.setAlwaysOnTop(true);
+		this.setLayout(new BorderLayout(0, 0));
+		this.setUndecorated(true);
+		this.getRootPane().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(000, 000, 000, 120)));
 	}
 
 	/**
-	 * Getter of buttons (ArrayList of type JButton). 
-	 * [0] -> btnLogin
-	 * [1] -> btnReturn
 	 * 
-	 * @return the buttons
 	 */
-	public ArrayList<JButton> getButtonsLogin() {
-		return buttons;
+	private void moveJFrame() {
+		this.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mousePressed(MouseEvent e) {
+				posX = e.getX();
+				posY = e.getY();
+			}
+		});
+
+		this.addMouseMotionListener(new MouseAdapter() {
+			@Override
+			public void mouseDragged(MouseEvent e) {
+				setLocation(e.getXOnScreen() - posX, e.getYOnScreen() - posY);
+			}
+		});
 	}
 
 	/**
-	 * @return the buttons
+	 * @return the paLogin
 	 */
-	public ArrayList<JButton> getButtons() {
-		return buttons;
-	}
-
-	/**
-	 * @return the labels
-	 */
-	public ArrayList<JLabel> getLabels() {
-		return labels;
-	}
-
-	/**
-	 * @return the contentPane
-	 */
-	public JPanel getContentPane() {
-		return contentPane;
-	}
-
-	/**
-	 * @return the txtFmail
-	 */
-	public JTextField getTxtFmail() {
-		return txtFmail;
-	}
-
-	/**
-	 * @return the passPassword
-	 */
-	public JPasswordField getPassPassword() {
-		return passPassword;
+	public Pa_Login getPaLogin() {
+		return paLogin;
 	}
 }
