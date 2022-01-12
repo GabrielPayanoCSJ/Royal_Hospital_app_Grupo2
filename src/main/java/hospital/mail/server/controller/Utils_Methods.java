@@ -45,8 +45,8 @@ public class Utils_Methods {
 	private static final int PORT_SMTP = 587;
 	private static final int PORT_POP3 = 995;
 
-//	private static String username = "jorgefernandezruiz.sanjose@alumnado.fundacionloyola.net";
-//	private static String password = "50008606";
+	//private static String username = "jorgefernandezruiz.sanjose@alumnado.fundacionloyola.net";
+	//private static String password = "50008606";
 
 	// private static String username = "testhospitalroyale1";
 	// private static String password = "estoesuntest";
