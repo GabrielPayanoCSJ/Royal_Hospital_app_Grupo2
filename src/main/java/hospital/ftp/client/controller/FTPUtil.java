@@ -368,6 +368,7 @@ public class FTPUtil {
 		String pathToCreate = file.getPath() + File.separator;
 		FTPFile[] files = null;
 		String nameNewDir = Tool.inputGUIpane("Indique el nombre del nuevo directorio:", "CREAR DIRECTORIO");
+		nameNewDir = nameNewDir.trim().replace(" ", "_");
 
 		if (nameNewDir != null) {
 			try {
@@ -417,11 +418,11 @@ public class FTPUtil {
 	 */
 	public static void renameFile(FTPClient ftpClient, String pathSelected, String pathSelectedMinus) {
 		/*
-		System.out.println("---------------IN RENAME------------------");
-		System.out.println("PATH SELECTED: " + pathSelected);
-		System.out.println("PATH SELECTED Minus : " + pathSelectedMinus);
-		System.out.println("ÚLTIMA PALABRA: " + pathSelectedMinus);
-*/
+		 * System.out.println("---------------IN RENAME------------------");
+		 * System.out.println("PATH SELECTED: " + pathSelected);
+		 * System.out.println("PATH SELECTED Minus : " + pathSelectedMinus);
+		 * System.out.println("ÚLTIMA PALABRA: " + pathSelectedMinus);
+		 */
 		switch (pathSelected) {
 		case " ":
 			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de Raíz");
@@ -463,8 +464,9 @@ public class FTPUtil {
 
 				// System.out.println("EL GET NAME TIENE: " + renameFile.getName());
 
-				boolean success = ftpClient.rename(pathSelected, pathSelectedMinus
-						+ Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName()).toString());
+				boolean success = ftpClient.rename(pathSelected,
+						pathSelectedMinus + Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName())
+								.toString().trim().replace(" ", "_"));
 				if (success) {
 					System.out.println("THE HAS CHANGE TO THE NEW ONE");
 				}
@@ -478,7 +480,6 @@ public class FTPUtil {
 			break;
 		}
 
-		
 	}
 
 	public static void showResponse(FTPClient ftpClient) {
