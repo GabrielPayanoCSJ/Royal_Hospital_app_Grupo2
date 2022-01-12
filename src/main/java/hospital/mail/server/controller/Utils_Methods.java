@@ -5,7 +5,12 @@ import java.io.File;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.io.Writer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Properties;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import javax.mail.*;
 import javax.mail.internet.AddressException;
@@ -16,6 +21,7 @@ import javax.mail.internet.MimeMultipart;
 
 import org.jsoup.Jsoup;
 
+import com.mysql.cj.x.protobuf.MysqlxCrud.Collection;
 import com.sun.mail.pop3.POP3Folder;
 import com.sun.mail.pop3.POP3SSLStore;
 
@@ -41,7 +47,7 @@ public class Utils_Methods {
 
 	private static final String SMTP = "smtp.gmail.com";
 	private static final String POP3 = "pop.gmail.com";
-	
+
 	private static final int PORT_SMTP = 587;
 	private static final int PORT_POP3 = 995;
 
@@ -50,8 +56,8 @@ public class Utils_Methods {
 
 	// private static String username = "testhospitalroyale1";
 	// private static String password = "estoesuntest";
-	 private static String username = "";
-	 private static String password = "";
+	private static String username = "";
+	private static String password = "";
 
 	// private static String USER_NAME = "testhospitalroyale1"; // GMail username
 
@@ -97,12 +103,12 @@ public class Utils_Methods {
 
 			message.setSubject(subject);
 			message.setText(body);
-			
+
 			transport = session.getTransport("smtp");
 			transport.connect(SMTP, username, password);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
-			
+
 		} catch (AddressException ae) {
 			ae.printStackTrace();
 		} catch (MessagingException me) {
@@ -113,17 +119,17 @@ public class Utils_Methods {
 	public static boolean userauth(String from, String pass) throws MessagingException {
 		boolean exists = false;
 		createSession(true);
-		transport = session.getTransport("smtp");	
+		transport = session.getTransport("smtp");
 
 //		System.out.println(from + " " + pass);
 		try {
 			transport.connect(SMTP, from, pass);
 			exists = true;
-			
+
 			// SAVE DATA EMAIL
 			username = from;
 			password = pass;
-			
+
 			transport.close();
 		} catch (AuthenticationFailedException e) {
 			System.out.println("Comprueba el usuario y la contraseña");
@@ -133,15 +139,15 @@ public class Utils_Methods {
 		}
 		return exists;
 	}
-	
+
 	/**
 	 * @param from
 	 * @param pass
 	 */
 	private static void createSession(boolean type) {
 
-		if(type) { // SMTP SESSION
-			
+		if (type) { // SMTP SESSION
+
 			properties = System.getProperties();
 			properties.put("mail.smtp.starttls.enable", "true");
 			properties.put("mail.smtp.host", SMTP);
@@ -149,19 +155,19 @@ public class Utils_Methods {
 			properties.put("mail.smtp.password", password);
 			properties.put("mail.smtp.port", String.valueOf(PORT_SMTP));
 			properties.put("mail.smtp.auth", "true");
-			
+
 			session = Session.getDefaultInstance(properties);
-			
+
 		} else { // POP3 SESSION
-			
+
 			String SSL_FACTORY = "javax.net.ssl.SSLSocketFactory";
-			
+
 			properties = new Properties();
 			properties.setProperty("mail.pop3.socketFactory.class", SSL_FACTORY);
 			properties.setProperty("mail.pop3.socketFactory.fallback", "false");
 			properties.setProperty("mail.pop3.port", String.valueOf(PORT_POP3));
 			properties.setProperty("mail.pop3.socketFactory.port", String.valueOf(PORT_POP3));
-			
+
 			session = Session.getInstance(properties, null);
 		}
 	}
@@ -306,9 +312,25 @@ public class Utils_Methods {
 //    sendFromGMail(from, pass, to, subject, body);
 //    System.out.println("Correo Enviado");
 //}
-	
+
 	public void closeFolder() throws Exception {
 		folder.close(false);
+	}
+
+	public String[] stringtoArray(String cadena) {
+		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
+		String[]correoscorrectos;
+		ArrayList<String> lista = new ArrayList<String>();
+		Collections.addAll(lista, cadena.split(";"));
+		Pattern pattern = Pattern.compile(regex);
+		Matcher matcher;
+		for (int i = 0; i < lista.size(); i++) {
+			matcher = pattern.matcher(lista.get(i));
+			if (!matcher.matches()) {
+				lista.remove(i);
+			}
+		}
+		return correoscorrectos = (String[]) lista.toArray();
 	}
 
 	/**
