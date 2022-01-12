@@ -5,6 +5,8 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+import hospital.mail.client.controller.MailClientController;
+import hospital.mail.client.controller.Pipe_MailUpdater;
 import hospital.mail.client.view.panels.Client.Pa_Counter;
 import hospital.mail.client.view.panels.Client.Pa_Inbox;
 import hospital.mail.client.view.panels.Client.Pa_Side;
@@ -21,6 +23,10 @@ public class JF_MailClient extends JFrame {
 	private Pa_Inbox inboxPanel;
 	private Pa_Counter counterPanel;
 	private JPanel panel;
+	
+	//--------------
+	private Pipe_MailUpdater pipeMailUpdater;
+	//--------------------------
 
 	/**
 	 * Constructor
@@ -46,6 +52,7 @@ public class JF_MailClient extends JFrame {
 		appendObjectsPanel();
 		add(this.panel);
 		defaultOperations(txtTitle);
+
 	}
 
 	/**
