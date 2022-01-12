@@ -23,7 +23,8 @@ public class MailUpdaterList implements Runnable {
 	}
 
 	@Override
-	public void run() {	
+	public void run() {
+		/*
 			while(true) {
 				
 				try {
@@ -43,6 +44,7 @@ public class MailUpdaterList implements Runnable {
 					e.printStackTrace();
 				}
 			}
+			*/
 	}
 
 }

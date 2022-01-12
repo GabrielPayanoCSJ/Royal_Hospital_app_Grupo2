@@ -5,6 +5,7 @@ import javax.mail.Message;
 import hospital.mail.server.controller.Utils_Methods;
 
 public class Pipe_MailUpdater {
+	/*
 	
 	private MailClientController mailClient;
 	private boolean continueListing = true;
@@ -38,5 +39,5 @@ public class Pipe_MailUpdater {
 			e.printStackTrace();
 		}
 	}
-
+*/
 }
