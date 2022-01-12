@@ -317,7 +317,7 @@ public class Utils_Methods {
 		folder.close(false);
 	}
 
-	public String[] stringtoArray(String cadena) {
+	public static String[] stringtoArray(String cadena) {
 		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
 		String[]correoscorrectos;
 		ArrayList<String> lista = new ArrayList<String>();

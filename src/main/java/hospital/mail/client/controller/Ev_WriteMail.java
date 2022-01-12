@@ -48,7 +48,7 @@ public class Ev_WriteMail implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (Tool.checkEmail(to.getText())) {
-			Utils_Methods.sendFromGMail(to.getText(),  subject.getText() ,body.getText());
+			Utils_Methods.sendFromGMail(Utils_Methods.stringtoArray(to.getText()),  subject.getText() ,body.getText());
 			write.dispose();
 		}else {
 			Tool.showGUIerror("Error destinatario", "Fallo en el formato del email destinatario(Asegurate que es formato *@*.*) "); 
