@@ -29,8 +29,6 @@ import hospital.tools.Tool;
  * @dateCreated 19/12/2021
  */
 public class FTPUtil {
-	private static String nameNewDir;
-	private static String urlCreated;
 
 	/**
 	 * Method for displaying a directory or file selection window. This window
@@ -81,12 +79,13 @@ public class FTPUtil {
 	public static void downloadFile(FTPClient ftpClient, String localPath) {
 		String localSavePath = chooseFile(new File(localPath).getName(), "SELECCIONE UNA UBICACIï¿½N PARA GUARDARLO",
 				"GUARDAR");
-
 		if (localSavePath != "") {
-
 			try {
 
-				OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(new File(localSavePath)));
+				File downlFile = new File(localSavePath);
+				System.out.println("DESCARGADO: " + downlFile.getAbsolutePath());
+
+				OutputStream outputStream = new BufferedOutputStream(new FileOutputStream(downlFile));
 				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 				boolean success = ftpClient.retrieveFile(localPath, outputStream);
 
@@ -171,6 +170,12 @@ public class FTPUtil {
 			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de medicos");
 			break;
 		case "/pacientes":
+			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de pacientes");
+			break;
+		case "/doctors":
+			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de medicos");
+			break;
+		case "/patients":
 			JOptionPane.showMessageDialog(null, "No se puede eliminar la carpeta de pacientes");
 			break;
 		case "":
@@ -319,14 +324,12 @@ public class FTPUtil {
 	/**
 	 * Deletes an empty directory on the server by the path given.
 	 * 
+	 * @author Gabriel Payano.
 	 * @param ftpclient  of type FTPClient, used for the operations with the FTP
 	 *                   server
 	 * @param remotePath Type String , path of the remote file in the server to
 	 *                   delete
 	 * @return Type boolean , indicates if the directory is deleted properly
-	 * 
-	 * @author Gabriel Payano.
-	 * @editor Jorge Fernández Ruiz
 	 */
 	public static boolean deleteEmptyFolder(FTPClient ftpclient, String remotePath) {
 		// System.out.println("-----------INTO DELETE EMPTY FOLDER--------");
@@ -359,15 +362,12 @@ public class FTPUtil {
 	 *                    directory
 	 * 
 	 * @author Guillermo Gonzï¿½lez de Miguel
-	 * @editor Jorge Fernández Ruiz
 	 */
-	public static boolean createDirectory(FTPClient ftpClient, String selectedDir) {
-		urlCreated = selectedDir;
-		boolean created = false;
+	public static void createDirectory(FTPClient ftpClient, String selectedDir) {
 		File file = new File(selectedDir);
 		String pathToCreate = file.getPath() + File.separator;
 		FTPFile[] files = null;
-		nameNewDir = Tool.inputGUIpane("Indique el nombre del nuevo directorio:", "CREAR DIRECTORIO");
+		String nameNewDir = Tool.inputGUIpane("Indique el nombre del nuevo directorio:", "CREAR DIRECTORIO");
 
 		if (nameNewDir != null) {
 			try {
@@ -385,12 +385,11 @@ public class FTPUtil {
 
 				boolean success = ftpClient.makeDirectory(pathToCreate + nameNewDir); // CREATE A NEW DIRECTORY
 
-				if (success) {
+				if (success)
 					Tool.showGUIinfo("Directorio creado con ï¿½xito.", "INFORMACIï¿½N" + " - " + "CREACIï¿½N EXITOSA");
-					created = true;
-				} else {
+				else
 					Tool.showGUIerror("Fallo al crear el directorio.", "ERROR" + " - " + "CREACIï¿½N FALLIDA");
-				}
+
 			} catch (IOException e) {
 				Tool.showGUIerror("Ha fallado la creaciï¿½n del directorio." + "\nSistema dice: " + e.getMessage(),
 						"ERROR - CREACIï¿½N DIRECTORIO");
@@ -398,7 +397,6 @@ public class FTPUtil {
 		} else {
 			Tool.showGUIinfo("Has cancelado la creaciï¿½n de un nuevo directorio.", "CREAR DIRECTORIO");
 		}
-		return created;
 	}
 
 	/**
@@ -418,45 +416,69 @@ public class FTPUtil {
 	 *         Modify by Gabriel Payano
 	 */
 	public static void renameFile(FTPClient ftpClient, String pathSelected, String pathSelectedMinus) {
+		/*
 		System.out.println("---------------IN RENAME------------------");
 		System.out.println("PATH SELECTED: " + pathSelected);
 		System.out.println("PATH SELECTED Minus : " + pathSelectedMinus);
-		File renameFile = new File(pathSelected);
+		System.out.println("ÃšLTIMA PALABRA: " + pathSelectedMinus);
+*/
+		switch (pathSelected) {
+		case " ":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de RaÃ­z");
+			break;
+		case "/medicos":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de medicos");
+			break;
+		case "/pacientes":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de pacientes");
+			break;
+		case "/doctors":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de medicos");
+			break;
+		case "/patients":
+			JOptionPane.showMessageDialog(null, "No se puede renombrar la carpeta de pacientes");
+			break;
+		default:
+			File renameFile = new File(pathSelected);
 
-		try {
-			String title = "RENOMBRAR ";
-			String aux;
-			if (renameFile.isDirectory())
-				title += "DIRECTORIO";
-			else
-				title += "FICHERO";
+			try {
+				String title = "RENOMBRAR ";
+				String aux;
+				if (renameFile.isDirectory())
+					title += "DIRECTORIO";
+				else
+					title += "FICHERO";
 
-			/*
-			 * Original Part by: Guillermo boolean success =
-			 * ftpClient.rename(renameFile.getName(),
-			 * Tool.inputGUIpane("Introduzca el nuevo nombre", title,
-			 * renameFile.getName()).toString());
-			 */
+				/*
+				 * Original Part by: Guillermo boolean success =
+				 * ftpClient.rename(renameFile.getName(),
+				 * Tool.inputGUIpane("Introduzca el nuevo nombre", title,
+				 * renameFile.getName()).toString());
+				 */
 
-			/**
-			 * @author Gabriel Payano Modify by: Gabriel Payano
-			 */
-			ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
+				/**
+				 * @author Gabriel Payano Modify by: Gabriel Payano
+				 */
+				ftpClient.setFileType(FTP.BINARY_FILE_TYPE);
 
-			// System.out.println("EL GET NAME TIENE: " + renameFile.getName());
+				// System.out.println("EL GET NAME TIENE: " + renameFile.getName());
 
-			boolean success = ftpClient.rename(pathSelected, pathSelectedMinus
-					+ Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName()).toString());
-			if (success) {
-				System.out.println("THE HAS CHANGE TO THE NEW ONE");
+				boolean success = ftpClient.rename(pathSelected, pathSelectedMinus
+						+ Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName()).toString());
+				if (success) {
+					System.out.println("THE HAS CHANGE TO THE NEW ONE");
+				}
+			} catch (IOException e) {
+				Tool.showGUIerror(
+						"Ha habido un fallo al realizar la operacion renombrar.\n" + "Sistema dice: " + e.getMessage(),
+						"ERROR AL RENOMBRAR");
 			}
-		} catch (IOException e) {
-			Tool.showGUIerror(
-					"Ha habido un fallo al realizar la operacion renombrar.\n" + "Sistema dice: " + e.getMessage(),
-					"ERROR AL RENOMBRAR");
+
+			// System.out.println("---------------OUT OF RENAME------------------");
+			break;
 		}
 
-		// System.out.println("---------------OUT OF RENAME------------------");
+		
 	}
 
 	public static void showResponse(FTPClient ftpClient) {
@@ -465,25 +487,4 @@ public class FTPUtil {
 //		System.out.println(ftpClient.getr);
 		System.out.println(ftpClient.getReplyCode());
 	}
-
-	/**
-	 * Getter the name of a created new file
-	 * 
-	 * @author Jorge Fernández Ruiz
-	 * @return nameNewDir, of type {@link String}
-	 */
-	public static String getNameNewDir() {
-		return nameNewDir;
-	}
-
-	/**
-	 * Getter the url where was created the new file.
-	 * 
-	 * @return the urlCreated
-	 * @author Jorge Fernández Ruiz
-	 */
-	public static String getUrlCreated() {
-		return urlCreated;
-	}
-
 }

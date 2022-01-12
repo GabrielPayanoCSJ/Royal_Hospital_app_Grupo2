@@ -28,7 +28,6 @@ import hospital.ftp.model.Group;
 import hospital.ftp.model.User;
 import hospital.tools.Tool;
 import hospital.tools.database.DB;
-import main.view.JF_Principal;
 
 /**
  * Clase que contiene métodos encargado de la iniciación del servidor FTP
@@ -38,7 +37,6 @@ import main.view.JF_Principal;
  * @dateCreated 17/12/2021
  */
 public class FTPServer {
-	private JF_Principal mainView;
 	private static final String HOST = "localhost";
 	private static final int PORT = 6000;
 	private FtpServerFactory serverFactory;
@@ -49,13 +47,15 @@ public class FTPServer {
 	private Group groupdb;
 
 	/**
-	 * @param view 
 	 * 
 	 */
-	public FTPServer(JF_Principal mainView) {
-		this.mainView = mainView;
+	public FTPServer() {
 		Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
-
+////		log.
+//		log.trace("DEBUG");
+//		log.info("Hello world");
+//		log.debug("Hello world 2");
+//		log.warn("MENSAJE DE FALLO");
 		this.db = new DB();
 		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
 		this.serverFactory = new FtpServerFactory();
@@ -192,6 +192,13 @@ public class FTPServer {
 		if (!this.server.isSuspended()) {
 			this.server.suspend();
 		}
+	}
+
+	/**
+	 * @param args
+	 */
+	public static void main(String[] args) {
+		new FTPServer();
 	}
 
 }

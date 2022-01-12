@@ -1,98 +1,81 @@
 package main.view;
 
-import java.awt.Dimension;
-import java.util.ArrayList;
+import java.awt.BorderLayout;
+import java.awt.EventQueue;
 
-import javax.swing.BoxLayout;
-import javax.swing.JButton;
-import javax.swing.JComboBox;
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
+import javax.swing.JLabel;
+import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.SwingConstants;
 
-/**
- * View of the sections select.
- * 
- * @author Jorge Fernández Ruiz
- *
- */
 public class JF_Principal extends JFrame {
-	private ArrayList<JButton> buttons;
-	private JComboBox<String> jcLanguages;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private JButton btnCorreo;
+	private JButton btnFTP;
 	private JPanel contentPane;
 
+	/**
+	 * Launch the application.
+	 */
+	public static void main(String[] args) {
+		EventQueue.invokeLater(new Runnable() {
+			public void run() {
+				try {
+					JF_Principal frame = new JF_Principal();
+					frame.setVisible(true);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+	}
+
+	/**
+	 * Create the frame.
+	 */
 	public JF_Principal() {
-		buttons = new ArrayList<>();
-		jcLanguages = new JComboBox<>();
-		
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
-		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
-
-		fillButtons();
-		buttonsProperties();
-		appendObjects();
+		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
+		setContentPane(contentPane);
+		contentPane.setLayout(null);
 		
-		fillLanguages();
+		JLabel lblNombres = new JLabel("Grupo 2\r\n\t-Gabriel\r\n\t-Jorge\r\n\t-Guillermo\r\n\t-Javi");
+		lblNombres.setHorizontalAlignment(SwingConstants.CENTER);
+		lblNombres.setBounds(0, 0, 434, 103);
+		contentPane.add(lblNombres);
 		
-		this.add(contentPane);
-
-		properties();
-	}
-
-	private void fillLanguages() {
-		jcLanguages.addItem("English");
-		jcLanguages.addItem("Spanish");
+		btnFTP = new JButton("FTP");
+		btnFTP.setBounds(32, 192, 113, 49);
+		contentPane.add(btnFTP);
 		
+		btnCorreo = new JButton("Correo");
+		btnCorreo.setBounds(287, 192, 113, 49);
+		contentPane.add(btnCorreo);
 	}
 
-	private void buttonsProperties() {
-		buttons.get(1).setEnabled(false);
-		
-		for (JButton button : buttons) {
-			button.setSize(new Dimension(3000, button.getHeight()));
-		}
+	public JButton getBtnCorreo() {
+		return btnCorreo;
 	}
 
-	private void appendObjects() {
-		for (JButton button : buttons) {
-			contentPane.add(button);
-		}
-		contentPane.add(jcLanguages);
-
+	public void setBtnCorreo(JButton btnCorreo) {
+		this.btnCorreo = btnCorreo;
 	}
 
-	private void fillButtons() {
-		buttons.add(new JButton("FTP Server"));
-		buttons.add(new JButton("FTP client"));
-		buttons.add(new JButton("Mail"));
-
+	public JButton getBtnFTP() {
+		return btnFTP;
 	}
 
-	private void properties() {
-		this.setTitle("Title");
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(new Dimension(500, 200));
-		this.setResizable(false);
-
+	public void setBtnFTP(JButton btnFTP) {
+		this.btnFTP = btnFTP;
 	}
-
-	/**
-	 * Getter of buttons [0] -> FTP Server || [1] -> FTP Client || [2] -> Mail
-	 *
-	 * @return the buttons, of type {@link ArrayList} of type {@link JButton}
-	 */
-	public ArrayList<JButton> getButtons() {
-		return buttons;
-	}
-
-	/**
-	 * Getter of comboBox
-	 *
-	 * @return the jcLanguages
-	 */
-	public JComboBox<String> getJcLanguages() {
-		return jcLanguages;
-	}
-
 	
 }

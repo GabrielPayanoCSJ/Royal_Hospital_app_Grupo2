@@ -16,21 +16,29 @@ public class MailUpdaterList implements Runnable {
 	
 	private Thread thread;
 	private MailClientController mailClient;
-	private Pipe_MailUpdater pipe;
 	
-	public MailUpdaterList(Pipe_MailUpdater pipe ) {
-		 this.pipe = pipe;
+	public MailUpdaterList(MailClientController mailClient ) {
 		 this.thread = new Thread(this);
+		 this.mailClient = mailClient;
 	}
 
 	@Override
 	public void run() {	
-		System.out.println("eeeeeeeeeeeeeeeeeeeeeeeeeeeEEEEEEEEEEEE");
-			while(pipe.isContinueListing()) {			
+			while(true) {
+				
 				try {
-					System.out.println("AAAAAAAAAAAAAAAAAAAAAAAAAAAAAA");
 					Thread.sleep(60000);
-					this.pipe.updateEmailList();
+					System.out.println("------------ACTUALIZO--------");
+					Utils_Methods.openFolder("INBOX");
+					Message msgs[] = Utils_Methods.getFolder().getMessages();
+//					System.out.println(msgs.length);
+					mailClient.getClientView().getInboxPanel().getEmailList().clear();
+
+					for (int i = msgs.length - 1; i >= 0; i--) {
+						mailClient.getClientView().getInboxPanel().appendNewEmail(msgs[i].getMessageNumber(), msgs[i].getFrom(),
+								msgs[i].getSubject(), msgs[i].getSentDate());
+					}
+					
 				} catch (Exception e) {
 					e.printStackTrace();
 				}

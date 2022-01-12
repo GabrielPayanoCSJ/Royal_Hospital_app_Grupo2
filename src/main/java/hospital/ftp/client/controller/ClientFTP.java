@@ -1,9 +1,6 @@
 // PACKAGE
 package hospital.ftp.client.controller;
 
-import java.io.IOException;
-import java.net.Socket;
-
 // IMPORTS
 import org.apache.commons.net.ftp.FTPClient;
 
@@ -27,7 +24,6 @@ public class ClientFTP {
 	private User user;
 	private Group group;
 	private Log log;
-	private Socket socket = null;
 
 	/**
 	 * 
@@ -43,22 +39,15 @@ public class ClientFTP {
 		this.ftpCliente = new FTPClient();
 		this.jfClient = new JF_FTPClient();
 		this.jfClient.setVisible(true);
-		
-		try {
-			this.socket = new Socket("localhost", 6000);
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
 
 		for (int i = 0; i < this.jfClient.getPanel_login().getButtons().size(); i++) {
 			this.jfClient.getPanel_login().getButtons().get(i).addActionListener(
 					new Ev_FTPConnect(this.ftpCliente, this.jfClient, this.user, this.group, this.log));
 		}
-		
-		System.out.println("Justo antes de añadir los eventos");
+
 		for (int i = 0; i < this.jfClient.getPanel_button().getButtons().size(); i++) {
 			this.jfClient.getPanel_button().getButtons().get(i).addActionListener(
-					new Ev_FTPButtons(this.ftpCliente, this.jfClient, this.user, this.group, this.log, this.socket));
+					new Ev_FTPButtons(this.ftpCliente, this.jfClient, this.user, this.group, this.log));
 		}
 	}
 

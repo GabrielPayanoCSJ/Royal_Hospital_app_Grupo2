@@ -1,7 +1,6 @@
 package hospital.mail.client.controller;
 
 import javax.mail.Message;
-import javax.swing.JFrame;
 
 import hospital.mail.server.controller.Utils_Methods;
 
@@ -38,11 +37,6 @@ public class Pipe_MailUpdater {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-	}
-	
-	public int stopThread() {
-		this.continueListing = false;
-		return JFrame.DISPOSE_ON_CLOSE;
 	}
 
 }
