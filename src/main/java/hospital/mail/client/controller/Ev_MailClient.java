@@ -12,7 +12,7 @@ import hospital.mail.client.view.JF_MailClient;
 import hospital.mail.server.controller.Utils_Methods;
 
 /**
- * Events class of mail client. fill the list of mails that has received and
+ * Events class of mail client. Fill the list of mails that has received and
  * each button call other controller.
  * 
  * @author Jorge Fernández Ruiz.
