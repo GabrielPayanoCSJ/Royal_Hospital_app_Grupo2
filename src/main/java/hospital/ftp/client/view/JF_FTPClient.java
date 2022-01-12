@@ -52,7 +52,7 @@ public class JF_FTPClient extends JFrame {
 		JPanel btnContainer = new JPanel();
 		this.setSize(new Dimension(900, 800));
 		this.setResizable(false);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		this.getContentPane().setLayout(new BorderLayout(0, 0));
 		this.panel_login = new Pa_Login();
 		this.panel_directory = new Pa_Directory();

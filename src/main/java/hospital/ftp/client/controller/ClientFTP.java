@@ -8,7 +8,6 @@ import hospital.ftp.client.view.JF_FTPClient;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.Log;
 import hospital.ftp.model.User;
-import hospital.languages.Language;
 import hospital.tools.database.DB;
 
 /**
@@ -29,13 +28,12 @@ public class ClientFTP {
 	 * 
 	 * @param language
 	 */
-	public ClientFTP(int language) {
+	public ClientFTP() {
 		this.db = new DB();
 		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
 		this.user = new User(db);
 		this.group = new Group(db);
 		this.log = new Log(db);
-		Language.selectLanguage(language);
 		this.ftpCliente = new FTPClient();
 		this.jfClient = new JF_FTPClient();
 		this.jfClient.setVisible(true);
@@ -49,13 +47,6 @@ public class ClientFTP {
 			this.jfClient.getPanel_button().getButtons().get(i).addActionListener(
 					new Ev_FTPButtons(this.ftpCliente, this.jfClient, this.user, this.group, this.log));
 		}
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new ClientFTP(1);
 	}
 
 }
