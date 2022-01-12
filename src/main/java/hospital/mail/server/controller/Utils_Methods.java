@@ -118,13 +118,11 @@ public class Utils_Methods {
 //		System.out.println(from + " " + pass);
 		try {
 			transport.connect(SMTP, from, pass);
-			System.out.println(from+" "+pass);
 			exists = true;
 			
 			// SAVE DATA EMAIL
 			username = from;
 			password = pass;
-			System.out.println(username+" "+password);
 			
 			transport.close();
 		} catch (AuthenticationFailedException e) {
