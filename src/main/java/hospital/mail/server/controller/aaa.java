@@ -7,7 +7,7 @@ public class aaa {
 	        try
 	        {
 	            Utils_Methods gmail = new Utils_Methods();
-	            gmail.connect();
+//	            gmail.connect();
 	            gmail.openFolder("INBOX");
 	            gmail.printAllMessages();
 

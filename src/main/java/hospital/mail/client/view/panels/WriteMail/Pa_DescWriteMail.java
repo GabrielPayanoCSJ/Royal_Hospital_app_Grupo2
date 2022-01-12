@@ -73,7 +73,7 @@ public class Pa_DescWriteMail extends JPanel {
 	 */
 	private void fillDesc() {
 		JTextField txFsender = new JTextField();
-		txFsender.setEnabled(false);
+		txFsender.setEditable(false);
 
 		txFDesc.add(txFsender);
 		txFDesc.add(new JTextField());

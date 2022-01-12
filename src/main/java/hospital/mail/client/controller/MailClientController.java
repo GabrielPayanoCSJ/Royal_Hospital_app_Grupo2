@@ -1,10 +1,14 @@
 package hospital.mail.client.controller;
 
+import java.util.Iterator;
+
 import javax.mail.Message;
 
 import hospital.languages.Language;
 import hospital.mail.client.view.JF_MailClient;
+import hospital.mail.client.view.JF_MailLogIn;
 import hospital.mail.server.controller.Utils_Methods;
+import hospital.tools.Tool;
 
 /**
  * Mail client controller, add the events to all buttons through Ev_MailClient
@@ -16,27 +20,48 @@ import hospital.mail.server.controller.Utils_Methods;
  */
 public class MailClientController {
 	private JF_MailClient clientView;
-	
+	private JF_MailLogIn loginView;
+
 	/**
 	 * Constructor.
 	 * 
 	 * @param language of type {@link Integer}, the language number.
 	 */
-	public MailClientController(int language) {
+	public MailClientController(int language, JF_MailLogIn loginView) {
+		this.loginView = loginView;
 		Language.selectLanguage(language);
 
+		String pass = "";
+		String user = loginView.getTxtFmail().getText();
+		for (int i = 0; i < this.loginView.getPassPassword().getPassword().length; i++) {
+			pass += this.loginView.getPassPassword().getPassword()[i];
+		}
 		try {
-			Utils_Methods.connect();
+			if (Utils_Methods.userauth(user, pass)) {
+				Utils_Methods.connect();
+				// change to language array
+				clientView = new JF_MailClient("title", "write", "read", "exit", "test", "test", "test");
+				addEvents();
+				fillMails();
+				changeCounts();
+				this.clientView.setVisible(true);
+			}else {
+				Tool.showGUIerror("Contraseña o usuario no válidos", "Fallo de autentificación");
+				loginView.getTxtFmail().setText("");
+				loginView.getPassPassword().setText("");
+			}
+			
+			
+			
+
+			
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
 
-		// change to language array
-		clientView = new JF_MailClient("title", "write", "read", "exit", "test", "test", "test");
-		addEvents();
-		fillMails();
-		changeCounts();
-		this.clientView.setVisible(true);
+		
 	}
 
 	/**
@@ -44,15 +69,17 @@ public class MailClientController {
 	 * (listener class) and a mouse listener to email list for read them (.
 	 */
 	private void addEvents() {
-		
+
 		for (int i = 0; i < clientView.getSidePanel().getButtons().size(); i++) {
-			clientView.getSidePanel().getButtons().get(i).addActionListener(new Ev_MailClient(clientView));
+			clientView.getSidePanel().getButtons().get(i)
+					.addActionListener(new Ev_MailClient(clientView, loginView.getTxtFmail().getText()));
 		}
-		
-		clientView.getInboxPanel().getEmails().addMouseListener(new Ev_MailClient(clientView));
-		
+
+		clientView.getInboxPanel().getEmails()
+				.addMouseListener(new Ev_MailClient(clientView, loginView.getTxtFmail().getText()));
+
 	}
-	
+
 	/**
 	 * Method that fill the mail's list looking for in a folder URL.
 	 */
@@ -67,7 +94,7 @@ public class MailClientController {
 				clientView.getInboxPanel().appendNewEmail(msgs[i].getMessageNumber(), msgs[i].getFrom(),
 						msgs[i].getSubject(), msgs[i].getSentDate());
 			}
-			
+
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
