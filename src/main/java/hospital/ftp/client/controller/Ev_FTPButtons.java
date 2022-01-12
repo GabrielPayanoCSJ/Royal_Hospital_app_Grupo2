@@ -4,8 +4,14 @@ package hospital.ftp.client.controller;
 // IMPORTS
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.DataOutputStream;
+import java.io.IOException;
+import java.net.Socket;
+
 import javax.swing.JButton;
+
 import org.apache.commons.net.ftp.FTPClient;
+
 import hospital.ftp.client.view.JF_FTPClient;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.Log;
@@ -26,6 +32,8 @@ public class Ev_FTPButtons implements ActionListener {
 	private User user;
 	private Group group;
 	private Log log;
+	private Socket socket = null;
+	private DataOutputStream dos = null;
 
 	/**
 	 * 
@@ -35,12 +43,19 @@ public class Ev_FTPButtons implements ActionListener {
 	 * @param group
 	 * @param log
 	 */
-	public Ev_FTPButtons(FTPClient ftpClient, JF_FTPClient jfClient, User user, Group group, Log log) {
+	public Ev_FTPButtons(FTPClient ftpClient, JF_FTPClient jfClient, User user, Group group, Log log, Socket socket) {
 		this.ftpClient = ftpClient;
 		this.jfClient = jfClient;
 		this.user = user;
 		this.group = group;
 		this.log = log;
+		this.socket = socket;
+
+		try {
+			this.dos = new DataOutputStream(socket.getOutputStream());
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	@Override
@@ -51,9 +66,12 @@ public class Ev_FTPButtons implements ActionListener {
 		case 0:
 			// CREATE DIRECTORY
 			System.out.println(Language.getFtpClient_txts(0));
-			FTPUtil.createDirectory(ftpClient, jfClient.generateURL(getPathTree()));
-			
-			jfClient.updateTree(ftpClient); //Update the node after Change.
+			System.out.println("funciona el crear");
+			if (FTPUtil.createDirectory(ftpClient, jfClient.generateURL(getPathTree()))) {
+				System.out.println("entra al if");
+				jfClient.updateTree(ftpClient); // Update the node after Change.
+				buildLog("CRT");
+			}
 			break;
 		case 1:
 			// DELETE FILES AND DIRECTORIES
@@ -86,6 +104,49 @@ public class Ev_FTPButtons implements ActionListener {
 			Tool.showConsoleError("This option doesn't exist.");
 			break;
 		}
+	}
+	
+	/**
+	 * 
+	 * @param operation
+	 * @author Jorge Fernández Ruiz
+	 */
+	private void buildLog(String operation) {
+		try {
+			String desc;
+			switch (operation) {
+			// created
+			case "CRT":
+				desc = "File '" + FTPUtil.getNameNewDir() + "' was created in: " + FTPUtil.getUrlCreated();
+				String log = operation + " ¬ " + desc;
+				dos.writeUTF(log);
+				writeClientLog(log);
+				break;
+
+			// deleted
+			case "DLT":
+//				desc = "File '" + getterDelNombreBorrado;
+				break;
+
+			// renamed
+			case "RNM":
+				break;
+
+			// downloaded
+			case "DWL":
+				break;
+
+			default:
+				break;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	private void writeClientLog(String newLog) {
+		String oldLog = jfClient.getPanel_log().getTxA_Log().getText();
+		jfClient.getPanel_log().getTxA_Log().setText(oldLog + "\n " + newLog);
 	}
 	
 	private String getPathTree() {
