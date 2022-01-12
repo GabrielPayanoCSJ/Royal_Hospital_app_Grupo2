@@ -29,7 +29,9 @@ import hospital.tools.Tool;
  * @dateCreated 19/12/2021
  */
 public class FTPUtil {
-
+	private static String nameNewDir;
+	private static String urlCreated;
+	
 	/**
 	 * Method for displaying a directory or file selection window. This window
 	 * returns the path that is selected.
@@ -363,11 +365,13 @@ public class FTPUtil {
 	 * 
 	 * @author Guillermo Gonz�lez de Miguel
 	 */
-	public static void createDirectory(FTPClient ftpClient, String selectedDir) {
+	public static boolean createDirectory(FTPClient ftpClient, String selectedDir) {
+		urlCreated = selectedDir;
+		boolean created = false;
 		File file = new File(selectedDir);
 		String pathToCreate = file.getPath() + File.separator;
 		FTPFile[] files = null;
-		String nameNewDir = Tool.inputGUIpane("Indique el nombre del nuevo directorio:", "CREAR DIRECTORIO");
+		nameNewDir = Tool.inputGUIpane("Indique el nombre del nuevo directorio:", "CREAR DIRECTORIO");
 
 		if (nameNewDir != null) {
 			try {
@@ -385,18 +389,20 @@ public class FTPUtil {
 
 				boolean success = ftpClient.makeDirectory(pathToCreate + nameNewDir); // CREATE A NEW DIRECTORY
 
-				if (success)
-					Tool.showGUIinfo("Directorio creado con �xito.", "INFORMACI�N" + " - " + "CREACI�N EXITOSA");
-				else
-					Tool.showGUIerror("Fallo al crear el directorio.", "ERROR" + " - " + "CREACI�N FALLIDA");
-
+				if (success) {
+					Tool.showGUIinfo("Directorio creado con ï¿½xito.", "INFORMACIï¿½N" + " - " + "CREACIï¿½N EXITOSA");
+					created = true;
+				} else {
+					Tool.showGUIerror("Fallo al crear el directorio.", "ERROR" + " - " + "CREACIï¿½N FALLIDA");
+				}
 			} catch (IOException e) {
-				Tool.showGUIerror("Ha fallado la creaci�n del directorio." + "\nSistema dice: " + e.getMessage(),
-						"ERROR - CREACI�N DIRECTORIO");
+				Tool.showGUIerror("Ha fallado la creaciï¿½n del directorio." + "\nSistema dice: " + e.getMessage(),
+						"ERROR - CREACIï¿½N DIRECTORIO");
 			}
 		} else {
-			Tool.showGUIinfo("Has cancelado la creaci�n de un nuevo directorio.", "CREAR DIRECTORIO");
+			Tool.showGUIinfo("Has cancelado la creaciï¿½n de un nuevo directorio.", "CREAR DIRECTORIO");
 		}
+		return created;
 	}
 
 	/**
@@ -486,5 +492,25 @@ public class FTPUtil {
 		System.out.println(ftpClient.getReplyString());
 //		System.out.println(ftpClient.getr);
 		System.out.println(ftpClient.getReplyCode());
+	}
+	
+	/**
+	 * Getter the name of a created new file
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return nameNewDir, of type {@link String}
+	 */
+	public static String getNameNewDir() {
+		return nameNewDir;
+	}
+
+	/**
+	 * Getter the url where was created the new file.
+	 * 
+	 * @return the urlCreated
+	 * @author Jorge Fernández Ruiz
+	 */
+	public static String getUrlCreated() {
+		return urlCreated;
 	}
 }

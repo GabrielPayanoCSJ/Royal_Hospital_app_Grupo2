@@ -150,7 +150,7 @@ public class Ev_FTPConnect implements ActionListener {
 			try {
 				this.ftpClient.logout();
 				this.ftpClient.disconnect();
-				System.exit(1);
+				jfClient.dispose();
 			} catch (IOException e1) {
 				Tool.showConsoleError(e1.getMessage());
 			}
