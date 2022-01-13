@@ -11,7 +11,6 @@ import hospital.ftp.client.view.JF_FTPClient;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.Log;
 import hospital.ftp.model.User;
-import hospital.languages.Language;
 import hospital.tools.database.DB;
 
 /**
