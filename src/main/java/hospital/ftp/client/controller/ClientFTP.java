@@ -37,7 +37,7 @@ public class ClientFTP {
 		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
 		this.user = new User(db);
 		this.group = new Group(db);
-		this.log = new Log(db);
+//		this.log = new Log(db);
 		this.ftpCliente = new FTPClient();
 		this.jfClient = new JF_FTPClient();
 		this.jfClient.setVisible(true);

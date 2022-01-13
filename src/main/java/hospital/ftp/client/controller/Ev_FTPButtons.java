@@ -59,9 +59,7 @@ public class Ev_FTPButtons implements ActionListener {
 		this.group = group;
 		this.log = log;
 		this.socket = socket;
-		this.nomUser = jfClient.getPanel_login().getTfield_user().getText();
-		System.out.println("-----------------------------" + nomUser + "??????????????????");
-
+		
 		try {
 			this.dos = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
@@ -72,6 +70,7 @@ public class Ev_FTPButtons implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
+		this.nomUser = jfClient.getPanel_login().getTfield_user().getText();
 
 		switch (Integer.parseInt(button.getName())) {
 		case 0:
@@ -128,7 +127,7 @@ public class Ev_FTPButtons implements ActionListener {
 			switch (operation) {
 			// created
 			case "CRT":
-				desc = "File [" + FTPUtil.getNameNewDir() + "] was created in: " + FTPUtil.getUrlCreated();
+				desc = "File [" + FTPUtil.getNameNewDir() + "] was create in: " + FTPUtil.getUrlCreated();
 				getDateNow();
 				break;
 
@@ -141,7 +140,7 @@ public class Ev_FTPButtons implements ActionListener {
 
 			// uploaded
 			case "UPL":
-				desc = "File [" + FTPUtil.getUploadedName() + "] was download in: " + FTPUtil.getUploadedServerURL();
+				desc = "File [" + FTPUtil.getUploadedName() + "] was upload in: " + FTPUtil.getUploadedServerURL();
 				getDateNow();
 				break;
 
@@ -173,20 +172,20 @@ public class Ev_FTPButtons implements ActionListener {
 			if (operation.equals("DLT")) {
 				switch (deletedIndex) {
 				case -1:
-					desc = "Nothing was deleted";
+					desc = "Nothing was delete";
 					break;
 				case 0:
-					desc = "File [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was deleted in: "
+					desc = "File [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was delete in: "
 							+ FTPUtil.getDelectedURL();
 					getDateNow();
 					break;
 				case 1:
-					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was deleted in: "
+					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was delete in: "
 							+ FTPUtil.getDelectedURL();
 					getDateNow();
 					break;
 				case 2:
-					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was deleted in: "
+					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was delete in: "
 							+ FTPUtil.getDelectedURL();
 					getDateNow();
 					break;
