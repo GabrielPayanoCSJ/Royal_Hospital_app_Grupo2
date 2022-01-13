@@ -468,7 +468,8 @@ public class FTPUtil {
 			// System.out.println("EL GET NAME TIENE: " + renameFile.getName());
 
 			oldName = renameFile.getName().toString().trim().replace(" ", "_");
-			newName = Tool.inputGUIpane("Introduzca el nuevo nombre", title, oldName).toString();
+//			System.out.println(oldName);
+			newName = Tool.inputGUIpane("Introduzca el nuevo nombre", title, oldName).toString().trim().replace(" ", "_");
 
 			boolean success = ftpClient.rename(pathSelected, pathSelectedMinus + newName);
 			if (success) {
