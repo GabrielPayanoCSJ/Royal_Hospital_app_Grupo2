@@ -37,9 +37,9 @@ public class JF_MailClient extends JFrame {
 	 *                    unseen in inbox.
 	 */
 	public JF_MailClient(String txtTitle, String txtBtnWrite, String txtBtnRead, String txtBtnExit, String txtInbox,
-			String txtTotal, String txtUnseen) {
+			String txtTotal, String txtUnseen , String txtBtnRefresh) {
 		// create the panels
-		this.sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnExit);
+		this.sidePanel = new Pa_Side(txtBtnWrite, txtBtnRead, txtBtnExit , txtBtnRefresh );
 		this.inboxPanel = new Pa_Inbox(txtInbox);
 		this.counterPanel = new Pa_Counter(txtTotal, txtUnseen);
 		this.panel = new JPanel();

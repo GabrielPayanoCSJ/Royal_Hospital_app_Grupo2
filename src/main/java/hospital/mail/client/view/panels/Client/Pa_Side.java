@@ -20,7 +20,7 @@ import javax.swing.JPanel;
  * @author Jorge Fernández Ruiz
  * @date 14/12/2021
  * @version 1.0
- * 
+ * @edited Gabriel Payano
  */
 public class Pa_Side extends JPanel {
 	// label for the hospital's icon
@@ -39,8 +39,9 @@ public class Pa_Side extends JPanel {
 	 * @param txtBtnWrite of type {@link String}, the text of button's write.
 	 * @param txtBtnRead  of type {@link String}, the text of button's read.
 	 * @param txtBtnExit  of type {@link String}, the text of button's exit.
+	 * @param txtBtnRefresh of type {@link String}, the text of button's refresh.
 	 */
-	public Pa_Side(String txtBtnWrite, String txtBtnRead, String txtBtnExit) {
+	public Pa_Side(String txtBtnWrite, String txtBtnRead, String txtBtnExit , String txtBtnRefresh) {
 		imgPanel = new JPanel();
 		emailButtonsPanel = new JPanel();
 		controlPanel = new JPanel();
@@ -51,7 +52,7 @@ public class Pa_Side extends JPanel {
 		lblIco.setBounds(ALLBITS, ABORT, 100, 100);
 		lblIco.setIcon(new ImageIcon(getClass().getResource("/images/crown_77906.png"))); // relative URL
 
-		fillButtons(txtBtnWrite, txtBtnRead, txtBtnExit);
+		fillButtons(txtBtnWrite, txtBtnRead, txtBtnExit, txtBtnRefresh);
 
 		// set border and the layout
 		this.setBorder(BorderFactory.createEmptyBorder(10, 10, 10, 10));
@@ -100,17 +101,19 @@ public class Pa_Side extends JPanel {
 	 * @param txtBtnFtp   of type {@link String}, the text of button's FTP for
 	 *                    change the view.
 	 * @param txtBtnExit  of type {@link String}, the text of button's exit.
+	 * @param txtBtnRefresh  of type {@link String}, the text of button's refresh.
 	 */
-	private void fillButtons(String txtBtnWrite, String txtBtnRead, String txtBtnExit) {
+	private void fillButtons(String txtBtnWrite, String txtBtnRead, String txtBtnExit , String txtBtnRefresh) {
 		buttons.add(new JButton(txtBtnWrite));
 		buttons.add(new JButton(txtBtnRead));
 		buttons.add(new JButton(txtBtnExit));
+		buttons.add(new JButton(txtBtnRefresh));
 	}
 
 	/**
 	 * Getter of buttons ({@link ArrayList} of type {@link JButton}).
 	 * 
-	 * [0] -> Write || [1] -> Read || [2] -> Exit
+	 * [0] -> Write || [1] -> Read || [2] -> Exit || [3] -> Refresh
 	 * 
 	 * @return buttons ({@link ArrayList} of type {@link JButton}).
 	 */

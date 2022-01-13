@@ -45,6 +45,8 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 //				System.out.println("Read is open");
 		} else if (ev.getSource().equals(this.clientView.getSidePanel().getButtons().get(2))) {
 			this.clientView.dispose();
+		} else if (ev.getSource().equals(this.clientView.getSidePanel().getButtons().get(3))) {
+			refresMails();
 		}
 	}
 
@@ -68,6 +70,25 @@ public class Ev_MailClient implements ActionListener, MouseListener {
 
 		return null;
 	}
+	
+	public void refresMails() {
+		System.out.println("-Refresh mails-");
+		try {
+			Utils_Methods.openFolder("INBOX");
+			Message msgs[] = Utils_Methods.getFolder().getMessages();
+//			System.out.println(msgs.length);
+			this.clientView.getInboxPanel().getEmailList().clear();
+
+			for (int i = msgs.length - 1; i >= 0; i--) {
+				this.clientView.getInboxPanel().appendNewEmail(msgs[i].getMessageNumber(), msgs[i].getFrom(),
+						msgs[i].getSubject(), msgs[i].getSentDate());
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
 
 	// Mouse events
 	@Override
