@@ -43,6 +43,7 @@ public class ClientFTP {
 
 		try {
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 			this.socket = new Socket("localhost", 6000); // CONNECTION WITH FTP SERVER
 			
 			this.jfClient.setVisible(true);
@@ -56,6 +57,9 @@ public class ClientFTP {
 				this.jfClient.getPanel_button().getButtons().get(i).addActionListener(
 						new Ev_FTPButtons(this.ftpCliente, this.jfClient, this.user, this.group, this.log, this.socket));
 			}
+=======
+			this.socket = new Socket("localhost", 7000);
+>>>>>>> Stashed changes
 =======
 			this.socket = new Socket("localhost", 7000);
 >>>>>>> Stashed changes
