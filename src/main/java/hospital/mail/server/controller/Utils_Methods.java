@@ -77,12 +77,15 @@ public class Utils_Methods {
 	 * 
 	 * @throws Exception
 	 */
-	public static void connect(String username, String password) {
+	public static void connect(String user, String pass) {
 		try {
 			createSession(false); // SESSION POP3
-			url = new URLName("pop3", POP3, PORT_POP3, "", username, password);
+			url = new URLName("pop3", POP3, PORT_POP3, "", user, pass);
 			store = new POP3SSLStore(session, url);
 			store.connect();
+			username=user;
+			password=pass;
+			
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -249,7 +252,11 @@ public class Utils_Methods {
 				lista.remove(i);
 			}
 		}
-		return correoscorrectos = (String[]) lista.toArray();
+		correoscorrectos = new String[lista.size()];
+		for (int i = 0; i < correoscorrectos.length; i++) {
+			correoscorrectos[i]=lista.get(i);
+		}
+		return correoscorrectos;
 	}
 
 	/**
