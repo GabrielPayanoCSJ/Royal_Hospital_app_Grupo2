@@ -15,7 +15,7 @@ public class Jf_Main extends JFrame {
 		this.paMain = new Pa_Main(txtHeader, txtLblLang, txtBtnServerFTP, txtBtnClientFTP, txtBtnMailClient);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setSize(new Dimension(600, 550));
-		this.setAlwaysOnTop(true);
+		this.setAlwaysOnTop(false);
 		this.setResizable(false);
 		this.add(this.paMain);
 	}
