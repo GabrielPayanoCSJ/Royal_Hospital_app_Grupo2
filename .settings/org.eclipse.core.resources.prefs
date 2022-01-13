@@ -1,2 +1,5 @@
 eclipse.preferences.version=1
 encoding//src/main/java/hospital/ftp/client/controller/FTPUtil.java=UTF-8
+encoding//src/main/java/hospital/mail/client/controller/Ev_MainController.java=UTF-8
+encoding//src/main/java/hospital/mail/client/controller/LoginControllerMail.java=UTF-8
+encoding//src/main/java/hospital/mail/client/controller/MailClientController.java=UTF-8

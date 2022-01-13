@@ -8,43 +8,41 @@ import hospital.mail.server.controller.Utils_Methods;
 /**
  * 
  * @author Gabriel Payano
- * @version 1.0
- * Date of creation: 11/01/2022
+ * @version 1.0 Date of creation: 11/01/2022
  */
 
 public class MailUpdaterList implements Runnable {
-	
+
 	private Thread thread;
 	private MailClientController mailClient;
-	
-	public MailUpdaterList(MailClientController mailClient ) {
-		 this.thread = new Thread(this);
-		 this.mailClient = mailClient;
+	private Pipe_MailUpdater pipe;
+ 
+	/**
+	 * 
+	 * @param mailClient Type MailClientController , mailClientController object to access his properties
+	 * @param pipe Type Pipe_MailUpdater , Objetc of a pipe class that defines the methods for this thread.
+	 */
+	public MailUpdaterList(MailClientController mailClient, Pipe_MailUpdater pipe) {
+		this.pipe = pipe;
+		this.thread = new Thread(this);
+		this.mailClient = mailClient;
+
 	}
 
+	/**
+	 * Main running method of the thread.
+	 * Function: call the updateMail method in the pipe to refresh the email list every minute.
+	 *
+	 */
 	@Override
 	public void run() {
-		/*
-			while(true) {
-				
-				try {
-					Thread.sleep(60000);
-					System.out.println("------------ACTUALIZO--------");
-					Utils_Methods.openFolder("INBOX");
-					Message msgs[] = Utils_Methods.getFolder().getMessages();
-//					System.out.println(msgs.length);
-					mailClient.getClientView().getInboxPanel().getEmailList().clear();
-
-					for (int i = msgs.length - 1; i >= 0; i--) {
-						mailClient.getClientView().getInboxPanel().appendNewEmail(msgs[i].getMessageNumber(), msgs[i].getFrom(),
-								msgs[i].getSubject(), msgs[i].getSentDate());
-					}
-					
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-			*/
+		 while (pipe.isContinueListing()) {	      
+		      try {
+		        Thread.sleep(60000);
+		        pipe.updateEmailList();		       
+		      } catch (InterruptedException e) {
+		        e.printStackTrace();
+		      }
+		    }
 	}
-
 }

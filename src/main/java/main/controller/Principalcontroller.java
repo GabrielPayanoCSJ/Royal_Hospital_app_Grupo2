@@ -3,6 +3,7 @@ package main.controller;
 import javax.swing.JButton;
 
 import hospital.languages.Language;
+import hospital.mail.client.controller.Pipe_MailUpdater;
 import main.view.JF_Principal;
 
 public class Principalcontroller {
