@@ -68,6 +68,8 @@ public class JF_MailClient extends JFrame {
 		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		this.setSize(new Dimension(900, 400));
 		this.setResizable(false);
+		this.setLocation(900, 200);
+
 	}
 
 	/**
