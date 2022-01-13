@@ -13,7 +13,7 @@ import hospital.mail.server.controller.Utils_Methods;
  * Mail client controller, add the events to all buttons through Ev_MailClient
  * (listener class).
  * 
- * @author Jorge Fernández Ruiz
+ * @author Jorge FernÃ¡ndez Ruiz
  * @date 20/12/2021
  * @version 1.0
  */
@@ -46,7 +46,7 @@ public class MailClientController {
 			changeCounts();
 			this.clientView.setVisible(true);
 //			} else {
-//				Tool.showGUIerror("Contraseña o usuario no válidos", "Fallo de autentificación");
+//				Tool.showGUIerror("ContraseÃ±a o usuario no vÃ¡lidos", "Fallo de autentificaciÃ³n");
 //				loginView.getTxtFmail().setText("");
 //				loginView.getPassPassword().setText("");
 //			}
@@ -102,4 +102,7 @@ public class MailClientController {
 		}
 	}
 
+	public JF_MailClient getClientView() {
+		return clientView;
+	}
 }

@@ -7,12 +7,13 @@ import hospital.ftp.client.controller.ClientFTP;
 import hospital.ftp.server.controller.FTPServer;
 import hospital.languages.Language;
 import hospital.mail.client.controller.LoginControllerMail;
+import hospital.mail.client.controller.Pipe_MailUpdater;
 import main.view.JF_Principal;
 
 public class EV_Principal implements ActionListener {
 	private JF_Principal view;
 
-	public EV_Principal(JF_Principal view) {
+	public EV_Principal(JF_Principal view ) {
 		this.view = view;
 	}
 

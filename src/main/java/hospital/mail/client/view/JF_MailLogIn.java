@@ -5,6 +5,7 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.util.ArrayList;
 
 import javax.swing.BorderFactory;
 import javax.swing.JFrame;
@@ -79,6 +80,7 @@ public class JF_MailLogIn extends JFrame {
 		this.setUndecorated(true);
 		this.getRootPane().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(000, 000, 000, 120)));
 	}
+
 
 	/**
 	 * 

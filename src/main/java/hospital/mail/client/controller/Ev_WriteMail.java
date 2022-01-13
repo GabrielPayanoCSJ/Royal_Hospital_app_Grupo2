@@ -47,7 +47,7 @@ public class Ev_WriteMail implements ActionListener {
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
-		if (Tool.checkEmail(to.getText())) {
+		if (!to.getText().isEmpty()) {
 			Utils_Methods.sendFromGMail(Utils_Methods.stringtoArray(to.getText()),  subject.getText() ,body.getText());
 			write.dispose();
 		}else {
