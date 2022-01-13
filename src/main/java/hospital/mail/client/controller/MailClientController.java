@@ -15,11 +15,13 @@ import hospital.mail.server.controller.Utils_Methods;
  * 
  * @author Jorge Fernández Ruiz
  * @date 20/12/2021
+ * @edited Gabriel Payano.
  * @version 1.0
  */
 public class MailClientController {
 	private JF_MailClient clientView;
 	private JF_MailLogIn loginView;
+	private Pipe_MailUpdater pipe;
 
 	/**
 	 * Constructor.
@@ -50,6 +52,17 @@ public class MailClientController {
 //				loginView.getTxtFmail().setText("");
 //				loginView.getPassPassword().setText("");
 //			}
+			
+			pipe = new Pipe_MailUpdater(this);
+			Thread updaterThread = new Thread(new MailUpdaterList(this, pipe));
+			updaterThread.start();
+			clientView.addWindowListener(new java.awt.event.WindowAdapter() {
+			    @Override
+			    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+			      pipe.stopThread();
+			      clientView.dispose();
+			    }
+			});
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
