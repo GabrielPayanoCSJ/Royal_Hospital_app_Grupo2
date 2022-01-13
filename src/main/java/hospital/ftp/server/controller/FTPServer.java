@@ -7,7 +7,6 @@ import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.nio.file.FileSystem;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -15,8 +14,6 @@ import javax.swing.JFileChooser;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.Authority;
-import org.apache.ftpserver.ftplet.FileSystemFactory;
-import org.apache.ftpserver.ftplet.FileSystemView;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
@@ -200,15 +197,8 @@ public class FTPServer {
 			e1.printStackTrace();
 		}
 
-		try {
-			while (true) {
-				this.clientSocket = new Socket();
-				this.clientSocket = this.serverSocket.accept();
-				this.thread = new Thread(new ServerFTPThread(this.clientSocket, pipeline, db));
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
+		AcceptThread acceptThread = new AcceptThread(clientSocket, serverSocket, db, thread, pipeline, userdb);
+		acceptThread.t.start();
 	}
 
 	private void stopFTPServer() {

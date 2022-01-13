@@ -20,11 +20,6 @@ public class Jf_Main extends JFrame {
 		this.add(this.paMain);
 	}
 
-	public static void main(String[] args) {
-		new Jf_Main("VENTANA PRINCIPAL", "EJECUTADOR PRINCIPAL", "Seleccione un idioma", "SERVIDOR FTP", "CLIENTE FTP", "CLIENTE CORREO")
-				.setVisible(true);
-	}
-
 	/**
 	 * @return the paMain
 	 */

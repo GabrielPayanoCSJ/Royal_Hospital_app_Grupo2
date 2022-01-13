@@ -71,7 +71,7 @@ public class User {
 		}
 
 		return exist;
-	}
+	}	
 
 	public int searchUserGroup(String username) {
 		

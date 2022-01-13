@@ -42,6 +42,7 @@ public class Ev_FTPButtons implements ActionListener {
 	private DataOutputStream dos = null;
 	private LocalDateTime localDate;
 	private String date = "";
+	private String nomUser;
 
 	/**
 	 * 
@@ -58,6 +59,8 @@ public class Ev_FTPButtons implements ActionListener {
 		this.group = group;
 		this.log = log;
 		this.socket = socket;
+		this.nomUser = jfClient.getPanel_login().getTfield_user().getText();
+		System.out.println("-----------------------------" + nomUser + "??????????????????");
 
 		try {
 			this.dos = new DataOutputStream(socket.getOutputStream());
@@ -125,34 +128,76 @@ public class Ev_FTPButtons implements ActionListener {
 			switch (operation) {
 			// created
 			case "CRT":
-				desc = "File '" + FTPUtil.getNameNewDir() + "' was created in: " + FTPUtil.getUrlCreated();
+				desc = "File [" + FTPUtil.getNameNewDir() + "] was created in: " + FTPUtil.getUrlCreated();
 				getDateNow();
 				break;
 
 			// renamed
 			case "RNM":
-				desc = "File '" + FTPUtil.getOldName() + "' was rename for '" + FTPUtil.getNewName() + "' in: "
+				desc = "File [" + FTPUtil.getOldName() + "] was rename for [" + FTPUtil.getNewName() + "] in: "
 						+ FTPUtil.getRenamedURL();
 				getDateNow();
 				break;
 
 			// uploaded
 			case "UPL":
-				desc = "File '" + FTPUtil.getUploadedName() + "' was download in: " + FTPUtil.getUploadedServerURL();
+				desc = "File [" + FTPUtil.getUploadedName() + "] was download in: " + FTPUtil.getUploadedServerURL();
 				getDateNow();
 				break;
 
 			// downloaded
 			case "DWL":
-				desc = "File '" + FTPUtil.getDownloadedName() + "' was download in: " + FTPUtil.getDownloadedURL();
+				desc = "File [" + FTPUtil.getDownloadedName() + "] was download in: " + FTPUtil.getDownloadedURL();
 				getDateNow();
 				break;
 			}
 
 			log = operation + " ¬ " + desc + " ¬ " + date;
 			writeClientLog(log);
+			dos.writeUTF(nomUser);
 			dos.writeUTF(log);
 		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @author Jorge Fernández Ruiz
+	 * @param operation
+	 * @param deletedIndex
+	 */
+	private void buildLog(String operation, int deletedIndex) {
+		try {
+			String desc = "";
+			String log = "";
+			if (operation.equals("DLT")) {
+				switch (deletedIndex) {
+				case -1:
+					desc = "Nothing was deleted";
+					break;
+				case 0:
+					desc = "File [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was deleted in: "
+							+ FTPUtil.getDelectedURL();
+					getDateNow();
+					break;
+				case 1:
+					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was deleted in: "
+							+ FTPUtil.getDelectedURL();
+					getDateNow();
+					break;
+				case 2:
+					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was deleted in: "
+							+ FTPUtil.getDelectedURL();
+					getDateNow();
+					break;
+				}
+	
+				log = operation + " ¬ " + desc + " ¬ " + date;
+				writeClientLog(log);
+				dos.writeUTF(nomUser);
+				dos.writeUTF(log);
+			}
+		} catch (Exception e) {
 			e.printStackTrace();
 		}
 	}
@@ -203,46 +248,6 @@ public class Ev_FTPButtons implements ActionListener {
 
 		date = localDate.getYear() + "/" + Str_month + "/" + Str_day + " - " + Str_hour + ":" + Str_minutes + ":"
 				+ Str_seconds;
-	}
-
-	/**
-	 * @author Jorge Fernández Ruiz
-	 * @param operation
-	 * @param deletedIndex
-	 */
-	private void buildLog(String operation, int deletedIndex) {
-		try {
-			String desc = "";
-			String log = "";
-			if (operation.equals("DLT")) {
-				switch (deletedIndex) {
-				case -1:
-					desc = "Nothing was deleted";
-					break;
-				case 0:
-					desc = "File '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
-							+ FTPUtil.getDelectedURL();
-					getDateNow();
-					break;
-				case 1:
-					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
-							+ FTPUtil.getDelectedURL();
-					getDateNow();
-					break;
-				case 2:
-					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
-							+ FTPUtil.getDelectedURL();
-					getDateNow();
-					break;
-				}
-
-				log = operation + " ¬ " + desc + " ¬ " + date;
-				writeClientLog(log);
-				dos.writeUTF(log);
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
 	}
 
 	/**
