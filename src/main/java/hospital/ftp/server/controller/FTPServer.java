@@ -5,8 +5,6 @@ package hospital.ftp.server.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -18,8 +16,6 @@ import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import hospital.ftp.model.Group;
 import hospital.ftp.model.User;
@@ -43,31 +39,18 @@ public class FTPServer {
 	private User userdb;
 	private Group groupdb;
 
-	private ServerSocket serverSocket;
-	private Socket clientSocket;
-	private static final int PORT_SERVERSOCKET = 7000;
-	private Thread thread;
 	/**
 	 * 
 	 */
-	public FTPServer() {
-		Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
-////		log.
-//		log.trace("DEBUG");
-//		log.info("Hello world");
-//		log.debug("Hello world 2");
-//		log.warn("MENSAJE DE FALLO");
-		this.db = new DB();
-		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
+	public FTPServer(DB db, User userdb, Group groupdb) {
+		this.db = db;
+		this.userdb = userdb;
+		this.groupdb = groupdb;
 		this.serverFactory = new FtpServerFactory();
 		this.listenerFactory = new ListenerFactory();
 		this.listenerFactory.setServerAddress(HOST);
 		this.listenerFactory.setPort(PORT);
 		this.serverFactory.addListener("default", listenerFactory.createListener());
-
-//		System.out.println(this.listenerFactory.getPort());
-//		System.out.println(this.listenerFactory.getServerAddress());
-//		System.out.println(this.listenerFactory.getIdleTimeout());
 
 		String rootDir = "";
 		JFileChooser f = new JFileChooser();
@@ -77,23 +60,17 @@ public class FTPServer {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = f.getSelectedFile();
 			rootDir = file.getAbsolutePath();
-			System.out.println(rootDir);
+//			System.out.println(rootDir);
 		}
 
 		if (rootDir.equals("")) {
 			Tool.showGUIinfo("Debe seleccionar un directorio raíz", "Información");
-			System.exit(1);
-		}
-
-		if (generateUserFTP(rootDir)) {
-			startFTPSever();
-			startThread();
 		} else {
-			Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
+			if (generateUserFTP(rootDir))
+				startFTPSever();
+			else
+				Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
 		}
-	}
-
-	private void enableLog4j() {
 	}
 
 	/**
@@ -152,12 +129,9 @@ public class FTPServer {
 
 		if (!fi.exists())
 			fi.mkdirs();
+
 		return homeDir;
 	}
-
-//	private void createFTPserver() {
-//		this.server = this.serverFactory.createServer();
-//	}
 
 	/**
 	 * @throws IOException
@@ -187,18 +161,14 @@ public class FTPServer {
 		}
 	}
 
-	private void startThread() {
-
-		ServerFTPPipeline pipeline = new ServerFTPPipeline();
-		
-		try {
-			this.serverSocket = new ServerSocket(PORT_SERVERSOCKET); // el puerto ya está siendo usado por el socket del mail (FTP)
-		} catch (IOException e1) {
-			e1.printStackTrace();
+	private void startFTPServer() {
+		if (!this.server.isStopped()) {
+			try {
+				this.server.start();
+			} catch (FtpException e) {
+				Tool.showGUIerror("El servidor ya está iniciado.", "ERROR SERVIDOR FTP YA ESTA INICIADO");
+			}
 		}
-
-		AcceptThread acceptThread = new AcceptThread(clientSocket, serverSocket, db, thread, pipeline, userdb);
-		acceptThread.t.start();
 	}
 
 	private void stopFTPServer() {
@@ -206,11 +176,4 @@ public class FTPServer {
 			this.server.stop();
 		}
 	}
-
-	private void suspendFTPServer() {
-		if (!this.server.isSuspended()) {
-			this.server.suspend();
-		}
-	}
-
 }

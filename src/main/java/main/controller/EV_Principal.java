@@ -4,39 +4,29 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import hospital.ftp.client.controller.ClientFTP;
+import hospital.ftp.model.Group;
+import hospital.ftp.model.User;
 import hospital.ftp.server.controller.FTPServer;
 import hospital.languages.Language;
 import hospital.mail.client.controller.LoginControllerMail;
+import hospital.tools.database.DB;
 import main.view.Jf_Main;
 
 public class EV_Principal implements ActionListener {
-//	private JF_Principal view;
 	private Jf_Main mainView;
+	private DB db;
+	private User userdb;
+	private Group groupdb;
 
-//	public EV_Principal(JF_Principal view) {
-//		this.view = view;
-//	}
-
-	public EV_Principal(Jf_Main mainView) {
+	public EV_Principal(Jf_Main mainView, DB db, User userdb, Group groupdb) {
 		this.mainView = mainView;
+		this.db = db;
+		this.userdb = userdb;
+		this.groupdb = groupdb;
 	}
 
 	@Override
 	public void actionPerformed(ActionEvent e) {
-//		// comboBox
-//		if (e.getSource() == view.getJcLanguages()) {
-//			Language.selectLanguage(view.getJcLanguages().getSelectedIndex());
-//		}
-//		
-//		// buttons
-//		if (view.getButtons().get(0) == e.getSource()) {
-//			new FTPServer();
-//		} else if (view.getButtons().get(1) == e.getSource()) {
-//			new ClientFTP();
-//		} else if (view.getButtons().get(2) == e.getSource()) {
-//			new LoginControllerMail();
-//		}
-
 		// comboBox
 		if (e.getSource() == this.mainView.getPaMain().getJcLanguages()) {
 			Language.selectLanguage(this.mainView.getPaMain().getJcLanguages().getSelectedIndex());
@@ -44,13 +34,11 @@ public class EV_Principal implements ActionListener {
 
 		// buttons
 		if (e.getSource().equals(this.mainView.getPaMain().getButtons().get(0))) {
-			new FTPServer();
+			new FTPServer(this.db, this.userdb, this.groupdb);
 		} else if (e.getSource().equals(this.mainView.getPaMain().getButtons().get(1))) {
-			new ClientFTP();
+			new ClientFTP(this.db, this.userdb, this.groupdb);
 		} else if (e.getSource().equals(this.mainView.getPaMain().getButtons().get(2))) {
 			new LoginControllerMail();
 		}
-
 	}
-
 }
