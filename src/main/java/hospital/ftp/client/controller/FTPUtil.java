@@ -126,7 +126,7 @@ public class FTPUtil {
 	 * @param pathSelectedMinus type String , parent folder name for the file to be
 	 *                          renamed
 	 * 
-	 * @author Guillermo Gonzï¿½lez de Miguel
+	 * @author Guillermo González de Miguel
 	 * 
 	 *         Modify by Gabriel Payano
 	 */
