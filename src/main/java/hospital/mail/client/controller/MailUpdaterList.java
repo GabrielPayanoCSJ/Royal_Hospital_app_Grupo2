@@ -36,8 +36,8 @@ public class MailUpdaterList implements Runnable {
 	 */
 	@Override
 	public void run() {
-		 while (pipe.isContinueListing()) {	      
-		      try {
+		 while (pipe.isContinueListing()) {	 
+		try {
 		        Thread.sleep(60000);
 		        pipe.updateEmailList();		       
 		      } catch (InterruptedException e) {

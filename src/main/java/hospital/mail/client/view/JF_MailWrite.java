@@ -43,6 +43,7 @@ public class JF_MailWrite extends JFrame {
 		desc = new Pa_DescWriteMail(txtHeadDesc, txtSender, txtAddressee);
 		body = new Pa_WriteBody(txtHeadBody, txtHeadIssue, txtHeadMessage);
 		buttons = new Pa_WriteButtons(txtBtnCancel, txtBtnSend);
+		buttons.getButtons().get(0).setVisible(false);
 		panel.setLayout(new BorderLayout());
 
 		appendPanel();
