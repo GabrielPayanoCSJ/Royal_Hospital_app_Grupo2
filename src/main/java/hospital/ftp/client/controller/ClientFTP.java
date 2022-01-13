@@ -32,25 +32,23 @@ public class ClientFTP {
 	/**
 	 * 
 	 */
-	public ClientFTP() {
-		this.db = new DB();
-		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
-		this.user = new User(db);
-		this.group = new Group(db);
-		this.log = new Log(db);
+	public ClientFTP(DB db, User userdb, Group groupdb) {
+		this.db = db;
+		this.user = userdb;
+		this.group = groupdb;
 		this.ftpCliente = new FTPClient();
 		this.jfClient = new JF_FTPClient();
 
 		try {
-			this.socket = new Socket("localhost", 6000); // CONNECTION WITH FTP SERVER
-			
+			this.socket = new Socket("localhost", 7000); // CONNECTION WITH SOCKET CLIENT LOG
+
 			this.jfClient.setVisible(true);
+			
 			for (int i = 0; i < this.jfClient.getPanel_login().getButtons().size(); i++) {
 				this.jfClient.getPanel_login().getButtons().get(i).addActionListener(
-						new Ev_FTPConnect(this.ftpCliente, this.jfClient, this.user, this.group, this.log));
+						new Ev_FTPConnect(this.ftpCliente, this.jfClient, this.user, this.group));
 			}
 			
-//			System.out.println("Justo antes de añadir los eventos");
 			for (int i = 0; i < this.jfClient.getPanel_button().getButtons().size(); i++) {
 				this.jfClient.getPanel_button().getButtons().get(i).addActionListener(
 						new Ev_FTPButtons(this.ftpCliente, this.jfClient, this.user, this.group, this.log, this.socket));

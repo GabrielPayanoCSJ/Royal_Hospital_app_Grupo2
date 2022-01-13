@@ -5,9 +5,6 @@ package hospital.ftp.server.controller;
 
 import java.io.File;
 import java.io.IOException;
-import java.net.ServerSocket;
-import java.net.Socket;
-import java.nio.file.FileSystem;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -15,14 +12,10 @@ import javax.swing.JFileChooser;
 import org.apache.ftpserver.FtpServer;
 import org.apache.ftpserver.FtpServerFactory;
 import org.apache.ftpserver.ftplet.Authority;
-import org.apache.ftpserver.ftplet.FileSystemFactory;
-import org.apache.ftpserver.ftplet.FileSystemView;
 import org.apache.ftpserver.ftplet.FtpException;
 import org.apache.ftpserver.listener.ListenerFactory;
 import org.apache.ftpserver.usermanager.impl.BaseUser;
 import org.apache.ftpserver.usermanager.impl.WritePermission;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import hospital.ftp.model.Group;
 import hospital.ftp.model.User;
@@ -49,24 +42,15 @@ public class FTPServer {
 	/**
 	 * 
 	 */
-	public FTPServer() {
-		Logger log = LoggerFactory.getLogger(this.getClass().getSimpleName());
-////		log.
-//		log.trace("DEBUG");
-//		log.info("Hello world");
-//		log.debug("Hello world 2");
-//		log.warn("MENSAJE DE FALLO");
-		this.db = new DB();
-		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
+	public FTPServer(DB db, User userdb, Group groupdb) {
+		this.db = db;
+		this.userdb = userdb;
+		this.groupdb = groupdb;
 		this.serverFactory = new FtpServerFactory();
 		this.listenerFactory = new ListenerFactory();
 		this.listenerFactory.setServerAddress(HOST);
 		this.listenerFactory.setPort(PORT);
 		this.serverFactory.addListener("default", listenerFactory.createListener());
-
-//		System.out.println(this.listenerFactory.getPort());
-//		System.out.println(this.listenerFactory.getServerAddress());
-//		System.out.println(this.listenerFactory.getIdleTimeout());
 
 		String rootDir = "";
 		JFileChooser f = new JFileChooser();
@@ -76,21 +60,17 @@ public class FTPServer {
 		if (returnVal == JFileChooser.APPROVE_OPTION) {
 			File file = f.getSelectedFile();
 			rootDir = file.getAbsolutePath();
-			System.out.println(rootDir);
+//			System.out.println(rootDir);
 		}
 
 		if (rootDir.equals("")) {
 			Tool.showGUIinfo("Debe seleccionar un directorio raíz", "Información");
-			System.exit(1);
-		}
-
-		if (generateUserFTP(rootDir))
+		} else {
+			if (generateUserFTP(rootDir))
 				startFTPSever();
-		else
-			Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
-	}
-
-	private void enableLog4j() {
+			else
+				Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
+		}
 	}
 
 	/**
@@ -149,12 +129,9 @@ public class FTPServer {
 
 		if (!fi.exists())
 			fi.mkdirs();
+
 		return homeDir;
 	}
-
-//	private void createFTPserver() {
-//		this.server = this.serverFactory.createServer();
-//	}
 
 	/**
 	 * @throws IOException
@@ -174,11 +151,23 @@ public class FTPServer {
 				String addr = this.listenerFactory.getServerAddress();
 				if (this.listenerFactory.getServerAddress().equals("localhost"))
 					addr += "/127.0.0.1";
-				
-				Tool.showGUIerror("No es posible iniciar el servidor FTP, " + addr + ":" + this.listenerFactory.getPort()
-				+ " está en uso.\n\nCompruebe que no disponga de otro servidor activado.", "ERROR SERVIDOR FTP NO PUEDE INICIAR");
+
+				Tool.showGUIerror(
+						"No es posible iniciar el servidor FTP, " + addr + ":" + this.listenerFactory.getPort()
+								+ " está en uso.\n\nCompruebe que no disponga de otro servidor activado.",
+						"ERROR SERVIDOR FTP NO PUEDE INICIAR");
 			}
 
+		}
+	}
+
+	private void startFTPServer() {
+		if (!this.server.isStopped()) {
+			try {
+				this.server.start();
+			} catch (FtpException e) {
+				Tool.showGUIerror("El servidor ya está iniciado.", "ERROR SERVIDOR FTP YA ESTA INICIADO");
+			}
 		}
 	}
 
@@ -187,18 +176,4 @@ public class FTPServer {
 			this.server.stop();
 		}
 	}
-
-	private void suspendFTPServer() {
-		if (!this.server.isSuspended()) {
-			this.server.suspend();
-		}
-	}
-
-	/**
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		new FTPServer();
-	}
-
 }
