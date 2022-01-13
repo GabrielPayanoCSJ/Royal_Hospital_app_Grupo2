@@ -243,11 +243,11 @@ public class Utils_Methods {
 		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
 		String[] correoscorrectos;
 		ArrayList<String> lista = new ArrayList<String>();
+		cadena = cadena.replaceAll("\\s+","");
 		Collections.addAll(lista, cadena.split(";"));
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher;
 		for (int i = 0; i < lista.size(); i++) {
-			lista.get(i).replaceAll("\\s+","");
 			matcher = pattern.matcher(lista.get(i));
 			if (!matcher.matches()) {
 				lista.remove(i);
