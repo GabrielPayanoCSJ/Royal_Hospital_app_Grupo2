@@ -1,10 +1,6 @@
 package hospital.mail.client.controller;
 
-import java.util.Iterator;
-
 import javax.mail.Message;
-
-import hospital.languages.Language;
 import hospital.mail.client.view.JF_MailClient;
 import hospital.mail.client.view.JF_MailLogIn;
 import hospital.mail.server.controller.Utils_Methods;

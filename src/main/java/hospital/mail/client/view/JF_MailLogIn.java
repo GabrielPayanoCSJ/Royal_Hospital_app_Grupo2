@@ -72,12 +72,13 @@ public class JF_MailLogIn extends JFrame {
 	 * @param txtTitle type of String, the text of title.
 	 */
 	private void defaultOperations() {
-		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
-		this.setSize(new Dimension(600, 360));
-		this.setLocation(500, 500);
+		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		this.setSize(new Dimension(600, 400));
+		this.setLocation(900, 0);
 //		this.setAlwaysOnTop(true);
 		this.setLayout(new BorderLayout(0, 0));
-		this.setUndecorated(true);
+		this.setUndecorated(false);
+		this.setResizable(false);
 		this.getRootPane().setBorder(BorderFactory.createMatteBorder(2, 2, 2, 2, new Color(000, 000, 000, 120)));
 	}
 
