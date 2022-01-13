@@ -7,6 +7,11 @@ import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 
@@ -35,6 +40,8 @@ public class Ev_FTPButtons implements ActionListener {
 	private Log log;
 	private Socket socket = null;
 	private DataOutputStream dos = null;
+	private LocalDateTime localDate;
+	private String date = "";
 
 	/**
 	 * 
@@ -119,34 +126,83 @@ public class Ev_FTPButtons implements ActionListener {
 			// created
 			case "CRT":
 				desc = "File '" + FTPUtil.getNameNewDir() + "' was created in: " + FTPUtil.getUrlCreated();
-				dos.writeUTF(log);
+				getDateNow();
 				break;
 
 			// renamed
 			case "RNM":
 				desc = "File '" + FTPUtil.getOldName() + "' was rename for '" + FTPUtil.getNewName() + "' in: "
 						+ FTPUtil.getRenamedURL();
-				dos.writeUTF(log);
+				getDateNow();
 				break;
 
 			// uploaded
 			case "UPL":
 				desc = "File '" + FTPUtil.getUploadedName() + "' was download in: " + FTPUtil.getUploadedServerURL();
-				dos.writeUTF(log);
+				getDateNow();
 				break;
 
 			// downloaded
 			case "DWL":
 				desc = "File '" + FTPUtil.getDownloadedName() + "' was download in: " + FTPUtil.getDownloadedURL();
-				dos.writeUTF(log);
+				getDateNow();
 				break;
 			}
 
-			log = operation + " ¬ " + desc;
+			log = operation + " ¬ " + desc + " ¬ " + date;
 			writeClientLog(log);
+			dos.writeUTF(log);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void getDateNow() {
+		localDate = LocalDateTime.now();
+		int month = localDate.getMonthValue();
+		int day = localDate.getDayOfMonth();
+		int hour = localDate.getHour();
+		int minutes = localDate.getMinute();
+		int seconds = localDate.getSecond();
+
+		String Str_month;
+		String Str_day;
+		String Str_hour;
+		String Str_minutes;
+		String Str_seconds;
+
+		if (month < 10) {
+			Str_month = "0" + month;
+		} else {
+			Str_month = month + "";
+		}
+
+		if (day < 10) {
+			Str_day = "0" + day;
+		} else {
+			Str_day = day + "";
+		}
+
+		if (hour < 10) {
+			Str_hour = "0" + hour;
+		} else {
+			Str_hour = hour + "";
+		}
+
+		if (minutes < 10) {
+			Str_minutes = "0" + minutes;
+		} else {
+			Str_minutes = minutes + "";
+		}
+
+		if (seconds < 10) {
+			Str_seconds = "0" + seconds;
+		} else {
+			Str_seconds = seconds + "";
+		}
+
+		date = localDate.getYear() + "/" + Str_month + "/" + Str_day + " - " + Str_hour + ":" + Str_minutes + ":"
+				+ Str_seconds;
 	}
 
 	/**
@@ -166,19 +222,23 @@ public class Ev_FTPButtons implements ActionListener {
 				case 0:
 					desc = "File '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
 							+ FTPUtil.getDelectedURL();
+					getDateNow();
 					break;
 				case 1:
 					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
 							+ FTPUtil.getDelectedURL();
+					getDateNow();
 					break;
 				case 2:
 					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
 							+ FTPUtil.getDelectedURL();
+					getDateNow();
 					break;
 				}
 
-				log = operation + " ¬ " + desc;
+				log = operation + " ¬ " + desc + " ¬ " + date;
 				writeClientLog(log);
+				dos.writeUTF(log);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
