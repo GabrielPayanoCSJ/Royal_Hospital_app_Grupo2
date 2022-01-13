@@ -48,7 +48,7 @@ public class FTPServer {
 
 	private ServerSocket serverSocket;
 	private Socket clientSocket;
-	private final int PORT_SERVERSOCKET = 7000;
+	private static final int PORT_SERVERSOCKET = 7000;
 	private Thread thread;
 	/**
 	 * 
@@ -193,6 +193,12 @@ public class FTPServer {
 	private void startThread() {
 
 		ServerFTPPipeline pipeline = new ServerFTPPipeline();
+		
+		try {
+			this.serverSocket = new ServerSocket(PORT_SERVERSOCKET); // el puerto ya está siendo usado por el socket del mail (FTP)
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
 
 		try {
 			while (true) {
