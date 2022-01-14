@@ -98,11 +98,11 @@ public class JF_FTPClient extends JFrame {
 		return panel_button;
 	}
 
-	public static void main(String[] args) {
-		Language.selectLanguage(2);
-		JF_FTPClient jframe = new JF_FTPClient();
-		jframe.setVisible(true);
-	}
+//	public static void main(String[] args) {
+//		Language.selectLanguage(2);
+//		JF_FTPClient jframe = new JF_FTPClient();
+//		jframe.setVisible(true);
+//	}
 
 	// ---------------------------------------------
 
