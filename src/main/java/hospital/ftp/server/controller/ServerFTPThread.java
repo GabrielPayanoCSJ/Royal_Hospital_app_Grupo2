@@ -7,8 +7,6 @@ import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.Arrays;
 
 import hospital.ftp.model.User;
 import hospital.tools.database.DB;
@@ -22,12 +20,12 @@ import hospital.tools.database.DB;
 public class ServerFTPThread implements Runnable {
 
 	private Socket clientSocket;
-	private ServerFTPPipeline pipeline;
+	private static ServerFTPPipeline pipeline;
 	private Thread thread;
-	private DataInputStream dataInput;
+	private static DataInputStream dataInput;
 	private DataOutputStream dataOutput;
-	private DB db;
-	private User userDB;
+	private static DB db;
+	private static User userDB;
 
 	/**
 	 * @param pipeline
@@ -48,15 +46,21 @@ public class ServerFTPThread implements Runnable {
 			this.dataInput = new DataInputStream(clientSocket.getInputStream());
 			this.dataOutput = new DataOutputStream(clientSocket.getOutputStream());
 		} catch (IOException e) {
-			e.printStackTrace();
+//			e.printStackTrace();
 		}
 
 	}
 
 	@Override
 	public void run() {
-		pipeline.writeLogDB(pipeline, dataInput, db, userDB);
+		// llamada al controlador de la ventana del servidor
 
+		checkClose(true);
 	}
 
+	public static void checkClose(boolean exit) {
+		if (exit) {
+			pipeline.writeLogDB(dataInput, db, userDB, exit);
+		}
+	}
 }
