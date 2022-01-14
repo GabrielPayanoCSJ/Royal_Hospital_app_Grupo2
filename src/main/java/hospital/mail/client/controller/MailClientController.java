@@ -61,6 +61,7 @@ public class MailClientController {
 				loginView.getPaLogin().getPassPassword().setText("");
 			}
 			
+	
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
