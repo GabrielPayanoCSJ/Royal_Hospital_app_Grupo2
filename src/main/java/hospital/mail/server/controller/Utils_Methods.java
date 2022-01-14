@@ -21,9 +21,9 @@ public class Utils_Methods {
 
 	private static POP3SSLStore store;
 	private static POP3Folder folder;
-	private static String numberOfFiles = null;
-	private static int toCheck = 0;
-	private static Writer output = null;
+//	private static String numberOfFiles = null;
+//	private static int toCheck = 0;
+//	private static Writer output = null;
 	private static URLName url;
 //	private static String receiving_attachments = "C:\\Users\\Profesor\\Documents\\Correos";
 
@@ -35,7 +35,7 @@ public class Utils_Methods {
 	private static final String SMTP = "smtp.gmail.com";
 	private static final String POP3 = "pop.gmail.com";
 
-	private static final int PORT_SMTP = 587;
+	private static final int PORT_SMTP = 25;
 	private static final int PORT_POP3 = 995;
 
 	// private static String username =
@@ -49,18 +49,18 @@ public class Utils_Methods {
 
 	/**
 	 * 
-	 * @param username
-	 * @param password
+	 * @param user
+	 * @param pass
 	 * @return
 	 * @throws MessagingException
 	 */
-	public static boolean userauth(String username, String password) throws MessagingException {
+	public static boolean userauth(String user, String pass) throws MessagingException {
 		boolean exists = false;
 		createSession(true);
 		transport = session.getTransport("smtp");
 
 		try {
-			transport.connect(SMTP, username, password);
+			transport.connect(SMTP, PORT_SMTP, user, pass);
 			exists = true;
 			transport.close();
 		} catch (AuthenticationFailedException e) {
@@ -83,9 +83,9 @@ public class Utils_Methods {
 			url = new URLName("pop3", POP3, PORT_POP3, "", user, pass);
 			store = new POP3SSLStore(session, url);
 			store.connect();
-			username=user;
-			password=pass;
-			
+			username = user;
+			password = pass;
+
 		} catch (MessagingException e) {
 			e.printStackTrace();
 		}
@@ -98,24 +98,24 @@ public class Utils_Methods {
 	 * @param menssage
 	 * @param subject
 	 */
-	public static void sendEmail(String to, String host, String menssage, String subject) {
-		properties.setProperty("mail.smtp.host", host);
-		session = Session.getDefaultInstance(properties);
-
-		try {
-			// Mime es un tipo de formato de email, lo podemos cambiar
-			message = new MimeMessage(session);
-			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
-			message.setSubject(subject);
-			message.setText(menssage);
-			Transport.send(message);
-//			System.out.println("Mensaje enviado");
-		} catch (AddressException e) {
-			e.printStackTrace();
-		} catch (MessagingException e) {
-			e.printStackTrace();
-		}
-	}
+//	public static void sendEmail(String to, String host, String menssage, String subject) {
+//		properties.setProperty("mail.smtp.host", host);
+//		session = Session.getDefaultInstance(properties);
+//
+//		try {
+//			// Mime es un tipo de formato de email, lo podemos cambiar
+//			message = new MimeMessage(session);
+//			message.addRecipient(Message.RecipientType.TO, new InternetAddress(to));
+//			message.setSubject(subject);
+//			message.setText(menssage);
+//			Transport.send(message);
+////			System.out.println("Mensaje enviado");
+//		} catch (AddressException e) {
+//			e.printStackTrace();
+//		} catch (MessagingException e) {
+//			e.printStackTrace();
+//		}
+//	}
 
 	/**
 	 * @param type
@@ -175,7 +175,7 @@ public class Utils_Methods {
 			message.setText(body);
 
 			transport = session.getTransport("smtp");
-			transport.connect(SMTP, username, password);
+			transport.connect(SMTP, PORT_SMTP, username, password);
 			transport.sendMessage(message, message.getAllRecipients());
 			transport.close();
 
@@ -243,7 +243,7 @@ public class Utils_Methods {
 		String regex = "^[A-Za-z0-9+_.-]+@(.+)$";
 		String[] correoscorrectos;
 		ArrayList<String> lista = new ArrayList<String>();
-		cadena = cadena.replaceAll("\\s+","");
+		cadena = cadena.replaceAll("\\s+", "");
 		Collections.addAll(lista, cadena.split(";"));
 		Pattern pattern = Pattern.compile(regex);
 		Matcher matcher;
@@ -255,7 +255,7 @@ public class Utils_Methods {
 		}
 		correoscorrectos = new String[lista.size()];
 		for (int i = 0; i < correoscorrectos.length; i++) {
-			correoscorrectos[i]=lista.get(i);
+			correoscorrectos[i] = lista.get(i);
 		}
 		return correoscorrectos;
 	}
@@ -391,15 +391,15 @@ public class Utils_Methods {
 	// // desconocido
 	// }
 	// } else if ((disposition != null)
-	//						&& (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE)
-	//								|| disposition.equals("ATTACHMENT") || disposition.equals("INLINE"))) {
+	// && (disposition.equals(Part.ATTACHMENT) || disposition.equals(Part.INLINE)
+	// || disposition.equals("ATTACHMENT") || disposition.equals("INLINE"))) {
 	//
-	//					MimeBodyPart mbp = (MimeBodyPart) part;
-	//					if (mbp.isMimeType("text/plain")) {
-	//						body += (String) mbp.getContent();
-	//					} else if (mbp.isMimeType("TEXT/HTML")) {
-	//						body += mbp.getContent().toString();
-	//					} else {
+	// MimeBodyPart mbp = (MimeBodyPart) part;
+	// if (mbp.isMimeType("text/plain")) {
+	// body += (String) mbp.getContent();
+	// } else if (mbp.isMimeType("TEXT/HTML")) {
+	// body += mbp.getContent().toString();
+	// } else {
 	// File savedir = new File(receiving_attachments);
 	// savedir.mkdirs();
 	// File savefile = new File(savedir + "\\" + part.getFileName());

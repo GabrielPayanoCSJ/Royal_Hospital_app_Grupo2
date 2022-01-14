@@ -16,7 +16,7 @@ import hospital.tools.Tool;
 
 /**
  * @author Javier Gómez
- *@version 1.0
+ * @version 1.0
  */
 public class Ev_WriteMail implements ActionListener {
 
@@ -29,12 +29,11 @@ public class Ev_WriteMail implements ActionListener {
 	JTextArea body;
 	String host = "smtp.gmail.com";
 
-	
 	/**
 	 * @param write
 	 * 
 	 */
-	public Ev_WriteMail(JF_MailWrite write,String mail) {
+	public Ev_WriteMail(JF_MailWrite write, String mail) {
 		this.write = write;
 		subject = write.getBody().getTxtIssue();
 		from = mail;
@@ -42,16 +41,18 @@ public class Ev_WriteMail implements ActionListener {
 		body = write.getBody().getTxA_body();
 	}
 
-	/**Event handler for the button send E-mail
+	/**
+	 * Event handler for the button send E-mail
 	 * 
 	 */
 	@Override
 	public void actionPerformed(ActionEvent arg0) {
 		if (!to.getText().isEmpty()) {
-			Utils_Methods.sendFromGMail(Utils_Methods.stringtoArray(to.getText()),  subject.getText() ,body.getText());
+			Utils_Methods.sendFromGMail(Utils_Methods.stringtoArray(to.getText()), subject.getText(), body.getText());
 			write.dispose();
-		}else {
-			Tool.showGUIerror("Error destinatario", "Fallo en el formato del email destinatario(Asegurate que es formato *@*.*) "); 
+		} else {
+			Tool.showGUIerror("Error destinatario",
+					"Fallo en el formato del email destinatario(Asegurate que es formato *@*.*) ");
 		}
 
 	}
