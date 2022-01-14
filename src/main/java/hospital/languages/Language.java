@@ -64,6 +64,10 @@ public class Language {
 
 	
 	private static ArrayList<String> language_txts;
+	private static ArrayList<String> main_txts;	
+	private static ArrayList<String> writeMail_txts;	
+	private static ArrayList<String> readMail_txts;	
+	private static ArrayList<String> mailLogin_txts;	
 	
 	/**
 	 * 
@@ -130,6 +134,18 @@ public class Language {
 				break;
 			case 6: // MAIL SERVER TEXTS
 				language_txts = langTexts.get(option);
+				break;
+			case 7: // MAIN TEXTS
+				main_txts = langTexts.get(option);
+				break;
+			case 8: // MAIN TEXTS
+				mailLogin_txts = langTexts.get(option);
+				break;
+			case 9: // MAIN TEXTS
+				readMail_txts = langTexts.get(option);
+				break;
+			case 10: // MAIN TEXTS
+				writeMail_txts = langTexts.get(option);
 				break;
 			default:
 				Tool.showConsoleMessage("Option [ " + option + " ] doesn't exist.", true);

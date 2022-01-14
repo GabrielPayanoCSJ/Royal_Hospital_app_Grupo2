@@ -53,7 +53,11 @@ public class ServerFTPThread implements Runnable {
 
 	@Override
 	public void run() {
+<<<<<<< Updated upstream
 		// llamada al controlador de la ventana del servidor
+=======
+		pipeline.writeLogDB(dataInput, db, userDB);
+>>>>>>> Stashed changes
 
 		checkClose(true);
 	}

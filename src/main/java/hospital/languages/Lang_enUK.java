@@ -30,7 +30,11 @@ public class Lang_enUK {
 				loadFTPServerTxts(), // 3
 				loadMailClientTxts(), // 4
 				loadMailServerTxts(), // 5
-				loadLanguageTxts() // 6
+				loadLanguageTxts(), // 6
+				loadMainTxts(), // 7
+				loadMailLoginTxts(), // 8
+				loadReadMailTxts(), // 9
+				loadWriteMailTxts() // 10
 		));
 	}
 
@@ -46,6 +50,67 @@ public class Lang_enUK {
 	 * @return
 	 */
 	private ArrayList<String> loadMailClientTxts() {
+		return new ArrayList<String>(Arrays.asList( // LIST MAIL CLIENT TEXTS
+				"MAIL CLIENT", // 0
+				"INBOX", // 1
+				"WRITE", // 2
+				"READ", // 3
+				"EXIT", // 4
+				"TOTAL: ", // 5
+				"NEWS: " // 6
+		));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private ArrayList<String> loadReadMailTxts() { // NOT IN ENGLISH
+		return new ArrayList<String>(Arrays.asList( // LIST READ MAIL TEXTS
+				"READ MAIL", // 0
+				"DESCRIPTION", // 1
+				"FROM: ", // 2
+				"SUBJECT: ", // 3
+				"BODY" // 4
+		));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private ArrayList<String> loadWriteMailTxts() { // NOT IN ENGLISH
+		return new ArrayList<String>(Arrays.asList( // LIST MAIL CLIENT TEXTS
+				"REDACTION", // 0
+				"FROM: ", // 1
+				"TO: ", // 2
+				"DESCRIPTION", // 3
+				"SUBJECT", // 4
+				"MESSAGE", // 5
+				"SEND" // 6
+		));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private ArrayList<String> loadMailLoginTxts() { // NOT IN ENGLISH
+		return new ArrayList<String>(Arrays.asList( // LIST MAIL LOGIN TEXTS
+				"ACCESS WINDOW", // 0
+				"MAIL ACCESS", // 1
+				"EMAIL", // 2
+				"PASSWORD", // 3
+				"LOG-IN", // 4
+				"CANCEL" // 5
+		));
+	}
+
+	/**
+	 * 
+	 * @return
+	 */
+	private ArrayList<String> loadMainTxts() {
 		return new ArrayList<String>(Arrays.asList(""));
 	}
 
@@ -75,7 +140,13 @@ public class Lang_enUK {
 				"USER: ", // 9
 				"PASSWORD: ", // 10
 				"RENAME", // 11
-				"DISCONNECT" // 12
+				"DISCONNECT", // 12
+				"CREATE DIRECTORY", // 13
+				"Write the name of the new directory:", // 14
+				"REMANE FILE", // 15
+				"Write the new name", // 16
+				"Select a file to upload", // 17
+				"Select a path to save" // 18
 
 		));
 	}
@@ -85,7 +156,11 @@ public class Lang_enUK {
 	 * @return
 	 */
 	private ArrayList<String> loadFTPServerTxts() {
-		return new ArrayList<String>(Arrays.asList(""));
+		return new ArrayList<String>(Arrays.asList( // LIST FTP SERVER TEXTS
+				"SERVER WINDOW", // 0
+				"STOP", // 1
+				"START" // 2
+		));
 	}
 
 	/**
@@ -93,8 +168,18 @@ public class Lang_enUK {
 	 * @return
 	 */
 	private ArrayList<String> loadErrorTxts() {
-		return new ArrayList<String>(Arrays.asList( // LIST ERROR TEXTS
-				"Test error message" // 0
+		return new ArrayList<String>(Arrays.asList( // LIST ERROR TEXTS & TITLES
+				"CLASS NOT FOUND", // 0
+				"INFO", // 1 (Title)
+				"SELECT A ROOT DIRECTORY", // 2 (text of 1)
+				"LOGIN FIELDS EMPTY", // 3 (title)
+				"USER EMPTY", // 4 (text of 3)
+				"ERROR - FTP SERVER NOT FOUND", // 5 (title)
+				"NOT POSSIBLE TO GET A CONNECTION WITH THE FTP SERVER", // 6 (text of 5)
+				"ERROR TO RENAME", // 7 (title)
+				"THERE WAS AN ERROR IN THE RENAME PROCESS. \n SISTEM SAYS: ", // 8 (text of 7)
+				"AUTHENTICATION ERROR", // 9
+				"USER OR PASSWORD NOT VALID" // 10
 		));
 	}
 
