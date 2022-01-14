@@ -5,6 +5,8 @@ package hospital.ftp.server.controller;
 
 import java.io.File;
 import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.util.ArrayList;
 
 import javax.swing.JFileChooser;
@@ -39,6 +41,11 @@ public class FTPServer {
 	private User userdb;
 	private Group groupdb;
 
+	private ServerSocket serverSocket;
+	private Socket clientSocket;
+	private static final int PORT_SERVERSOCKET = 7000;
+	private Thread thread;
+
 	/**
 	 * 
 	 */
@@ -66,10 +73,12 @@ public class FTPServer {
 		if (rootDir.equals("")) {
 			Tool.showGUIinfo("Debe seleccionar un directorio raíz", "Información");
 		} else {
-			if (generateUserFTP(rootDir))
+			if (generateUserFTP(rootDir)) {
 				startFTPSever();
-			else
+				startThread();
+			} else {
 				Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
+			}
 		}
 	}
 
@@ -159,6 +168,21 @@ public class FTPServer {
 			}
 
 		}
+	}
+
+	private void startThread() {
+
+		ServerFTPPipeline pipeline = new ServerFTPPipeline();
+
+		try {
+			this.serverSocket = new ServerSocket(PORT_SERVERSOCKET); // el puerto ya está siendo usado por el socket del
+																		// mail (FTP)
+		} catch (IOException e1) {
+			e1.printStackTrace();
+		}
+
+		AcceptThread acceptThread = new AcceptThread(clientSocket, serverSocket, db, thread, pipeline, userdb);
+		acceptThread.t.start();
 	}
 
 	private void startFTPServer() {

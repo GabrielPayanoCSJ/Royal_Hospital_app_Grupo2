@@ -137,7 +137,7 @@ public class FTPUtil {
 
 		if (fileSelected != "") {
 			File localFile = new File(fileSelected);
-			uploadedName = localFile.getName();
+			uploadedName = localFile.getName().trim().replace(" ", "_");
 			String remoteFile = remotePath + "/" + uploadedName;
 			InputStream inputStream = null;
 			try {

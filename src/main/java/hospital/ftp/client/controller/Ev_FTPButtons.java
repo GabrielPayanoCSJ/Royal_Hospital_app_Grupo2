@@ -7,6 +7,11 @@ import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.text.DateFormat;
+import java.text.Format;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 
@@ -35,6 +40,9 @@ public class Ev_FTPButtons implements ActionListener {
 	private Log log;
 	private Socket socket = null;
 	private DataOutputStream dos = null;
+	private LocalDateTime localDate;
+	private String date = "";
+	private String nomUser;
 
 	/**
 	 * 
@@ -51,7 +59,7 @@ public class Ev_FTPButtons implements ActionListener {
 		this.group = group;
 		this.log = log;
 		this.socket = socket;
-
+		
 		try {
 			this.dos = new DataOutputStream(socket.getOutputStream());
 		} catch (IOException e) {
@@ -62,6 +70,7 @@ public class Ev_FTPButtons implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
+		this.nomUser = jfClient.getPanel_login().getTfield_user().getText();
 
 		switch (Integer.parseInt(button.getName())) {
 		case 0:
@@ -118,32 +127,34 @@ public class Ev_FTPButtons implements ActionListener {
 			switch (operation) {
 			// created
 			case "CRT":
-				desc = "File '" + FTPUtil.getNameNewDir() + "' was created in: " + FTPUtil.getUrlCreated();
-				dos.writeUTF(log);
+				desc = "File [" + FTPUtil.getNameNewDir() + "] was create in: " + FTPUtil.getUrlCreated();
+				getDateNow();
 				break;
 
 			// renamed
 			case "RNM":
-				desc = "File '" + FTPUtil.getOldName() + "' was rename for '" + FTPUtil.getNewName() + "' in: "
+				desc = "File [" + FTPUtil.getOldName() + "] was rename for [" + FTPUtil.getNewName() + "] in: "
 						+ FTPUtil.getRenamedURL();
-				dos.writeUTF(log);
+				getDateNow();
 				break;
 
 			// uploaded
 			case "UPL":
-				desc = "File '" + FTPUtil.getUploadedName() + "' was download in: " + FTPUtil.getUploadedServerURL();
-				dos.writeUTF(log);
+				desc = "File [" + FTPUtil.getUploadedName() + "] was upload in: " + FTPUtil.getUploadedServerURL();
+				getDateNow();
 				break;
 
 			// downloaded
 			case "DWL":
-				desc = "File '" + FTPUtil.getDownloadedName() + "' was download in: " + FTPUtil.getDownloadedURL();
-				dos.writeUTF(log);
+				desc = "File [" + FTPUtil.getDownloadedName() + "] was download in: " + FTPUtil.getDownloadedURL();
+				getDateNow();
 				break;
 			}
 
-			log = operation + " ¬ " + desc;
+			log = operation + " ¬ " + desc + " ¬ " + date;
 			writeClientLog(log);
+			dos.writeUTF(nomUser);
+			dos.writeUTF(log);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
@@ -161,28 +172,81 @@ public class Ev_FTPButtons implements ActionListener {
 			if (operation.equals("DLT")) {
 				switch (deletedIndex) {
 				case -1:
-					desc = "Nothing was deleted";
+					desc = "Nothing was delete";
 					break;
 				case 0:
-					desc = "File '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
+					desc = "File [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was delete in: "
 							+ FTPUtil.getDelectedURL();
+					getDateNow();
 					break;
 				case 1:
-					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
+					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was delete in: "
 							+ FTPUtil.getDelectedURL();
+					getDateNow();
 					break;
 				case 2:
-					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
+					desc = "Folder [" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "] was delete in: "
 							+ FTPUtil.getDelectedURL();
+					getDateNow();
 					break;
 				}
-
-				log = operation + " ¬ " + desc;
+	
+				log = operation + " ¬ " + desc + " ¬ " + date;
 				writeClientLog(log);
+				dos.writeUTF(nomUser);
+				dos.writeUTF(log);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	private void getDateNow() {
+		localDate = LocalDateTime.now();
+		int month = localDate.getMonthValue();
+		int day = localDate.getDayOfMonth();
+		int hour = localDate.getHour();
+		int minutes = localDate.getMinute();
+		int seconds = localDate.getSecond();
+
+		String Str_month;
+		String Str_day;
+		String Str_hour;
+		String Str_minutes;
+		String Str_seconds;
+
+		if (month < 10) {
+			Str_month = "0" + month;
+		} else {
+			Str_month = month + "";
+		}
+
+		if (day < 10) {
+			Str_day = "0" + day;
+		} else {
+			Str_day = day + "";
+		}
+
+		if (hour < 10) {
+			Str_hour = "0" + hour;
+		} else {
+			Str_hour = hour + "";
+		}
+
+		if (minutes < 10) {
+			Str_minutes = "0" + minutes;
+		} else {
+			Str_minutes = minutes + "";
+		}
+
+		if (seconds < 10) {
+			Str_seconds = "0" + seconds;
+		} else {
+			Str_seconds = seconds + "";
+		}
+
+		date = localDate.getYear() + "/" + Str_month + "/" + Str_day + " - " + Str_hour + ":" + Str_minutes + ":"
+				+ Str_seconds;
 	}
 
 	/**

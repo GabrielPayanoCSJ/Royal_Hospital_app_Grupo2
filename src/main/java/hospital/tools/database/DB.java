@@ -166,6 +166,22 @@ public class DB {
 		}
 	}
 	
+	/**
+	 * 
+	 * @param sql
+	 */
+	public int setStatement(String sql) {
+		int valuesRows = 0;
+		try {
+			this.staSQL = this.conSQL.createStatement();
+			valuesRows = this.staSQL.executeUpdate(sql);
+		} catch (SQLException e) {
+			Tool.showConsoleError(CLASSNAME + " - " + e.getMessage());
+		}
+		
+		return valuesRows;
+	}
+	
 	
 	/**
 	 * 

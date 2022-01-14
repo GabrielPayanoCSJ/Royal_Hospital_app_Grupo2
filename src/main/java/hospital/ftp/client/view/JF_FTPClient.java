@@ -134,7 +134,7 @@ public class JF_FTPClient extends JFrame {
 	 * @author Gabriel Payano Type void deletes the selected node in the JTree
 	 */
 	public void deleteNode() {
-		System.out.println("Delete node");
+		// // System.out.println("Delete node");
 		panel_directory.getTree().removeSelectionPath(panel_directory.getTree().getSelectionPath());
 		panel_directory.getTree().updateUI();
 	}
@@ -184,7 +184,7 @@ public class JF_FTPClient extends JFrame {
 	 * @return JTree Type , returns an JTree based in the directory to list.
 	 */
 	public JTree generateTreeByFile(File directory, int level) {
-		// System.out.println(directorio.getName());
+		// // System.out.println(directorio.getName());
 		int actualLevel = level;
 		File f = directory;
 		String[] archivos = f.list();
@@ -197,10 +197,10 @@ public class JF_FTPClient extends JFrame {
 				System.out.print("  A:");
 
 			}
-			System.out.println(archivos[i]);
+			// System.out.println(archivos[i]);
 			parentNode.add(new DefaultMutableTreeNode(archivos[i]));
 			if (f2.isDirectory()) {
-				System.out.println("fOILDER");
+				// System.out.println("fOILDER");
 				generateTreeByFile(f2, actualLevel + 1);
 			} else {
 			}
@@ -231,7 +231,7 @@ public class JF_FTPClient extends JFrame {
 
 		for (File file : files) {
 			if (file == null) {
-				System.out.println("NUll directory found ");
+				// System.out.println("NUll directory found ");
 				continue;
 			}
 			if (file.isDirectory()) {
@@ -328,7 +328,7 @@ public class JF_FTPClient extends JFrame {
 		panel_directory.getTree().addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent me) {
 				URLnodeFormated = generateURL(panel_directory.getTree().getSelectionPath().toString()); // GETTING THEACTUAL NODE SELECTED
-				System.out.println("URL: " + URLnodeFormated);
+				// System.out.println("URL: " + URLnodeFormated);
 			}
 		});
 
@@ -356,7 +356,7 @@ public class JF_FTPClient extends JFrame {
 				}
 
 				if (aFile.isDirectory()) {
-					System.out.println("[" + currentFileName + "]");
+					// System.out.println("[" + currentFileName + "]");
 
 					// gets the current model of the jtree
 					DefaultTreeModel model = (DefaultTreeModel) this.panel_directory.getTree().getModel();
@@ -394,7 +394,7 @@ public class JF_FTPClient extends JFrame {
 
 					// refresh the model to show the changes
 					model.reload();
-					System.out.println(currentFileName);
+					// System.out.println(currentFileName);
 				}
 			}
 		}

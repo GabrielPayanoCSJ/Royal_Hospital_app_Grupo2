@@ -14,10 +14,10 @@ public class Principalcontroller {
 	private Group groupdb;
 	
 	public Principalcontroller() {
-//		this.db = new DB();
-//		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
-//		this.userdb = new User(db);
-//		this.groupdb = new Group(db);
+		this.db = new DB();
+		this.db.ConnectMySQL(true, "jdbc:mysql://localhost:3306", "grupo2_hospitaldb", "root", "");
+		this.userdb = new User(db);
+		this.groupdb = new Group(db);
 		
 		Language.selectLanguage(DEFAULT_LANGUAGE);
 		
