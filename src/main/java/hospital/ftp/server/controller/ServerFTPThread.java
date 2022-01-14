@@ -33,7 +33,7 @@ public class ServerFTPThread implements Runnable {
 	 * @param pipeline
 	 * @param clientSocket
 	 * @param db
-	 * @param userDb 
+	 * @param userDb
 	 * 
 	 */
 	public ServerFTPThread(Socket clientSocket, ServerFTPPipeline pipeline, DB db, User userDb) {
@@ -55,12 +55,8 @@ public class ServerFTPThread implements Runnable {
 
 	@Override
 	public void run() {
-			// llamada al controlador de la ventana del servidor
-
-			pipeline.writeLogDB(pipeline, dataInput, db, userDB);
+		pipeline.writeLogDB(pipeline, dataInput, db, userDB);
 
 	}
-
-	
 
 }

@@ -1,5 +1,6 @@
 package hospital.ftp.server.view;
 
+import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 
@@ -18,10 +19,12 @@ public class serverView extends JFrame {
 		mainPanel = new JPanel();
 		pButtons = new Pa_Buttons();
 		pLog = new Pa_Log();
-		mainPanel.setLayout(new GridLayout());
+		mainPanel.setLayout(new BorderLayout());
 		
-		mainPanel.add(pButtons);
-		mainPanel.add(pLog);
+		mainPanel.add(pButtons, BorderLayout.SOUTH);
+		mainPanel.add(pLog, BorderLayout.NORTH);
+		
+		this.add(mainPanel);
 		
 		defaultProperties();
 	}

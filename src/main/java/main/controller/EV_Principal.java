@@ -7,6 +7,7 @@ import hospital.ftp.client.controller.ClientFTP;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.User;
 import hospital.ftp.server.controller.FTPServer;
+import hospital.ftp.server.controller.ViewController;
 import hospital.languages.Language;
 import hospital.mail.client.controller.LoginControllerMail;
 import hospital.tools.database.DB;
@@ -34,7 +35,8 @@ public class EV_Principal implements ActionListener {
 
 		// buttons
 		if (e.getSource().equals(this.mainView.getPaMain().getButtons().get(0))) {
-			new FTPServer(this.db, this.userdb, this.groupdb);
+//			new FTPServer(this.db, this.userdb, this.groupdb);
+			new ViewController(this.db, this.userdb, this.groupdb);
 		} else if (e.getSource().equals(this.mainView.getPaMain().getButtons().get(1))) {
 			new ClientFTP(this.db, this.userdb, this.groupdb);
 		} else if (e.getSource().equals(this.mainView.getPaMain().getButtons().get(2))) {

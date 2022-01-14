@@ -27,8 +27,11 @@ public class Pa_Buttons extends JPanel {
 	}
 
 	private void fillButtons() {
-		buttons.add(new JButton("conect"));
-		buttons.add(new JButton("disconect"));
+		JButton finish = new JButton("Finish");
+		finish.setEnabled(false);
+		
+		buttons.add(finish);
+		buttons.add(new JButton("Start"));
 		
 	}
 
