@@ -40,7 +40,7 @@ public class ClientFTP {
 		this.jfClient = new JF_FTPClient();
 
 		try {
-			this.socket = new Socket("192.168.1.98", 7000); // CONNECTION WITH SOCKET CLIENT LOG
+			this.socket = new Socket("localhost", 7000); // CONNECTION WITH SOCKET CLIENT LOG
 
 			this.jfClient.setVisible(true);
 			
