@@ -389,9 +389,10 @@ public class FTPUtil {
 		String pathToCreate = file.getPath() + File.separator;
 		FTPFile[] files = null;
 		nameNewDir = Tool.inputGUIpane("Indique el nombre del nuevo directorio:", "CREAR DIRECTORIO");
-		nameNewDir = nameNewDir.trim().replace(" ", "_");
 
-		if (nameNewDir != null) {
+		if (nameNewDir != null) {		
+			nameNewDir = nameNewDir.trim().replace(" ", "_");
+
 			try {
 				files = ftpClient.listFiles(selectedDir);
 
