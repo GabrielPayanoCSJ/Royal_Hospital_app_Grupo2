@@ -27,7 +27,7 @@ public class Ev_MainController implements ActionListener {
 
 				if (Tool.checkEmailFormat(this.loginView.getPaLogin().getTxtFmail().getText())) {
 					new MailClientController(this.loginView);
-					this.loginView.dispose();
+					//this.loginView.dispose();
 				} else {
 					Tool.showGUIerror("No es un correo válido.", "ERROR MAIL");
 				}

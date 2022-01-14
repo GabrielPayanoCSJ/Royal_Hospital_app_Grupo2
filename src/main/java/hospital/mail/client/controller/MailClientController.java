@@ -4,6 +4,7 @@ import javax.mail.Message;
 import hospital.mail.client.view.JF_MailClient;
 import hospital.mail.client.view.JF_MailLogIn;
 import hospital.mail.server.controller.Utils_Methods;
+import hospital.tools.Tool;
 
 /**
  * Mail client controller, add the events to all buttons through Ev_MailClient
@@ -34,7 +35,7 @@ public class MailClientController {
 		}
 
 		try {
-//			if (Utils_Methods.userauth(user, pass)) {
+	if (Utils_Methods.userauth(user, pass)) {
 			Utils_Methods.connect(user, pass);
 
 			// change to language array
@@ -43,22 +44,23 @@ public class MailClientController {
 			fillMails();
 			changeCounts();
 			this.clientView.setVisible(true);
-//			} else {
-//				Tool.showGUIerror("Contraseña o usuario no válidos", "Fallo de autentificación");
-//				loginView.getTxtFmail().setText("");
-//				loginView.getPassPassword().setText("");
-//			}
-			
 			pipe = new Pipe_MailUpdater(this);
 			Thread updaterThread = new Thread(new MailUpdaterList(this, pipe));
 			updaterThread.start();
 			clientView.addWindowListener(new java.awt.event.WindowAdapter() {
-			    @Override
-			    public void windowClosing(java.awt.event.WindowEvent windowEvent) {
-			      pipe.stopThread();
-			      clientView.dispose();
-			    }
+				@Override
+				public void windowClosing(java.awt.event.WindowEvent windowEvent) {
+					pipe.stopThread();
+					clientView.dispose();
+				}
 			});
+			this.loginView.dispose();
+			} else {
+				Tool.showGUIerror("Contrase�a o usuario no v�lidos", "Fallo de autentificación");
+				loginView.getPaLogin().getTxtFmail().setText("");
+				loginView.getPaLogin().getPassPassword().setText("");
+			}
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		}

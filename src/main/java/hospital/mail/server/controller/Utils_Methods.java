@@ -17,6 +17,8 @@ import javax.mail.internet.MimeMultipart;
 import com.sun.mail.pop3.POP3Folder;
 import com.sun.mail.pop3.POP3SSLStore;
 
+import hospital.tools.Tool;
+
 public class Utils_Methods {
 
 	private static POP3SSLStore store;
@@ -58,13 +60,11 @@ public class Utils_Methods {
 		boolean exists = false;
 		createSession(true);
 		transport = session.getTransport("smtp");
-
 		try {
 			transport.connect(SMTP, PORT_SMTP, user, pass);
 			exists = true;
 			transport.close();
 		} catch (AuthenticationFailedException e) {
-			System.out.println("Comprueba el usuario y la contraseña");
 			transport.close();
 		} catch (MessagingException e) {
 			transport.close();
