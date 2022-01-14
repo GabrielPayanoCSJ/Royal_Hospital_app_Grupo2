@@ -49,7 +49,7 @@ public class FTPServer {
 	private serverView serverView;
 
 	/**
-	 * @param serverView 
+	 * @param serverView
 	 * 
 	 */
 	public FTPServer(DB db, User userdb, Group groupdb, serverView serverView) {
@@ -57,7 +57,7 @@ public class FTPServer {
 		this.userdb = userdb;
 		this.groupdb = groupdb;
 		this.serverView = serverView;
-		
+
 		this.serverFactory = new FtpServerFactory();
 		this.listenerFactory = new ListenerFactory();
 		this.listenerFactory.setServerAddress(HOST);
@@ -153,7 +153,7 @@ public class FTPServer {
 	 */
 	public void startFTPSever() {
 		try {
-			
+
 			String rootDir = "";
 			JFileChooser f = new JFileChooser();
 			f.setFileSelectionMode(JFileChooser.DIRECTORIES_ONLY);
@@ -169,21 +169,21 @@ public class FTPServer {
 				Tool.showGUIinfo("Debe seleccionar un directorio raíz", "Información");
 			} else {
 				if (generateUserFTP(rootDir)) {
-//					startFTPSever();
-					
+					// startFTPSever();
+
 					this.server = this.serverFactory.createServer();
-//			this.server.resume();
-					
+					// this.server.resume();
+
 					this.server.start();
 					this.serverView.getpButtons().getButtons().get(0).setEnabled(true);
 					this.serverView.getpButtons().getButtons().get(1).setEnabled(false);
-					
+
 					startThread();
 				} else {
 					Tool.showGUIinfo("No existe ningún usuario en la base de datos.", "INFORMACIÓN");
 				}
 			}
-			
+
 		} catch (FtpException e1) {
 		} catch (Exception e2) {
 

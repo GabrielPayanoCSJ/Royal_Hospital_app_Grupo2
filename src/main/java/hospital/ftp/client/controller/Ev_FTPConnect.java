@@ -16,7 +16,6 @@ import hospital.ftp.model.Group;
 import hospital.ftp.model.User;
 import hospital.ftp.server.controller.ServerFTPPipeline;
 import hospital.ftp.server.controller.ServerFTPThread;
-import hospital.languages.Language;
 import hospital.tools.Tool;
 
 /**
@@ -26,7 +25,7 @@ import hospital.tools.Tool;
  * @dateCreated 18/12/2021
  */
 public class Ev_FTPConnect implements ActionListener {
-	private final String HOST = "localhost";
+	private final String HOST = "192.168.1.98";
 	private final int PORT = 6000;
 	private FTPClient ftpClient;
 	private JF_FTPClient jfClient;
@@ -95,7 +94,7 @@ public class Ev_FTPConnect implements ActionListener {
 					checkPrivilegesFTP(userLogin);
 
 				} else {
-					Tool.showGUIerror(Language.getError_txts(10), "ACCESO INCORRECTO");
+					Tool.showGUIerror("El usuario o contraseña son incorrecto.", "ACCESO INCORRECTO");
 					ftpClient.disconnect();
 				}
 
@@ -105,7 +104,7 @@ public class Ev_FTPConnect implements ActionListener {
 				e1.printStackTrace();
 			}
 		} else {
-			Tool.showGUIerror(Language.getError_txts(4), Language.getError_txts(3));
+			Tool.showGUIerror("No se ha introducido ningún usuario", "CAMPOS DE LOGIN VACÍOS");
 		}
 
 			jfClient.scannerFTP(ftpClient);
