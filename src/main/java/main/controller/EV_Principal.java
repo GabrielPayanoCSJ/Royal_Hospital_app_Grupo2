@@ -6,7 +6,6 @@ import java.awt.event.ActionListener;
 import hospital.ftp.client.controller.ClientFTP;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.User;
-import hospital.ftp.server.controller.FTPServer;
 import hospital.ftp.server.controller.ViewController;
 import hospital.languages.Language;
 import hospital.mail.client.controller.LoginControllerMail;
