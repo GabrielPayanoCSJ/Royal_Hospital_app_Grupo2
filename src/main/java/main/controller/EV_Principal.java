@@ -31,7 +31,6 @@ public class EV_Principal implements ActionListener {
 		if (e.getSource() == this.mainView.getPaMain().getJcLanguages()) {
 			Language.selectLanguage(this.mainView.getPaMain().getJcLanguages().getSelectedIndex());
 			System.out.println(this.mainView.getPaMain().getJcLanguages().getSelectedIndex());
-			mainView.repaint();
 		}
 
 		// buttons

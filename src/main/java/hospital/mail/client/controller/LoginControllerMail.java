@@ -1,5 +1,6 @@
 package hospital.mail.client.controller;
 
+import hospital.languages.Language;
 import hospital.mail.client.view.JF_MailLogIn;
 
 /**
@@ -17,7 +18,7 @@ public class LoginControllerMail {
 	private JF_MailLogIn login;
 
 	public LoginControllerMail() {
-		this.login = new JF_MailLogIn("VENTANA DE ACCESO", "ACCESO CORREO", "CORREO ELECTRÓNICO", "CONTRASEÑA", "ACCEDER", "CANCELAR ");
+		this.login = new JF_MailLogIn(Language.getMailLogin_txts().get(0), Language.getMailLogin_txts().get(1), Language.getMailLogin_txts().get(2), Language.getMailLogin_txts().get(3), Language.getMailLogin_txts().get(4), Language.getMailLogin_txts().get(5));
 		loginListener();
 		this.login.setVisible(true);
 	}
