@@ -153,6 +153,8 @@ public class Language {
 			}
 		}
 	}
+	
+	
 
 	/**
 	 * @return 
@@ -203,4 +205,35 @@ public class Language {
 		return mailServer_txts.get(index);
 	}
 
+	/**
+	 * @return the main_txts
+	 */
+	public static ArrayList<String> getMain_txts() {
+		return main_txts;
+	}
+
+	/**
+	 * @return the writeMail_txts
+	 */
+	public static ArrayList<String> getWriteMail_txts() {
+		return writeMail_txts;
+	}
+
+	/**
+	 * @return the readMail_txts
+	 */
+	public static ArrayList<String> getReadMail_txts() {
+		return readMail_txts;
+	}
+
+	/**
+	 * @return the mailLogin_txts
+	 */
+	public static ArrayList<String> getMailLogin_txts() {
+		return mailLogin_txts;
+	}
+
+	
+	
+	
 }
