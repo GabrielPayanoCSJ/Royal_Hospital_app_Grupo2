@@ -5,6 +5,7 @@ import java.awt.Dimension;
 
 import javax.swing.*;
 
+import hospital.mail.client.controller.Pipe_MailUpdater;
 import hospital.mail.client.view.panels.Client.Pa_Counter;
 import hospital.mail.client.view.panels.Client.Pa_Inbox;
 import hospital.mail.client.view.panels.Client.Pa_Side;
@@ -46,6 +47,7 @@ public class JF_MailClient extends JFrame {
 		appendObjectsPanel();
 		add(this.panel);
 		defaultOperations(txtTitle);
+		
 	}
 
 	/**
@@ -65,7 +67,7 @@ public class JF_MailClient extends JFrame {
 	 */
 	private void defaultOperations(String txtTitle) {
 		this.setTitle(txtTitle);
-		this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+	//
 		this.setSize(new Dimension(900, 400));
 		this.setResizable(false);
 		this.setLocation(900, 200);

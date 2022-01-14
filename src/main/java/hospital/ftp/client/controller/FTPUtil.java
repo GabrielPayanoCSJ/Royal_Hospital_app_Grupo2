@@ -31,6 +31,14 @@ import hospital.tools.Tool;
 public class FTPUtil {
 	private static String nameNewDir;
 	private static String urlCreated;
+	private static String delectedURL;
+	private static String renamedURL;
+	private static String oldName;
+	private static String newName;
+	private static String uploadedName;
+	private static String uploadedServerURL;
+	private static String downloadedName;
+	private static String downloadedURL;
 
 	/**
 	 * Method for displaying a directory or file selection window. This window
@@ -79,6 +87,9 @@ public class FTPUtil {
 	 * @author Guillermo Gonzï¿½lez de Miguel
 	 */
 	public static void downloadFile(FTPClient ftpClient, String localPath) {
+		downloadedURL = localPath;
+		downloadedName = getLastWordURL(localPath);
+		
 		String localSavePath = chooseFile(new File(localPath).getName(), "SELECCIONE UNA UBICACIï¿½N PARA GUARDARLO",
 				"GUARDAR");
 
@@ -115,17 +126,19 @@ public class FTPUtil {
 	 * @param pathSelectedMinus type String , parent folder name for the file to be
 	 *                          renamed
 	 * 
-	 * @author Guillermo Gonzï¿½lez de Miguel
+	 * @author Guillermo González de Miguel
 	 * 
 	 *         Modify by Gabriel Payano
 	 */
 	public static void uploadFile(FTPClient ftpClient, String remotePath) {
+		uploadedServerURL = remotePath;
 
 		String fileSelected = chooseFile(null, "SELECCIONA UN FICHERO PARA SUBIR", "SUBIR");
 
 		if (fileSelected != "") {
 			File localFile = new File(fileSelected);
-			String remoteFile = remotePath + "/" + localFile.getName();
+			uploadedName = localFile.getName();
+			String remoteFile = remotePath + "/" + uploadedName;
 			InputStream inputStream = null;
 			try {
 				inputStream = new FileInputStream(localFile);
@@ -163,8 +176,13 @@ public class FTPUtil {
 	 *                   user
 	 * @param currentDir Type string , contains the current directory name into the
 	 *                   directory list of a folder(Directory)
+	 * @return
 	 */
-	public static void manageDelete(FTPClient ftpClient, String parentDir, String currentDir) {
+	public static int manageDelete(FTPClient ftpClient, String parentDir, String currentDir) {
+		// -1 = no files deleted || 0 = file deleted || 1 = empty folder deleted || 2 =
+		// filled folder deleted
+		int deletedFiles = -1;
+		delectedURL = parentDir;
 
 		switch (parentDir) {
 		case "/medicos":
@@ -178,20 +196,23 @@ public class FTPUtil {
 			break;
 		default:
 			if (deleteFile(ftpClient, parentDir)) {
+				deletedFiles = 0;
 				System.out.println("-----------");
 				System.out.println("Is a File");
-
 			} else if (deleteEmptyFolder(ftpClient, parentDir)) {
+				deletedFiles = 1;
 				System.out.println("-----------");
 				System.out.println("Is an empty directory");
 			} else {
 				System.out.println("-----------");
 				System.out.println("Is a Directory with elements");
 				deleteFileRecursive(ftpClient, parentDir, currentDir);
-
+				deletedFiles = 2;
 			}
 			break;
 		}
+
+		return deletedFiles;
 
 	}
 
@@ -368,6 +389,7 @@ public class FTPUtil {
 		String pathToCreate = file.getPath() + File.separator;
 		FTPFile[] files = null;
 		nameNewDir = Tool.inputGUIpane("Indique el nombre del nuevo directorio:", "CREAR DIRECTORIO");
+		nameNewDir = nameNewDir.trim().replace(" ", "_");
 
 		if (nameNewDir != null) {
 			try {
@@ -418,6 +440,7 @@ public class FTPUtil {
 	 *         Modify by Gabriel Payano
 	 */
 	public static void renameFile(FTPClient ftpClient, String pathSelected, String pathSelectedMinus) {
+		renamedURL = pathSelected;
 		System.out.println("---------------IN RENAME------------------");
 		System.out.println("PATH SELECTED: " + pathSelected);
 		System.out.println("PATH SELECTED Minus : " + pathSelectedMinus);
@@ -425,7 +448,6 @@ public class FTPUtil {
 
 		try {
 			String title = "RENOMBRAR ";
-			String aux;
 			if (renameFile.isDirectory())
 				title += "DIRECTORIO";
 			else
@@ -445,8 +467,11 @@ public class FTPUtil {
 
 			// System.out.println("EL GET NAME TIENE: " + renameFile.getName());
 
-			boolean success = ftpClient.rename(pathSelected, pathSelectedMinus
-					+ Tool.inputGUIpane("Introduzca el nuevo nombre", title, renameFile.getName()).toString());
+			oldName = renameFile.getName().toString().trim().replace(" ", "_");
+//			System.out.println(oldName);
+			newName = Tool.inputGUIpane("Introduzca el nuevo nombre", title, oldName).toString().trim().replace(" ", "_");
+
+			boolean success = ftpClient.rename(pathSelected, pathSelectedMinus + newName);
 			if (success) {
 				System.out.println("THE HAS CHANGE TO THE NEW ONE");
 			}
@@ -467,6 +492,16 @@ public class FTPUtil {
 	}
 
 	/**
+	 * @author Jorge Fernández Ruiz
+	 * @param URL
+	 * @return
+	 */
+	public static String getLastWordURL(String URL) {
+		String[] words = URL.split("/");
+		return words[words.length - 1];
+	}
+
+	/**
 	 * Getter the name of a created new file
 	 * 
 	 * @author Jorge Fernández Ruiz
@@ -479,11 +514,93 @@ public class FTPUtil {
 	/**
 	 * Getter the url where was created the new file.
 	 * 
-	 * @return the urlCreated
 	 * @author Jorge Fernández Ruiz
+	 * @return the urlCreated
 	 */
 	public static String getUrlCreated() {
 		return urlCreated;
 	}
+
+	/**
+	 * Getter the url where was deleted the file.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the delectedURL
+	 */
+	public static String getDelectedURL() {
+		return delectedURL;
+	}
+
+	/**
+	 * Getter the url where was rename the file.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the renamedURL
+	 */
+	public static String getRenamedURL() {
+		return renamedURL;
+	}
+
+	/**
+	 * Getter the file's old name.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the oldName
+	 */
+	public static String getOldName() {
+		return oldName;
+	}
+
+	/**
+	 * Getter the file's new name.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the newName
+	 */
+	public static String getNewName() {
+		return newName;
+	}
+
+	/**
+	 * Getter the uploaded file's name.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the uploadedName
+	 */
+	public static String getUploadedName() {
+		return uploadedName;
+	}
+
+	/**
+	 * Getter the uploaded file's URL.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the uploadedURL
+	 */
+	public static String getUploadedServerURL() {
+		return uploadedServerURL;
+	}
+
+	/**
+	 * Getter the downloaded file's name.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the downloadedName
+	 */
+	public static String getDownloadedName() {
+		return downloadedName;
+	}
+
+	/**
+	 * Getter the downloaded file's URL.
+	 * 
+	 * @author Jorge Fernández Ruiz
+	 * @return the downloadedURL
+	 */
+	public static String getDownloadedURL() {
+		return downloadedURL;
+	}
+	
+	
 
 }

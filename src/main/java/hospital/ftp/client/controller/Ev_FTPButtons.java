@@ -22,6 +22,7 @@ import hospital.tools.Tool;
 /**
  * 
  * @author Guillermo Gonzï¿½lez de Miguel
+ * @editor Jorge Fernández Ruiz
  * @version 1.0
  * @dateCreated 18/12/2021
  */
@@ -68,7 +69,6 @@ public class Ev_FTPButtons implements ActionListener {
 			System.out.println(Language.getFtpClient_txts(0));
 			System.out.println("funciona el crear");
 			if (FTPUtil.createDirectory(ftpClient, jfClient.generateURL(getPathTree()))) {
-				System.out.println("entra al if");
 				jfClient.updateTree(ftpClient); // Update the node after Change.
 				buildLog("CRT");
 			}
@@ -76,103 +76,149 @@ public class Ev_FTPButtons implements ActionListener {
 		case 1:
 			// DELETE FILES AND DIRECTORIES
 			System.out.println(Language.getFtpClient_txts(1));
-			FTPUtil.manageDelete(ftpClient, jfClient.generateURL(getPathTree()), "");
-			jfClient.updateTree(ftpClient); //Update the node after Change.
+			buildLog("DLT", FTPUtil.manageDelete(ftpClient, jfClient.generateURL(getPathTree()), ""));
+			jfClient.updateTree(ftpClient); // Update the node after Change.
 			break;
 		case 2:
 			// RENAME FILE OR DIRECTORY
 			System.out.println(Language.getFtpClient_txts(11));
 			FTPUtil.renameFile(ftpClient, jfClient.generateURL(getPathTree()), getPathTreeMinus());
-			
-			jfClient.updateTree(ftpClient); //Update the node after Change.
+			buildLog("RNM");
+			jfClient.updateTree(ftpClient); // Update the node after Change.
 			break;
 		case 3:
 			// UPLOAD FILE
 			System.out.println(Language.getFtpClient_txts(2));
 			FTPUtil.uploadFile(ftpClient, jfClient.generateURL(getPathTree()));
-			
-			jfClient.updateTree(ftpClient); //Update the node after Change.
+			buildLog("UPL");
+			jfClient.updateTree(ftpClient); // Update the node after Change.
 			break;
 		case 4:
 			// DOWNLOAD FILE
 			System.out.println(Language.getFtpClient_txts(3));
 			FTPUtil.downloadFile(ftpClient, jfClient.generateURL(getPathTree()));
-			
-			jfClient.updateTree(ftpClient); //Update the node after Change.
+			buildLog("DWL");
+			jfClient.updateTree(ftpClient); // Update the node after Change.
 			break;
 		default:
 			Tool.showConsoleError("This option doesn't exist.");
 			break;
 		}
 	}
-	
+
 	/**
 	 * 
-	 * @param operation
 	 * @author Jorge Fernández Ruiz
+	 * @param operation
 	 */
 	private void buildLog(String operation) {
 		try {
-			String desc;
+			String desc = "";
+			String log = "";
 			switch (operation) {
 			// created
 			case "CRT":
 				desc = "File '" + FTPUtil.getNameNewDir() + "' was created in: " + FTPUtil.getUrlCreated();
-				String log = operation + " ¬ " + desc;
 				dos.writeUTF(log);
-				writeClientLog(log);
-				break;
-
-			// deleted
-			case "DLT":
-//				desc = "File '" + getterDelNombreBorrado;
 				break;
 
 			// renamed
 			case "RNM":
+				desc = "File '" + FTPUtil.getOldName() + "' was rename for '" + FTPUtil.getNewName() + "' in: "
+						+ FTPUtil.getRenamedURL();
+				dos.writeUTF(log);
+				break;
+
+			// uploaded
+			case "UPL":
+				desc = "File '" + FTPUtil.getUploadedName() + "' was download in: " + FTPUtil.getUploadedServerURL();
+				dos.writeUTF(log);
 				break;
 
 			// downloaded
 			case "DWL":
-				break;
-
-			default:
+				desc = "File '" + FTPUtil.getDownloadedName() + "' was download in: " + FTPUtil.getDownloadedURL();
+				dos.writeUTF(log);
 				break;
 			}
+
+			log = operation + " ¬ " + desc;
+			writeClientLog(log);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
 
+	/**
+	 * @author Jorge Fernández Ruiz
+	 * @param operation
+	 * @param deletedIndex
+	 */
+	private void buildLog(String operation, int deletedIndex) {
+		try {
+			String desc = "";
+			String log = "";
+			if (operation.equals("DLT")) {
+				switch (deletedIndex) {
+				case -1:
+					desc = "Nothing was deleted";
+					break;
+				case 0:
+					desc = "File '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
+							+ FTPUtil.getDelectedURL();
+					break;
+				case 1:
+					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
+							+ FTPUtil.getDelectedURL();
+					break;
+				case 2:
+					desc = "Folder '" + FTPUtil.getLastWordURL(FTPUtil.getDelectedURL()) + "' was deleted in: "
+							+ FTPUtil.getDelectedURL();
+					break;
+				}
+
+				log = operation + " ¬ " + desc;
+				writeClientLog(log);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * @author Jorge Fernández Ruiz
+	 * @param newLog
+	 */
 	private void writeClientLog(String newLog) {
 		String oldLog = jfClient.getPanel_log().getTxA_Log().getText();
 		jfClient.getPanel_log().getTxA_Log().setText(oldLog + "\n " + newLog);
 	}
-	
+
 	private String getPathTree() {
 		return jfClient.getPanel_directory().getTree().getSelectionPath().toString();
 	}
-	
-	//RETURNS THE URL FORMATED WITHOUT THE LAST FOLDER.
+
+	// RETURNS THE URL FORMATED WITHOUT THE LAST FOLDER.
 	/**
 	 * @author Gabriel Payano
-	 * @return String Type , return the URL Formated to without the last file/folder.
+	 * @return String Type , return the URL Formated to without the last
+	 *         file/folder.
 	 */
 	private String getPathTreeMinus() {
-		
+
 		String path = jfClient.getPanel_directory().getTree().getSelectionPath().toString();
 		String url = "";
 		path = path.replace("[", "");
 		path = path.replace("]", "");
 		path = path.replace(",", "/");
 		path = path.replace(" ", "");
-		
+
 		String[] parts = path.split("/");
 		System.out.println("Selected PAth es: " + path);
-		System.out.println("LA ÚLTIMA PALABRA ES: " + parts[parts.length-1]);
+		System.out.println("LA ÚLTIMA PALABRA ES: " + parts[parts.length - 1]);
 
-		//parts[parts.length-1] -> Last word of the Selected Path in the tree node
-		url = path.replace(parts[parts.length-1],"");//Deleting the last word
+		// parts[parts.length-1] -> Last word of the Selected Path in the tree node
+		url = path.replace(parts[parts.length - 1], "");// Deleting the last word
 		url = url.substring(1);
 		return url;
 	}
