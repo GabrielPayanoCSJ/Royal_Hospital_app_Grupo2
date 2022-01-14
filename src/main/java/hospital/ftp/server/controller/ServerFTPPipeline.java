@@ -29,9 +29,15 @@ public class ServerFTPPipeline {
 		// System.out.println("ME PARO ");
 		life = exit;
 	}
+<<<<<<< Updated upstream
 	
 	public synchronized void writeLogDB(DataInputStream dataInput, DB db, User userDB, boolean exit) {
 		while (exit) {
+=======
+
+	public synchronized void writeLogDB(DataInputStream dataInput, DB db, User userDB) {
+		while (isLife()) {
+>>>>>>> Stashed changes
 			try {
 				nomUser = dataInput.readUTF();
 				String log = dataInput.readUTF();

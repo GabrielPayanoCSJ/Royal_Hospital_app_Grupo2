@@ -56,8 +56,13 @@ public class Lang_esES {
 				"REDACTAR", // 2
 				"LEER", // 3
 				"SALIR", // 4
+<<<<<<< Updated upstream
 				"TOTAL: ", // 5
 				"NUEVOS: " // 6
+=======
+				"TOTAL", // 5
+				"NUEVOS" // 6
+>>>>>>> Stashed changes
 		));
 	}
 
