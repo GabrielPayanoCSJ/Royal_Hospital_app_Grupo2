@@ -5,10 +5,7 @@ package hospital.ftp.server.controller;
 
 import java.io.DataInputStream;
 import java.io.IOException;
-import java.sql.Date;
 import java.sql.SQLException;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 import hospital.ftp.model.User;
 import hospital.tools.database.DB;
@@ -20,27 +17,21 @@ import hospital.tools.database.DB;
  *
  */
 public class ServerFTPPipeline {
-	private boolean life = true;
+	private static boolean life = true;
 	private String nomUser = "";
 	private String prevLog = "";
 
 	/**
-	 * Constructor.
-	 */
-	public ServerFTPPipeline() {
-//		new ServerController(this);
-	}
-
-	/**
 	 * Stop the ServerFTPThread by changing the value of the life variable.
+	 * @param exit 
 	 */
-	public void stopThread() {
+	public synchronized void stopThread(boolean exit) {
 		// System.out.println("ME PARO ");
-		life = false;
+		life = exit;
 	}
-
-	public synchronized void writeLogDB(ServerFTPPipeline pipeline, DataInputStream dataInput, DB db, User userDB) {
-		while (pipeline.isLife()) {
+	
+	public synchronized void writeLogDB(DataInputStream dataInput, DB db, User userDB, boolean exit) {
+		while (exit) {
 			try {
 				nomUser = dataInput.readUTF();
 				String log = dataInput.readUTF();
@@ -49,7 +40,7 @@ public class ServerFTPPipeline {
 						wait();
 					} catch (InterruptedException e) {
 						System.out.println("Server thread wait");
-						e.printStackTrace();
+//						e.printStackTrace();
 					}
 				} else {
 					System.out.println("------------- Entra en el else ----------------");

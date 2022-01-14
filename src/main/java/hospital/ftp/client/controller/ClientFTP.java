@@ -40,7 +40,7 @@ public class ClientFTP {
 		this.jfClient = new JF_FTPClient();
 
 		try {
-			this.socket = new Socket("localhost", 7000); // CONNECTION WITH SOCKET CLIENT LOG
+			this.socket = new Socket("192.168.1.98", 7000); // CONNECTION WITH SOCKET CLIENT LOG
 
 			this.jfClient.setVisible(true);
 			
@@ -54,7 +54,7 @@ public class ClientFTP {
 						new Ev_FTPButtons(this.ftpCliente, this.jfClient, this.user, this.group, this.log, this.socket));
 			}
 		} catch (IOException e) {
-			Tool.showGUIerror("Ha sido imposible establecer la conexión con el servidor FTP", "ERROR - Servidor FTP no encontrado");
+			Tool.showGUIerror("Problema con el socket del LOG en la clase FTPClient", "ERROR - Socket Log");
 		}
 	
 	}

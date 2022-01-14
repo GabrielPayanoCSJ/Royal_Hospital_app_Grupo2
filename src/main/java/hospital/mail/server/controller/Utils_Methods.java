@@ -1,14 +1,19 @@
 package hospital.mail.server.controller;
 
 import java.io.IOException;
-import java.io.Writer;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Properties;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import javax.mail.*;
+import javax.mail.AuthenticationFailedException;
+import javax.mail.BodyPart;
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.URLName;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
@@ -16,8 +21,6 @@ import javax.mail.internet.MimeMultipart;
 
 import com.sun.mail.pop3.POP3Folder;
 import com.sun.mail.pop3.POP3SSLStore;
-
-import hospital.tools.Tool;
 
 public class Utils_Methods {
 
@@ -204,6 +207,12 @@ public class Utils_Methods {
 		}
 	}
 
+	/**
+	 * Método encargado de transformar el cuerpo de un mensaje a texto plano.
+	 * 
+	 * @param message de tipo String, Cuerpo de
+	 * @return
+	 */
 	public static String getTextFromMessage(Message message) {
 		String result = "";
 		try {

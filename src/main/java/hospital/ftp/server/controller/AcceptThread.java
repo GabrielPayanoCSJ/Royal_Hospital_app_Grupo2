@@ -26,7 +26,7 @@ public class AcceptThread implements Runnable {
 		this.userDb = userdb;
 		
 		t = new Thread(this);
-		t.setName("accpet thread");
+		t.setName("accept thread");
 	}
 
 	@Override
@@ -41,6 +41,7 @@ public class AcceptThread implements Runnable {
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
+			
 		}
 
 	}

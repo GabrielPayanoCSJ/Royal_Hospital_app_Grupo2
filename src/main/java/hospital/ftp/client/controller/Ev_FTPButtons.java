@@ -7,11 +7,7 @@ import java.awt.event.ActionListener;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
-import java.text.DateFormat;
-import java.text.Format;
-import java.text.SimpleDateFormat;
 import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
 
 import javax.swing.JButton;
 
@@ -70,7 +66,6 @@ public class Ev_FTPButtons implements ActionListener {
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		JButton button = (JButton) e.getSource();
-		this.nomUser = jfClient.getPanel_login().getTfield_user().getText();
 
 		switch (Integer.parseInt(button.getName())) {
 		case 0:
@@ -121,6 +116,8 @@ public class Ev_FTPButtons implements ActionListener {
 	 * @param operation
 	 */
 	private void buildLog(String operation) {
+		this.nomUser = jfClient.getPanel_login().getTfield_user().getText();
+		System.out.println("EVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV " + nomUser);
 		try {
 			String desc = "";
 			String log = "";
@@ -166,6 +163,9 @@ public class Ev_FTPButtons implements ActionListener {
 	 * @param deletedIndex
 	 */
 	private void buildLog(String operation, int deletedIndex) {
+		this.nomUser = jfClient.getPanel_login().getTfield_user().getText();
+		System.out.println("EVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVVV " + nomUser);
+
 		try {
 			String desc = "";
 			String log = "";
@@ -190,7 +190,7 @@ public class Ev_FTPButtons implements ActionListener {
 					getDateNow();
 					break;
 				}
-	
+
 				log = operation + " ¬ " + desc + " ¬ " + date;
 				writeClientLog(log);
 				dos.writeUTF(nomUser);

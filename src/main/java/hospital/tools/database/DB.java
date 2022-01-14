@@ -40,18 +40,15 @@ public class DB {
 	 * @param userDB
 	 * @param passwdDB
 	 * @throws ClassNotFoundException
+	 * @throws SQLException 
 	 */
-	public void ConnectMySQL(boolean driverMySQL, String urlDB, String nameDB, String userDB, String passwdDB) {
+	public void ConnectMySQL(boolean driverMySQL, String urlDB, String nameDB, String userDB, String passwdDB) throws ClassNotFoundException, SQLException {
 
-		try {
+
 			Class.forName(LoadDriverMySQL(driverMySQL));
 			this.conSQL = DriverManager.getConnection(urlDB + "/" + nameDB, userDB, passwdDB);
 //			Tool.showGUIinfo("Conexión a la base de datos realizada con exito", "MYSQL CONNECT");
-		} catch (ClassNotFoundException e) {
-			Tool.showConsoleError(Language.getDb_txts(0));
-		} catch (SQLException e) {
-			Tool.showGUIerror(Language.getDb_txts(1) + "\n" + e.getMessage(), CLASSNAME);
-		}
+
 	}
 
 	/**

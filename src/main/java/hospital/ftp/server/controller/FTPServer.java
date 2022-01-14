@@ -33,7 +33,7 @@ import hospital.tools.database.DB;
  * @dateCreated 17/12/2021
  */
 public class FTPServer {
-	private static final String HOST = "localhost";
+	private static final String HOST = "192.168.1.98";
 	private static final int PORT = 6000;
 	private FtpServerFactory serverFactory;
 	private ListenerFactory listenerFactory;
