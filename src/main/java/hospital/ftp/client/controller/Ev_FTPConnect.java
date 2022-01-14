@@ -14,6 +14,8 @@ import org.apache.commons.net.ftp.FTPClient;
 import hospital.ftp.client.view.JF_FTPClient;
 import hospital.ftp.model.Group;
 import hospital.ftp.model.User;
+import hospital.ftp.server.controller.ServerFTPPipeline;
+import hospital.ftp.server.controller.ServerFTPThread;
 import hospital.tools.Tool;
 
 /**
@@ -23,7 +25,7 @@ import hospital.tools.Tool;
  * @dateCreated 18/12/2021
  */
 public class Ev_FTPConnect implements ActionListener {
-	private final String HOST = "localhost";
+	private final String HOST = "192.168.1.98";
 	private final int PORT = 6000;
 	private FTPClient ftpClient;
 	private JF_FTPClient jfClient;
@@ -143,6 +145,7 @@ public class Ev_FTPConnect implements ActionListener {
 			try {
 				this.ftpClient.logout();
 				this.ftpClient.disconnect();
+				ServerFTPThread.checkClose(false);
 				jfClient.dispose();
 			} catch (IOException e1) {
 				Tool.showConsoleError(e1.getMessage());
