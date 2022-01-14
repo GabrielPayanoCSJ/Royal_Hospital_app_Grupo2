@@ -1,26 +1,23 @@
 package hospital.ftp.server.view;
 
-import java.awt.BorderLayout;
-import java.awt.EventQueue;
+import java.awt.GridLayout;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
-import javax.swing.border.EmptyBorder;
+
+import hospital.ftp.server.view.ServerPanels.Pa_Buttons;
+import hospital.ftp.server.view.ServerPanels.Pa_Log;
 
 public class serverView extends JFrame {
+	private Pa_Buttons pButtons;
+	private Pa_Log pLog;
+	private JPanel mainPanel;
 
-	
-
-	/**
-	 * Create the frame.
-	 */
 	public serverView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 300);
-		contentPane = new JPanel();
-		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-		contentPane.setLayout(new BorderLayout(0, 0));
-		setContentPane(contentPane);
+		mainPanel = new JPanel();
+		mainPanel.setLayout(new GridLayout());
+		
+		
 	}
 
 }
