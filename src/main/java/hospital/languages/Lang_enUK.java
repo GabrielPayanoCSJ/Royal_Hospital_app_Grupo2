@@ -111,7 +111,14 @@ public class Lang_enUK {
 	 * @return
 	 */
 	private ArrayList<String> loadMainTxts() {
-		return new ArrayList<String>(Arrays.asList(""));
+		return new ArrayList<String>(Arrays.asList( // LIST MAIN TEXTS
+				"MAIN WINDOW", // 0
+				"PRINCIPAL EXECUTER", // 1
+				"CHOOSE A LANGUAGE", // 2
+				"FTP SERVER", // 3
+				"FTP CLIENT", // 4
+				"MAIL CLIENT" // 5
+		));
 	}
 
 	/**
