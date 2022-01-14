@@ -19,8 +19,8 @@ public class Principalcontroller {
 	public Principalcontroller() {
 		Language.selectLanguage(DEFAULT_LANGUAGE);
 		this.db = new DB();
-		this.mainView = new Jf_Main("VENTANA PRINCIPAL", "EJECUTADOR PRINCIPAL", "Seleccione un idioma", "SERVIDOR FTP",
-				"CLIENTE FTP", "CLIENTE CORREO");
+		this.mainView = new Jf_Main(Language.getMain_txts().get(0), Language.getMain_txts().get(1), Language.getMain_txts().get(2), Language.getMain_txts().get(3),
+				Language.getMain_txts().get(4), Language.getMain_txts().get(5));
 
 		try {
 

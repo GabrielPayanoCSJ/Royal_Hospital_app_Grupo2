@@ -53,8 +53,6 @@ public class ServerFTPThread implements Runnable {
 
 	@Override
 	public void run() {
-		// llamada al controlador de la ventana del servidor
-
 		checkClose(true);
 	}
 
